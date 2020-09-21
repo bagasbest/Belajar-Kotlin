@@ -7,11 +7,11 @@ class Person {
     var lastName: String = ""
 
     fun sayHello(name:String) {
-        println("Hello $name my name is $firstName")
+        println("Hello $name my name is ${this.firstName}")
     }
 
-    fun sayHello(firstNameParam:String, lastNameParam:String) {
-        println("Hello $firstNameParam $lastNameParam, My name is $firstName")
+    fun sayHello(firstName:String, lastName:String) {
+        println("Hello $firstName $lastName, My name is ${this.firstName}")
     }
 
     fun run() {
