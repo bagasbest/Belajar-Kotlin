@@ -1,7 +1,6 @@
 package app
 
-import data.Manager
-import data.VicePrecident
+import data.*
 
 fun main() {
     val manager = Manager("Bagas")
@@ -9,4 +8,13 @@ fun main() {
 
     val vicePrecident  = VicePrecident("Budi")
     vicePrecident.sayHello("Joko")
+
+    val name = Player("Bagas")
+    name.sayHello("Mega")
+
+    val coach = Coach ("Axel")
+    coach.sayHello("Bagas")
+
+    val team = Team ("Bagas")
+    team.sayHello("UHU")
 }
