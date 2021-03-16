@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BeResto</string>
+    <string name="image">image</string>
+    <string name="restaurant_title">Restaurant Title</string>
+    <string name="rating">Rating</string>
+    <string name="description">description</string>
+    <string name="city">City</string>
+    <string name="name_restaurant">Name Restaurant</string>
+    <string name="i_liked_this">I liked this</string>
+    <string name="share">Share</string>
+    <string name="settings">Settings</string>
+    <string name="deskripsi">Halo, saya Bagas Pangestu, Android Developer, saat ini saya berusia 21 tahun, saya sedang mengikuti event Bangkit 2021, saya ingin menjadi Android Developer Expert yang berkontribusi membangun negeri.</string>
+    <string name="nama">Bagas Pangestu</string>
+</resources>
