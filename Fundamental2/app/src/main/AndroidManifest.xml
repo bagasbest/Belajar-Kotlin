@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
+        <activity android:name=".myLocalization.MyLocalizationMainActivity"></activity>
+        <activity android:name=".myTabLayout.MyTabLayoutMainActivity" />
         <activity
             android:name=".MyNavbar"
-            android:label="@string/title_activity_my_navbar"></activity>
+            android:label="@string/title_activity_my_navbar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

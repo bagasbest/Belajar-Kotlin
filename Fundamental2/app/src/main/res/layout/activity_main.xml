@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
     <Button
@@ -13,5 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MyBottomNavigation" />
+
+    <Button
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MyTabLayout" />
+
+    <Button
+        android:id="@+id/localization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MyLocalization" />
 
 </LinearLayout>
