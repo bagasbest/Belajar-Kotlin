@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
-        <activity android:name=".myLocalization.MyLocalizationMainActivity"></activity>
+
+        <activity android:name=".myService.MyServiceMainActivity" />
+        <activity android:name=".myBackgroundThread.MyBackgroundThreadMainActivity" />
+        <activity android:name=".myUnitTest.MyUnitTestMainActivity" />
+        <activity android:name=".MyUnitTestMainActivity" />
+        <activity android:name=".myLocalization.MyLocalizationMainActivity" />
         <activity android:name=".myTabLayout.MyTabLayoutMainActivity" />
         <activity
             android:name=".MyNavbar"
@@ -21,6 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".myService.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>

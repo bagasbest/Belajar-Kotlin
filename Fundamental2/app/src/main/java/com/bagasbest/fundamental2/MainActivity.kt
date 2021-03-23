@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
+import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
+import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
+import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +28,19 @@ class MainActivity : AppCompatActivity() {
         binding.localization.setOnClickListener {
             startActivity(Intent(this, MyLocalizationMainActivity::class.java))
         }
+
+        binding.testing.setOnClickListener{
+            startActivity(Intent(this, MyUnitTestMainActivity::class.java))
+        }
+
+        binding.backgroundThread.setOnClickListener {
+            startActivity(Intent(this, MyBackgroundThreadMainActivity::class.java))
+        }
+
+        binding.service.setOnClickListener {
+            startActivity(Intent(this, MyServiceMainActivity::class.java))
+        }
+
 
     }
 }
