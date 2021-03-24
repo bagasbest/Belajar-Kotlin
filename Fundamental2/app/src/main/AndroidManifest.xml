@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
 
+
         <activity android:name=".myService.MyServiceMainActivity" />
         <activity android:name=".myBackgroundThread.MyBackgroundThreadMainActivity" />
         <activity android:name=".myUnitTest.MyUnitTestMainActivity" />
-        <activity android:name=".MyUnitTestMainActivity" />
         <activity android:name=".myLocalization.MyLocalizationMainActivity" />
         <activity android:name=".myTabLayout.MyTabLayoutMainActivity" />
         <activity
@@ -32,6 +32,15 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name=".myService.MyBoundService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".myService.MyIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
