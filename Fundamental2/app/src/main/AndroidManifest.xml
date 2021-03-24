@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bagasbest.fundamental2">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +16,10 @@
         android:theme="@style/Theme.Fundamental2">
 
 
+        <activity
+            android:name=".myBroadcastReceiver.SmsReceiverActivity"
+            android:theme="@style/Theme.Broadcast.SmsReceiver" />
+        <activity android:name=".myBroadcastReceiver.MyBroadcastReceiverMainActivity" />
         <activity android:name=".myService.MyServiceMainActivity" />
         <activity android:name=".myBackgroundThread.MyBackgroundThreadMainActivity" />
         <activity android:name=".myUnitTest.MyUnitTestMainActivity" />
@@ -31,7 +40,6 @@
             android:name=".myService.MyService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".myService.MyBoundService"
             android:enabled="true"
@@ -41,6 +49,20 @@
             android:name=".myService.MyIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name=".myBroadcastReceiver.DownloadService"
+            android:exported="false" />
+
+
+        <receiver
+            android:name=".myBroadcastReceiver.SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

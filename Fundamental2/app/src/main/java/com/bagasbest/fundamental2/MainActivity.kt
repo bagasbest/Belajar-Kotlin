@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
+import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.service.setOnClickListener {
             startActivity(Intent(this, MyServiceMainActivity::class.java))
+        }
+
+        binding.broadcastReceiver.setOnClickListener {
+            startActivity(Intent(this, MyBroadcastReceiverMainActivity::class.java))
         }
 
 

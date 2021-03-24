@@ -45,4 +45,10 @@
         android:layout_height="wrap_content"
         android:text="MyService" />
 
+    <Button
+        android:id="@+id/broadcast_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MyBroadcastReceiver" />
+
 </LinearLayout>
