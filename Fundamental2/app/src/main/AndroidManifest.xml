@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
 
-
+        <activity android:name=".myAlarmManager.MyAlarmManagerMainActivity" />
         <activity
             android:name=".myBroadcastReceiver.SmsReceiverActivity"
             android:theme="@style/Theme.Broadcast.SmsReceiver" />
@@ -44,16 +44,13 @@
             android:name=".myService.MyBoundService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".myService.MyIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".myBroadcastReceiver.DownloadService"
             android:exported="false" />
-
 
         <receiver
             android:name=".myBroadcastReceiver.SmsReceiver"
@@ -63,6 +60,11 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".myAlarmManager.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

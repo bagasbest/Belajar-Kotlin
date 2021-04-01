@@ -1,9 +1,12 @@
 package com.bagasbest.fundamental2
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
+import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
@@ -46,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MyBroadcastReceiverMainActivity::class.java))
         }
 
-
+        binding.alarmManager.setOnClickListener {
+            startActivity(Intent(this, MyAlarmManagerMainActivity::class.java))
+        }
     }
+
+
 }

@@ -43,6 +43,15 @@
     <string name="incoming_message">Incoming Message</string>
     <string name="from">from : %s</string>
 
+    <string name="one_time_alarm">One Time Alarm</string>
+    <string name="alarm_date">Tanggal Alarm</string>
+    <string name="set_one_time_alarm">Set One Time Alarm</string>
+    <string name="alarm_message">Pesan Alarm</string>
+    <string name="repeating_alarm">Repeating Alarm</string>
+    <string name="set_repeating_alarm">Set Repeating Alarm</string>
+    <string name="cancel_alarm">Batalkan Alarm</string>
+    <string name="alarm_time">Waktu Alarm</string>
+
     <string name="hello_world">Hello World %1$s, you have %2$d pokes from %3$s</string>
     <string name="good_morning">Good Morning</string>
     <plurals name="numberOfSongsAvailable">
