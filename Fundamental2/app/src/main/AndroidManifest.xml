@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
-
+        <activity android:name=".myQuote.ListQuoteActivity"></activity>
+        <activity android:name=".myQuote.MyQuoteMainActivity" />
         <activity android:name=".myAlarmManager.MyAlarmManagerMainActivity" />
         <activity
             android:name=".myBroadcastReceiver.SmsReceiverActivity"
@@ -60,7 +61,6 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".myAlarmManager.AlarmReceiver"
             android:enabled="true"

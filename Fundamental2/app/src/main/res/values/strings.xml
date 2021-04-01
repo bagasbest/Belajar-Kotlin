@@ -52,6 +52,10 @@
     <string name="cancel_alarm">Batalkan Alarm</string>
     <string name="alarm_time">Waktu Alarm</string>
 
+    <string name="quote">When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No. When they drink a soup made from a poisonous mushroom!? No! It’s when… they are FORGOTTEN.</string>
+    <string name="author">- Dr. Hiluluk</string>
+    <string name="show_list_quotes">Show me list of quotes</string>
+
     <string name="hello_world">Hello World %1$s, you have %2$d pokes from %3$s</string>
     <string name="good_morning">Good Morning</string>
     <plurals name="numberOfSongsAvailable">

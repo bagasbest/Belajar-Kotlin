@@ -1,15 +1,14 @@
 package com.bagasbest.fundamental2
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
 import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
+import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
@@ -51,6 +50,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.alarmManager.setOnClickListener {
             startActivity(Intent(this, MyAlarmManagerMainActivity::class.java))
+        }
+
+        binding.webApi.setOnClickListener {
+            startActivity(Intent(this, MyQuoteMainActivity::class.java))
         }
     }
 
