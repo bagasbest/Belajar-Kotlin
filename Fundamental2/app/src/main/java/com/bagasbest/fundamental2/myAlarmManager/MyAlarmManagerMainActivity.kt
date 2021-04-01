@@ -8,7 +8,8 @@ import com.bagasbest.fundamental2.databinding.ActivityMyAlarmManagerMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MyAlarmManagerMainActivity : AppCompatActivity(), View.OnClickListener, DatePickerFragment.DialogDateListener, TimePickerFragment.DialogTimeListener {
+class MyAlarmManagerMainActivity : AppCompatActivity(), View.OnClickListener,
+    DatePickerFragment.DialogDateListener, TimePickerFragment.DialogTimeListener {
     private var binding: ActivityMyAlarmManagerMainBinding? = null
     private lateinit var alarmReceiver: AlarmReceiver
 
@@ -26,6 +27,9 @@ class MyAlarmManagerMainActivity : AppCompatActivity(), View.OnClickListener, Da
         binding?.btnOnceDate?.setOnClickListener(this)
         binding?.btnOnceTime?.setOnClickListener(this)
         binding?.btnSetOnceAlarm?.setOnClickListener(this)
+        binding?.btnRepeatingTime?.setOnClickListener(this)
+        binding?.btnSetRepeatingAlarm?.setOnClickListener(this)
+        binding?.btnCancelRepeatingAlarm?.setOnClickListener(this)
 
 
         alarmReceiver = AlarmReceiver()
@@ -55,6 +59,24 @@ class MyAlarmManagerMainActivity : AppCompatActivity(), View.OnClickListener, Da
                     onceMessage
                 )
             }
+            R.id.btn_repeating_time -> {
+                val timePickerFragment = TimePickerFragment()
+                timePickerFragment.show(supportFragmentManager, TIME_PICKER_REPEAT_TAG)
+            }
+
+            R.id.btn_set_repeating_alarm -> {
+                val repeatingTime = binding?.tvRepeatingTimr?.text.toString()
+                val repeatMessage = binding?.etRepeatingTime?.text.toString()
+                alarmReceiver.setRepeatingAlarm(
+                    this,
+                    AlarmReceiver.TYPE_REPEATING,
+                    repeatingTime,
+                    repeatMessage
+                )
+            }
+            R.id.btn_cancel_repeating_alarm -> {
+                alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_REPEATING)
+            }
         }
     }
 
@@ -79,7 +101,7 @@ class MyAlarmManagerMainActivity : AppCompatActivity(), View.OnClickListener, Da
         // set text dari textView berdasarkan tag
         when (tag) {
             TIME_PICKER_ONE_TAG -> binding?.tvOnceTime?.text = dateFormat.format(calendar.time)
-            TIME_PICKER_REPEAT_TAG -> {}
+            TIME_PICKER_REPEAT_TAG -> binding?.tvRepeatingTimr?.text = dateFormat.format(calendar.time)
             else -> {
 
             }
