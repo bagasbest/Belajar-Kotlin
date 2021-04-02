@@ -89,6 +89,11 @@
             android:text="MyDeepLink" />
 
 
+        <Button
+            android:id="@+id/view_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyViewModel" />
 
 
     </LinearLayout>
