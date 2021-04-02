@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
-        <activity android:name=".myQuote.ListQuoteActivity"></activity>
+        <activity android:name=".myJobSchduler.MyJobSchdulerMainActivity"></activity>
+        <activity android:name=".myQuote.ListQuoteActivity" />
         <activity android:name=".myQuote.MyQuoteMainActivity" />
         <activity android:name=".myAlarmManager.MyAlarmManagerMainActivity" />
         <activity
@@ -52,6 +53,11 @@
         <service
             android:name=".myBroadcastReceiver.DownloadService"
             android:exported="false" />
+
+        <service android:name=".myJobSchduler.GetCurrentWeatherJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <receiver
             android:name=".myBroadcastReceiver.SmsReceiver"

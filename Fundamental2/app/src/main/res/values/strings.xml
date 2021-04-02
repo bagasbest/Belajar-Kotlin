@@ -56,6 +56,10 @@
     <string name="author">- Dr. Hiluluk</string>
     <string name="show_list_quotes">Show me list of quotes</string>
 
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
+    <string name="description">Click the start button to start the weather task or click the cancel button to cancel the weather task</string>
+
     <string name="hello_world">Hello World %1$s, you have %2$d pokes from %3$s</string>
     <string name="good_morning">Good Morning</string>
     <plurals name="numberOfSongsAvailable">

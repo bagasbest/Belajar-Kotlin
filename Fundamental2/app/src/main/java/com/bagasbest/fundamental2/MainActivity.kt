@@ -7,6 +7,7 @@ import com.bagasbest.fundamental2.databinding.ActivityMainBinding
 import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
+import com.bagasbest.fundamental2.myJobSchduler.MyJobSchdulerMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
 import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.webApi.setOnClickListener {
             startActivity(Intent(this, MyQuoteMainActivity::class.java))
+        }
+
+        binding.jobScheduler.setOnClickListener {
+            startActivity(Intent(this, MyJobSchdulerMainActivity::class.java))
         }
     }
 
