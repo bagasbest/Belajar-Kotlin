@@ -7,6 +7,7 @@ import com.bagasbest.fundamental2.databinding.ActivityMainBinding
 import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
+import com.bagasbest.fundamental2.myDeepNavigation.MyDeepNavigationMainActivity
 import com.bagasbest.fundamental2.myJobSchduler.MyJobSchdulerMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
 import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
@@ -64,6 +65,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.workManager.setOnClickListener {
             startActivity(Intent(this, MyWorkManagerMainActivity::class.java))
+        }
+
+        binding.deepLink.setOnClickListener {
+            startActivity(Intent(this, MyDeepNavigationMainActivity::class.java))
         }
 
     }

@@ -1,82 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/bottom_nav"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MyBottomNavigation" />
-
-    <Button
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyTabLayout" />
-
-    <Button
-        android:id="@+id/localization"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyLocalization" />
-
-    <Button
-        android:id="@+id/testing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyUnisTest" />
-
-    <Button
-        android:id="@+id/background_thread"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyBackgroundThread" />
-
-    <Button
-        android:id="@+id/service"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyService" />
-
-    <Button
-        android:id="@+id/broadcast_receiver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyBroadcastReceiver" />
-
-    <Button
-        android:id="@+id/alarm_manager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyAlarmManager"/>
-
-    <Button
-        android:id="@+id/web_api"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Web Service" />
-
-    <Button
-        android:id="@+id/job_scheduler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyJobSchduler" />
-
-    <Button
-        android:id="@+id/work_manager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyWorkManager" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
 
+        <Button
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyBottomNavigation" />
+
+        <Button
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyTabLayout" />
+
+        <Button
+            android:id="@+id/localization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyLocalization" />
+
+        <Button
+            android:id="@+id/testing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyUnisTest" />
+
+        <Button
+            android:id="@+id/background_thread"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyBackgroundThread" />
+
+        <Button
+            android:id="@+id/service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyService" />
+
+        <Button
+            android:id="@+id/broadcast_receiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyBroadcastReceiver" />
+
+        <Button
+            android:id="@+id/alarm_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyAlarmManager"/>
+
+        <Button
+            android:id="@+id/web_api"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Web Service" />
+
+        <Button
+            android:id="@+id/job_scheduler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyJobSchduler" />
+
+        <Button
+            android:id="@+id/work_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyWorkManager" />
+
+
+        <Button
+            android:id="@+id/deep_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyDeepLink" />
 
 
 
-</LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
+

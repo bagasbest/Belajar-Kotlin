@@ -14,7 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2">
-        <activity android:name=".myWorkManager.MyWorkManagerMainActivity"></activity>
+        <activity
+            android:name=".myDeepNavigation.MyDeepLinkDetailActivity"
+            android:parentActivityName=".myDeepNavigation.MyDeepNavigationMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".myDeepNavigation.MyDeepNavigationMainActivity" />
+
+
+        </activity>
+        <activity
+            android:name=".myDeepNavigation.MyDeepNavigationMainActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".myWorkManager.MyWorkManagerMainActivity" />
         <activity android:name=".myJobSchduler.MyJobSchdulerMainActivity" />
         <activity android:name=".myQuote.ListQuoteActivity" />
         <activity android:name=".myQuote.MyQuoteMainActivity" />
