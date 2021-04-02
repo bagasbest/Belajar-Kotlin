@@ -23,8 +23,8 @@ class MyBackgroundThreadMainActivity : AppCompatActivity() {
         binding = ActivityMyBackgroundThreadMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
+//        val executor = Executors.newSingleThreadExecutor()
+//        val handler = Handler(Looper.getMainLooper())
 
         binding.btnStart.setOnClickListener{
             lifecycleScope.launch {

@@ -56,6 +56,11 @@
     <string name="author">- Dr. Hiluluk</string>
     <string name="show_list_quotes">Show me list of quotes</string>
 
+    <string name="enter_city_name">Enter city name</string>
+    <string name="run_one_time_task">Run One Time Task</string>
+    <string name="run_periodic_task">Run Periodic Task</string>
+    <string name="cancel_periodic_task">Cancel Periodic Task</string>
+
     <string name="start">Start</string>
     <string name="cancel">Cancel</string>
     <string name="description">Click the start button to start the weather task or click the cancel button to cancel the weather task</string>

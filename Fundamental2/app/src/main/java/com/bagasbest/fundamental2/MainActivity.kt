@@ -13,6 +13,7 @@ import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
+import com.bagasbest.fundamental2.myWorkManager.MyWorkManagerMainActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -60,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         binding.jobScheduler.setOnClickListener {
             startActivity(Intent(this, MyJobSchdulerMainActivity::class.java))
         }
+
+        binding.workManager.setOnClickListener {
+            startActivity(Intent(this, MyWorkManagerMainActivity::class.java))
+        }
+
     }
 
 

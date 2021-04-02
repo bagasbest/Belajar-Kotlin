@@ -1,6 +1,5 @@
 package com.bagasbest.fundamental2.myService
 
-import android.app.IntentService
 import android.content.Intent
 import android.content.Context
 import android.util.Log
