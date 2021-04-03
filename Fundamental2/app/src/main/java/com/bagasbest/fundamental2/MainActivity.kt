@@ -14,6 +14,7 @@ import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
+import com.bagasbest.fundamental2.myViewModel.MyViewModelMainActivity
 import com.bagasbest.fundamental2.myWorkManager.MyWorkManagerMainActivity
 
 class MainActivity : AppCompatActivity() {
@@ -69,6 +70,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.deepLink.setOnClickListener {
             startActivity(Intent(this, MyDeepNavigationMainActivity::class.java))
+        }
+
+        binding.viewModel.setOnClickListener {
+            startActivity(Intent(this, MyViewModelMainActivity::class.java))
         }
 
     }
