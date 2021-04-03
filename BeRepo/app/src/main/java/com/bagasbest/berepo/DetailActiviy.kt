@@ -7,7 +7,6 @@ import com.bagasbest.berepo.model.UserModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail_activiy.*
 import kotlinx.android.synthetic.main.github_user_list_item.tv_fullname
-import kotlinx.android.synthetic.main.github_user_list_item.tv_username
 
 class DetailActiviy : AppCompatActivity() {
 
@@ -27,23 +26,23 @@ class DetailActiviy : AppCompatActivity() {
         actionBar?.setDisplayShowHomeEnabled(true)
 
         val person = intent.getParcelableExtra<UserModel>(EXTRA_USER) as UserModel
-        val fullname = person.name
+        //val fullname = person.name
         val username = person.username
-        val location = person.location
-        val company = person.company
-        val following = person.following
-        val follower = person.follower
-        val repository = person.repository
+//        val location = person.location
+//        val company = person.company
+//        val following = person.following
+//        val follower = person.follower
+//        val repository = person.repository
         val avatar = person.avatar
 
 
-        tv_fullname.text = fullname
+//        tv_fullname.text = fullname
         tv_username.text = username
-        tv_location.text = location
-        tv_company_detail.text = company
-        tv_following.text = "Following\n$following"
-        tv_follower.text = "Follower\n$follower"
-        tv_repos.text = "repository\n$repository"
+//        tv_location.text = location
+//        tv_company_detail.text = company
+//        tv_following.text = "Following\n$following"
+//        tv_follower.text = "Follower\n$follower"
+//        tv_repos.text = "repository\n$repository"
 
         Glide.with(this)
             .load(avatar)

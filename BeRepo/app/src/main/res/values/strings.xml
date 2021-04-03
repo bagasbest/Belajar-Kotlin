@@ -11,6 +11,13 @@
     <string name="tentang_developer">Tentang Developer</string>
     <string name="search">search</string>
     <string name="search_hint">Cari pengguna</string>
+    <string name="perusahaan_anda">Perusahaan anda</string>
+    <string name="following">Following</string>
+    <string name="follower">Follower</string>
+    <string name="maaf_data_tidak_tersedia_bro">Maaf, data tidak tersedia, Bro!</string>
+    <string name="maaf_data_yang_anda_cari_kosong_bos">Maaf, data yang anda cari kosong, Bos!</string>
+    <string name="user_id">User ID</string>
+    <string name="item_count">0 Pengguna terdaftar</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
