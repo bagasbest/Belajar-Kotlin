@@ -22,7 +22,7 @@ class HomeViewModel : ViewModel() {
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/search/users?q=$query"
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token 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")
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler(){
             override fun onSuccess(
@@ -43,6 +43,7 @@ class HomeViewModel : ViewModel() {
                         userItems.username = jsonObject.getString("login")
                         userItems.avatar = jsonObject.getString("avatar_url")
                         userItems.id = jsonObject.getInt("id")
+                        userItems.url = jsonObject.getString("html_url")
                         listItems.add(userItems)
                     }
                     val userCount = ResponseUser()
@@ -54,11 +55,8 @@ class HomeViewModel : ViewModel() {
                     userResponse.postValue(userResponseItem)
 
                 } catch (e: Exception) {
-                    Log.d("Exception", e.message.toString())
+                    e.printStackTrace()
                 }
-
-
-
             }
 
             override fun onFailure(
@@ -78,6 +76,60 @@ class HomeViewModel : ViewModel() {
 
         })
     }
+
+    fun getUserDetailFromAPI(username: String?) {
+        val listItems = ArrayList<UserModel>()
+        val url = "https://api.github.com/users/$username"
+        val client = AsyncHttpClient()
+        client.addHeader("Authorization", "token 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")
+        client.addHeader("User-Agent", "request")
+        client.get(url, object : AsyncHttpResponseHandler(){
+            override fun onSuccess(
+                statusCode: Int,
+                headers: Array<Header>,
+                responseBody: ByteArray
+            ) {
+
+                val result = String(responseBody)
+                Log.d("RESULT : ", result)
+
+                try {
+                    val userItems = UserModel()
+                    val responseObject = JSONObject(result)
+                    userItems.fullname = responseObject.getString("name")
+                    userItems.location = responseObject.getString("location")
+                    userItems.company = responseObject.getString("company")
+                    userItems.email = responseObject.getString("email")
+                    userItems.bio = responseObject.getString("bio")
+                    userItems.blog = responseObject.getString("email")
+                    userItems.repository = responseObject.getInt("public_repos")
+                    listItems.add(userItems)
+                }catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                listUser.postValue(listItems)
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Array<Header>,
+                responseBody: ByteArray,
+                error: Throwable?
+            ) {
+                val errorMessage = when (statusCode) {
+                    401 -> "$statusCode : Bad Request"
+                    403 -> "$statusCode : Forbidden"
+                    404 -> "$statusCode : Not Found"
+                    else -> "$statusCode : ${error?.message}"
+                }
+                Log.d("onFailure : ", errorMessage)
+            }
+
+        })
+
+    }
+
+
 
     fun getUser() : LiveData<ArrayList<UserModel>> {
         return listUser

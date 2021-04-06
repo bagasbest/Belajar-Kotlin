@@ -8,31 +8,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.berepo.DetailActiviy
 import com.bagasbest.berepo.R
-import com.bagasbest.berepo.model.UserModel
+import com.bagasbest.berepo.model.FollowingModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.github_user_list_item.view.*
-import kotlinx.android.synthetic.main.github_user_list_item.view.tv_fullname
+import kotlinx.android.synthetic.main.list_user_following.view.*
 
-class UserAdapter :
-    RecyclerView.Adapter<UserAdapter.UserAdapterViewHolder>() {
+class FollowingAdapter :
+    RecyclerView.Adapter<FollowingAdapter.FollowingViewHolder>() {
 
-    private val userList = ArrayList<UserModel>()
-    fun setData(items: ArrayList<UserModel>) {
+
+    private val userList = ArrayList<FollowingModel>()
+    fun setData(items: ArrayList<FollowingModel>) {
         userList.clear()
         userList.addAll(items)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): UserAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.github_user_list_item, parent, false)
-        return UserAdapterViewHolder(itemView)
+            .inflate(R.layout.list_user_following, parent, false)
+        return FollowingViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: UserAdapter.UserAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FollowingViewHolder, position: Int) {
         holder.bind(userList[position])
 
         holder.itemView.setOnClickListener {
@@ -44,22 +41,21 @@ class UserAdapter :
 
     override fun getItemCount(): Int = userList.size
 
-    inner class UserAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+    inner class FollowingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
-        fun bind(list: UserModel) {
+        fun bind(list: FollowingModel) {
             with(itemView) {
                 Glide.with(itemView.context)
                     .load(list.avatar)
                     .placeholder(R.drawable.ic_baseline_face_24)
                     .error(R.drawable.ic_baseline_face_24)
-                    .into(iv_avatar)
-                tv_fullname.text = list.username
-                tv_id.text = list.id.toString()
-                urlTv.text = "url: " + list.url
+                    .into(iv_avatar_following)
+                tv_fullname_following.text = list.username
+                tv_id_following.text = list.id.toString()
+                urlTv_following.text = "url: " + list.url
             }
         }
-    }
 
+    }
 
 }

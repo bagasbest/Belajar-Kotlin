@@ -18,6 +18,11 @@
     <string name="maaf_data_yang_anda_cari_kosong_bos">Maaf, data yang anda cari kosong, Bos!</string>
     <string name="user_id">User ID</string>
     <string name="item_count">0 Pengguna terdaftar</string>
+    <string name="email">Email</string>
+    <string name="repositorimu">Repositorimu</string>
+    <string name="your_bio">Biodatamu</string>
+    <string name="blog">Blogmu</string>
+    <string name="button">button</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
@@ -122,5 +127,18 @@
         <item>@drawable/user9</item>
         <item>@drawable/user10</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mengikuti">Mengikuti</string>
+    <string name="diikuti_oleh">Diikuti oleh</string>
+    <string name="added_favorite">dihapus dari daftar favoritmu</string>
+    <string name="delete_faforite">ditambahkan ke daftar favorit anda</string>
+    <string name="not_fill_name">Pengguna belum mengisi nama lengkap</string>
+    <string name="not_fill_location">Pengguna belum mengisi lokasi</string>
+    <string name="not_fill_company">Pengguna belum mengisi perusahaan</string>
+    <string name="not_fill_email">Pengguna belum mengisi email</string>
+    <string name="not_fill_bio">Pengguna belum mengisi biodata</string>
+    <string name="not_fill_blog">Pengguna belum mengisi blog</string>
+    <string name="url">url</string>
 
 </resources>
