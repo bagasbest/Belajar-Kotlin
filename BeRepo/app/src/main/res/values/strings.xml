@@ -140,5 +140,10 @@
     <string name="not_fill_bio">Pengguna belum mengisi biodata</string>
     <string name="not_fill_blog">Pengguna belum mengisi blog</string>
     <string name="url">url</string>
+    <string name="detail_user">Detail Pengguna</string>
+    <string name="daftar_pengguna">Daftar Pengguna Github</string>
+    <string name="user_available">Pengguna terdaftar</string>
+    <string name="about_dev">Tentang Developer</string>
+    <string name="ganti_bahasa">Ganti Bahasa</string>
 
 </resources>

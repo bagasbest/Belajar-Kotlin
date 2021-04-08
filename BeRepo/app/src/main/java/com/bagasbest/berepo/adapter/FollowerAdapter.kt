@@ -35,6 +35,7 @@ class FollowerAdapter :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActiviy::class.java)
+            intent.putExtra(DetailActiviy.OPTION, "followers")
             intent.putExtra(DetailActiviy.EXTRA_USER, userList[position])
             holder.itemView.context.startActivity(intent)
         }

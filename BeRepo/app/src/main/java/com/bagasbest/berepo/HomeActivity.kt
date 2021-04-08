@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -28,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
 
-        title = "Daftar Pengguna Github"
+        title = resources.getString(R.string.daftar_pengguna)
 
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
@@ -48,10 +49,10 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.getUserCount().observe(this, {userCount ->
             if(userCount != null ) {
                 val len = userCount.toString().length
-                item_count.text = userCount.toString().substring(25, len-2) + " Pengguna terdaftar"
+                item_count.text = userCount.toString().substring(25, len-2) + " ${resources.getString(R.string.user_available)}"
                 showLoading(false)
             } else {
-                item_count.text = "0 Pengguna terdaftar"
+                item_count.text = "0 ${resources.getString(R.string.user_available)}"
                 showLoading(false)
             }
         })
@@ -85,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("LOG", newText)
                 if(newText.isEmpty()) {
                     rv_data.visibility = View.INVISIBLE
-                    item_count.text = "0 Pengguna terdaftar"
+                    item_count.text = "0 ${resources.getString(R.string.user_available)}"
                     empty_image.visibility = View.VISIBLE
                     empty_title.visibility = View.VISIBLE
 
@@ -107,6 +108,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.settings) {
             startActivity(Intent(this, AboutMeActivity::class.java))
+        }
+        else if (item.itemId == R.id.language) {
+            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
         }
         return super.onOptionsItemSelected(item)
     }

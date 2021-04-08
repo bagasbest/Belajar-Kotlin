@@ -197,7 +197,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 tools:ignore="UseCompoundDrawables">
 
@@ -215,10 +214,16 @@
                     android:text="@string/email"
                     android:textColor="@android:color/white" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/image"
                     android:src="@drawable/ic_baseline_location_on_24" />
@@ -264,8 +269,6 @@
         app:layout_scrollFlags="scroll"
         app:layout_anchorGravity="top|center_horizontal"
         android:background="@drawable/avatar_blank"/>
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

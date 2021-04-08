@@ -8,7 +8,7 @@ class AboutMeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_me)
 
-        title = "Tentang Developer"
+        title = resources.getString(R.string.about_dev)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.berepo.DetailActiviy
 import com.bagasbest.berepo.R
@@ -34,6 +35,7 @@ class FollowingAdapter :
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActiviy::class.java)
+            intent.putExtra(DetailActiviy.OPTION, "following")
             intent.putExtra(DetailActiviy.EXTRA_USER, userList[position])
             holder.itemView.context.startActivity(intent)
         }

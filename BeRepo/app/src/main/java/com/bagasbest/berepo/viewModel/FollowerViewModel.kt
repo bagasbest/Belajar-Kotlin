@@ -20,7 +20,7 @@ class FollowerViewModel : ViewModel(){
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/$username/followers"
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", "token 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")
         client.addHeader("User-Agent", "request")
 
         client.get(url, object : AsyncHttpResponseHandler(){

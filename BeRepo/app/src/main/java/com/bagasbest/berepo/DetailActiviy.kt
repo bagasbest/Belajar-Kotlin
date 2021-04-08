@@ -10,6 +10,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.berepo.adapter.SectionPagerAdapter
+import com.bagasbest.berepo.model.FollowerModel
+import com.bagasbest.berepo.model.FollowingModel
 import com.bagasbest.berepo.model.UserModel
 import com.bagasbest.berepo.viewModel.HomeViewModel
 import com.bumptech.glide.Glide
@@ -23,6 +25,7 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
 
     companion object {
         const val EXTRA_USER = "extra_user"
+        const val OPTION = "option"
         @StringRes
         private val tabTittles = intArrayOf(
             R.string.following,
@@ -43,23 +46,38 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_activiy)
 
-        title = "Detail Pengguna"
+        title = resources.getString(R.string.detail_user)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
 
-        val person = intent.getParcelableExtra<UserModel>(EXTRA_USER) as UserModel
-        username = person.username.toString()
-        val avatar = person.avatar
+        when (intent.getStringExtra(OPTION)) {
+            "user" -> {
+                val person = intent.getParcelableExtra<UserModel>(EXTRA_USER) as UserModel
+                username = person.username.toString()
+                val avatar = person.avatar
+                setUserDetail(username, avatar)
+            }
+            "following" -> {
+                val person = intent.getParcelableExtra<FollowingModel>(EXTRA_USER) as FollowingModel
+                username = person.username.toString()
+                val avatar = person.avatar
+                setUserDetail(username, avatar)
+            }
+            "followers" -> {
+                val person = intent.getParcelableExtra<FollowerModel>(EXTRA_USER) as FollowerModel
+                username = person.username.toString()
+                val avatar = person.avatar
+                setUserDetail(username, avatar)
+            }
+        }
 
         detailViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(HomeViewModel::class.java)
 
-
         showLoading(true)
-        setUserDetail(username, avatar)
         detailViewModel.getUserDetailFromAPI(username)
         showDetailViewModelObserver()
 
@@ -69,7 +87,6 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
         btn_favorite.setOnClickListener {
             saveData()
         }
-
     }
 
     private fun viewPagerConfig() {
@@ -103,14 +120,14 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
                 commit()
             }
             btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-            Toast.makeText(this, "$username ${R.string.added_favorite}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$username ${resources.getString(R.string.added_favorite)}", Toast.LENGTH_SHORT).show()
         }else{
             with(sharedPreferences.edit()) {
                 putBoolean("isFavorite", true)
                 commit()
             }
             btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-            Toast.makeText(this, "$username ${R.string.delete_faforite}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$username ${resources.getString(R.string.delete_faforite)}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -123,37 +140,37 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
                 if (userItems[0].fullname != "null") {
                     tv_fullname.text = userItems[0].fullname
                 } else {
-                    tv_fullname.text = "${R.string.not_fill_name}"
+                    tv_fullname.text = resources.getString(R.string.not_fill_name)
                 }
 
                 if (userItems[0].location != "null") {
                     locationTv.text = userItems[0].location
                 } else {
-                    locationTv.text = "${R.string.not_fill_location}"
+                    locationTv.text = resources.getString(R.string.not_fill_location)
                 }
 
                 if (userItems[0].company != "null") {
                     organizationTv.text = userItems[0].company
                 } else {
-                    organizationTv.text = "${R.string.not_fill_company}"
+                    organizationTv.text = resources.getString(R.string.not_fill_company)
                 }
 
                 if (userItems[0].email != "null") {
                     emailTv.text = userItems[0].email
                 } else {
-                    emailTv.text = "${R.string.not_fill_email}"
+                    emailTv.text = resources.getString(R.string.not_fill_email)
                 }
 
                 if (userItems[0].bio != "null") {
                     bio.text = userItems[0].bio
                 } else {
-                    bio.text = "${R.string.not_fill_bio}"
+                    bio.text = resources.getString(R.string.not_fill_bio)
                 }
 
                 if (userItems[0].blog != "null") {
                     blogTv.text = userItems[0].blog
                 } else {
-                    blogTv.text = "${R.string.not_fill_blog}"
+                    blogTv.text = resources.getString(R.string.not_fill_blog)
                 }
 
                 publicRepo.text = userItems[0].repository.toString()

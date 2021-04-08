@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BeRepo</string>
+    <string name="image">image</string>
+    <string name="cari_repository_nberepo_aja">Find A Repo ?\nBeRepo Aja</string>
+    <string name="v1_0_0">V1.0.0</string>
+    <string name="nama_lengkap">Full Name</string>
+    <string name="username">Username</string>
+    <string name="lokasi">Location</string>
+    <string name="company">Company</string>
+    <string name="halo_saya_bagas_pangestu_android_developer_saat_ini_saya_berusia_21_tahun_saya_sedang_mengikuti_event_bangkit_2021_saya_ingin_menjadi_android_developer_expert_yang_berkontribusi_membangun_negeri">Hello, I am Bagas Pangestu, Android Developer, I am currently 21 years old, I am participating in the Bangkit 2021 event, I want to become an Android Developer Expert who contributes to building the country.</string>
+    <string name="tentang_developer">About Developer</string>
+    <string name="search">search</string>
+    <string name="search_hint">Find User</string>
+    <string name="perusahaan_anda">Your Company</string>
+    <string name="following">Following</string>
+    <string name="follower">Follower</string>
+    <string name="maaf_data_tidak_tersedia_bro">Sorry, User Not Found Bro!</string>
+    <string name="maaf_data_yang_anda_cari_kosong_bos">Sorry, User Empty Bro!</string>
+    <string name="user_id">User ID</string>
+    <string name="item_count">0 User Registered</string>
+    <string name="email">Email</string>
+    <string name="repositorimu">Your Repository</string>
+    <string name="your_bio">Your Bio</string>
+    <string name="blog">Your Website</string>
+    <string name="button">button</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mengikuti">Following</string>
+    <string name="diikuti_oleh">Followed by</string>
+    <string name="added_favorite">Deleted from your favorite</string>
+    <string name="delete_faforite">Add to your favorite list</string>
+    <string name="not_fill_name">User don\'t fill username</string>
+    <string name="not_fill_location">User don\'t fill location</string>
+    <string name="not_fill_company">User don\'t fill company</string>
+    <string name="not_fill_email">User don\'t fill email</string>
+    <string name="not_fill_bio">User don\'t fill bio</string>
+    <string name="not_fill_blog">User don\'t fill website</string>
+    <string name="url">url</string>
+    <string name="detail_user">User Detail</string>
+    <string name="daftar_pengguna">List of User</string>
+    <string name="user_available">Registered User</string>
+    <string name="about_dev">About Developer</string>
+    <string name="ganti_bahasa">Change Language</string>
+</resources>
