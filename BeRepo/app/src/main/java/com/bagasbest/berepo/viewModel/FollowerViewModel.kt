@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bagasbest.berepo.R
 import com.bagasbest.berepo.model.FollowerModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -20,7 +21,7 @@ class FollowerViewModel : ViewModel(){
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/$username/followers"
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", R.string.GITHUB_TOKEN.toString())
         client.addHeader("User-Agent", "request")
 
         client.get(url, object : AsyncHttpResponseHandler(){

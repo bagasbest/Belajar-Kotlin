@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bagasbest.berepo.R
 import com.bagasbest.berepo.model.ResponseUser
 import com.bagasbest.berepo.model.UserModel
 import com.loopj.android.http.AsyncHttpClient
@@ -22,7 +23,7 @@ class HomeViewModel : ViewModel() {
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/search/users?q=$query"
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", R.string.GITHUB_TOKEN.toString())
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler(){
             override fun onSuccess(
@@ -81,7 +82,7 @@ class HomeViewModel : ViewModel() {
         val listItems = ArrayList<UserModel>()
         val url = "https://api.github.com/users/$username"
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token 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")
+        client.addHeader("Authorization", R.string.GITHUB_TOKEN.toString())
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler(){
             override fun onSuccess(
