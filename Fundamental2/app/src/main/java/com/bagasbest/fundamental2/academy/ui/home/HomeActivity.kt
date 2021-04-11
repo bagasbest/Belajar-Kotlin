@@ -11,6 +11,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Dicoding Academy"
+
         val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
         binding.viewPager.adapter = sectionPagerAdapter
         binding.tabs.setupWithViewPager(binding.viewPager)

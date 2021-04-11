@@ -2,6 +2,7 @@ package com.bagasbest.fundamental2.academy.ui.reader
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.academy.ui.reader.content.ModuleContentFragment
 import com.bagasbest.fundamental2.academy.ui.reader.list.ModuleListFragment
@@ -19,11 +20,15 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
         binding = ActivityCourseReaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+
+
 
         val bundle = intent.extras
         if(bundle != null) {
             val courseId = bundle.getString(EXTRA_COURSE_ID)
             if(courseId != null) {
+                viewModel.setSelectedCourse(courseId)
                 populateFragment()
             }
         }
