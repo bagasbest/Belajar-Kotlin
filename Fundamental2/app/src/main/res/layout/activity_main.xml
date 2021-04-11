@@ -95,6 +95,18 @@
             android:layout_height="wrap_content"
             android:text="MyViewModel" />
 
+        <Button
+            android:id="@+id/view_model2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyViewModel2" />
+
+        <Button
+            android:id="@+id/academy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Academy" />
+
 
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.bagasbest.fundamental2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bagasbest.fundamental2.academy.ui.home.HomeActivity
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
 import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
@@ -15,6 +16,7 @@ import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
 import com.bagasbest.fundamental2.myViewModel.MyViewModelMainActivity
+import com.bagasbest.fundamental2.myViewModel2.MyViewModel2MainActivity
 import com.bagasbest.fundamental2.myWorkManager.MyWorkManagerMainActivity
 
 class MainActivity : AppCompatActivity() {
@@ -74,6 +76,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewModel.setOnClickListener {
             startActivity(Intent(this, MyViewModelMainActivity::class.java))
+        }
+
+        binding.viewModel2.setOnClickListener {
+            startActivity(Intent(this, MyViewModel2MainActivity::class.java))
+        }
+
+        binding.academy.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
         }
 
     }
