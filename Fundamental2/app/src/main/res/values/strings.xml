@@ -82,7 +82,6 @@
     <string name="search">Cari</string>
     <string name="id_jakarta_bandung_semarang">1642911,1650357,1627896</string>
 
-    <string name="title_activity_detail_course">Detail Course</string>
 
     <string name="title2">Title</string>
     <string name="description2">Description</string>
@@ -94,8 +93,6 @@
     <string name="home">Home</string>
     <string name="bookmark">Bookmark</string>
     <string name="menu_bookmark">bookmark</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
     <string name="last_seen">Terakhir dilihat</string>
     <string name="message_undo">Batalkan menghapus item sebelumnya?</string>
     <string name="message_ok">OK</string>
