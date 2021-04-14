@@ -16,11 +16,16 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_avatar"
             android:layout_width="75dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@android:color/holo_red_dark"
             android:layout_height="75dp"
             android:layout_margin="16dp"
-            tools:ignore="MissingConstraints" />
+            app:civ_border_color="@android:color/holo_red_dark"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.75" />
 
         <TextView
             android:id="@+id/tv_fullname"
@@ -31,13 +36,13 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.046"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tv_id"
@@ -53,8 +58,7 @@
             app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             app:layout_constraintTop_toBottomOf="@+id/tv_fullname"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/urlTv"
@@ -71,8 +75,7 @@
             app:layout_constraintHorizontal_bias="0.031"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             app:layout_constraintTop_toBottomOf="@+id/tv_id"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

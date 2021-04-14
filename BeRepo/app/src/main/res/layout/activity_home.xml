@@ -24,14 +24,12 @@
         android:text="@string/item_count"
         android:textSize="20sp"
         android:textStyle="bold"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/rv_data"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/homeProgressBar"
@@ -41,8 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/empty_image"
@@ -57,8 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.436"
-        app:tint="@color/pink"
-        tools:ignore="MissingConstraints" />
+        app:tint="@color/pink" />
 
     <TextView
         android:id="@+id/empty_title"
@@ -74,8 +70,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeProgressBar"
-        app:layout_constraintVertical_bias="0.082"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.082" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
