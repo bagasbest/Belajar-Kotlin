@@ -107,6 +107,12 @@
             android:layout_height="wrap_content"
             android:text="Academy" />
 
+        <Button
+            android:id="@+id/myWriteAndRead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyReadAndWriteFiles" />
+
 
     </LinearLayout>
 

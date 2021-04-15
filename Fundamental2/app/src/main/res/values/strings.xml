@@ -122,5 +122,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="button">button</string>
     <string name="image">image</string>
+
+    <string name="file_new">File New</string>
+    <string name="file_open">File Open</string>
+    <string name="file_save">File Save</string>
+    <dimen name="tiny_margin">8dp</dimen>
 </resources>
 

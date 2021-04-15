@@ -15,17 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2"
         android:usesCleartextTraffic="true">
+        <activity android:name=".myReadWriteFile.MyReadWriteMainActivity"></activity>
         <activity
-            android:name="com.bagasbest.fundamental2.academy.ui.detail.DetailCourseActivity"
+            android:name=".academy.ui.detail.DetailCourseActivity"
             android:label="@string/title_activity_detail_course"
-            android:parentActivityName="com.bagasbest.fundamental2.academy.ui.home.HomeActivity"
+            android:parentActivityName=".academy.ui.home.HomeActivity"
             android:theme="@style/Theme.Fundamental2.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bagasbest.fundamental2.academy.ui.home.HomeActivity" />
         </activity>
-        <activity android:name="com.bagasbest.fundamental2.academy.ui.reader.CourseReaderActivity" />
-        <activity android:name="com.bagasbest.fundamental2.academy.ui.home.HomeActivity" />
+        <activity android:name=".academy.ui.reader.CourseReaderActivity" />
+        <activity android:name=".academy.ui.home.HomeActivity" />
         <activity android:name=".myViewModel2.MyViewModel2MainActivity" />
         <activity android:name=".myViewModel.MyViewModelMainActivity" />
         <activity

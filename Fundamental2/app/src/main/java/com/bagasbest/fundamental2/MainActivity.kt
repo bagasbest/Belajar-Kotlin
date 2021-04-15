@@ -12,6 +12,7 @@ import com.bagasbest.fundamental2.myDeepNavigation.MyDeepNavigationMainActivity
 import com.bagasbest.fundamental2.myJobSchduler.MyJobSchdulerMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
 import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
+import com.bagasbest.fundamental2.myReadWriteFile.MyReadWriteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
@@ -84,6 +85,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.academy.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
+        }
+
+        binding.myWriteAndRead.setOnClickListener {
+            startActivity(Intent(this, MyReadWriteMainActivity::class.java))
         }
 
     }
