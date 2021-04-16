@@ -113,6 +113,11 @@
             android:layout_height="wrap_content"
             android:text="MyReadAndWriteFiles" />
 
+        <Button
+            android:id="@+id/shared_pref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MySharedPreferences"  />
 
     </LinearLayout>
 

@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myReadWriteFile.MyReadWriteMainActivity"></activity>
+        <activity android:name=".mySharedPreferences.FormUserPreferenceActivity"></activity>
+        <activity android:name=".mySharedPreferences.MySharedPrefMainActivity" />
+        <activity android:name=".myReadWriteFile.MyReadWriteMainActivity" />
         <activity
             android:name=".academy.ui.detail.DetailCourseActivity"
             android:label="@string/title_activity_detail_course"

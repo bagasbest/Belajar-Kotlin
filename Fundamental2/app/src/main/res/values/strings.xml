@@ -127,5 +127,21 @@
     <string name="file_open">File Open</string>
     <string name="file_save">File Save</string>
     <dimen name="tiny_margin">8dp</dimen>
+
+    <string name="name_pref">Name</string>
+    <string name="email_pred">Email</string>
+    <string name="phone_number_pref">No Handphone</string>
+    <string name="age_pref">Age</string>
+    <string name="yes_pref">Ya</string>
+    <string name="no_pref">Tidak</string>
+    <string name="save_pref">Simpan</string>
+    <string name="love_manchester_united_pref">Suka manchester united?</string>
+    <string name="change_pref">Ubah</string>
+    <string name="dummy_name_pref">Narenda Wicaksono</string>
+    <string name="dummy_email_pref">narenda@dicoding.com</string>
+    <string name="dummynumber_pref">123456</string>
+    <string name="dummyage_pref">30</string>
+    <string name="dummyislove_pref">IsLoveMU</string>
+
 </resources>
 
