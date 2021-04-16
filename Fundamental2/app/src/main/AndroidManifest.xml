@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mySharedPreferences.FormUserPreferenceActivity"></activity>
+        <activity android:name=".mySettingPref.MySettingPrefMainActivity"></activity>
+        <activity android:name=".mySharedPreferences.FormUserPreferenceActivity" />
         <activity android:name=".mySharedPreferences.MySharedPrefMainActivity" />
         <activity android:name=".myReadWriteFile.MyReadWriteMainActivity" />
         <activity

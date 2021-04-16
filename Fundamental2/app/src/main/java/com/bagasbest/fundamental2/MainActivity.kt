@@ -14,6 +14,7 @@ import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
 import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myReadWriteFile.MyReadWriteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
+import com.bagasbest.fundamental2.mySettingPref.MySettingPrefMainActivity
 import com.bagasbest.fundamental2.mySharedPreferences.MySharedPrefMainActivity
 import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
@@ -94,6 +95,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.sharedPref.setOnClickListener {
             startActivity(Intent(this, MySharedPrefMainActivity::class.java))
+        }
+
+        binding.settingPref.setOnClickListener {
+            startActivity(Intent(this, MySettingPrefMainActivity::class.java))
         }
 
     }

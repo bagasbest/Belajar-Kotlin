@@ -119,6 +119,13 @@
             android:layout_height="wrap_content"
             android:text="MySharedPreferences"  />
 
+        <Button
+            android:id="@+id/setting_pref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="mySettingPreferences" />
+
+
     </LinearLayout>
 
 
