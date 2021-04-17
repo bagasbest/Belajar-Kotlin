@@ -15,7 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mySettingPref.MySettingPrefMainActivity"></activity>
+
+        <activity android:name=".myPreLoadData.MahasiswaActivity" />
+        <activity android:name=".myPreLoadData.MyPreloadDataMainActivity" />
+        <activity android:name=".myNotesApp.NoteAddUpdateActivity" />
+        <activity android:name=".myNotesApp.MyNotesAppMainActivity" />
+        <activity android:name=".mySettingPref.MySettingPrefMainActivity" />
         <activity android:name=".mySharedPreferences.FormUserPreferenceActivity" />
         <activity android:name=".mySharedPreferences.MySharedPrefMainActivity" />
         <activity android:name=".myReadWriteFile.MyReadWriteMainActivity" />
@@ -85,6 +90,10 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".myPreLoadData.service.DataManagerService"
+            android:enabled="true"
+            android:exported="true" />
 
         <receiver
             android:name=".myBroadcastReceiver.SmsReceiver"

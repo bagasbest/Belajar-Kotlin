@@ -11,6 +11,8 @@ import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainAct
 import com.bagasbest.fundamental2.myDeepNavigation.MyDeepNavigationMainActivity
 import com.bagasbest.fundamental2.myJobSchduler.MyJobSchdulerMainActivity
 import com.bagasbest.fundamental2.myLocalization.MyLocalizationMainActivity
+import com.bagasbest.fundamental2.myNotesApp.MyNotesAppMainActivity
+import com.bagasbest.fundamental2.myPreLoadData.MyPreloadDataMainActivity
 import com.bagasbest.fundamental2.myQuote.MyQuoteMainActivity
 import com.bagasbest.fundamental2.myReadWriteFile.MyReadWriteMainActivity
 import com.bagasbest.fundamental2.myService.MyServiceMainActivity
@@ -99,6 +101,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.settingPref.setOnClickListener {
             startActivity(Intent(this, MySettingPrefMainActivity::class.java))
+        }
+
+        binding.readWrite.setOnClickListener {
+            startActivity(Intent(this, MyNotesAppMainActivity::class.java))
+        }
+
+        binding.myPreloadData.setOnClickListener {
+            startActivity(Intent(this, MyPreloadDataMainActivity::class.java))
         }
 
     }

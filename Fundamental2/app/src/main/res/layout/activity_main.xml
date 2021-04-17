@@ -125,6 +125,18 @@
             android:layout_height="wrap_content"
             android:text="mySettingPreferences" />
 
+        <Button
+            android:id="@+id/read_write"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="myReadAndWrite" />
+
+        <Button
+            android:id="@+id/my_preload_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyPreLoadData" />
+
 
     </LinearLayout>
 

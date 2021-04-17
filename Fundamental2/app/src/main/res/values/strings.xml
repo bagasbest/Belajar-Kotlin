@@ -154,5 +154,9 @@
     <string name="key_love">love</string>
     <string name="key_name">name</string>
 
+    <string name="submit">Submit</string>
+    <string name="delete">Hapus</string>
+    <string name="date">Date</string>
+
 </resources>
 
