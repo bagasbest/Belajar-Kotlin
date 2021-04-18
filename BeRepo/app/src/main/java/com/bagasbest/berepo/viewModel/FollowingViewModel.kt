@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bagasbest.berepo.BuildConfig
+import com.bagasbest.berepo.BuildConfig.GITHUB_TOKEN
 import com.bagasbest.berepo.R
 import com.bagasbest.berepo.model.FollowingModel
 import com.loopj.android.http.AsyncHttpClient
@@ -22,7 +24,7 @@ class FollowingViewModel : ViewModel(){
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/$username/following"
-        client.addHeader("Authorization", R.string.GITHUB_TOKEN.toString())
+        client.addHeader("Authorization", GITHUB_TOKEN)
         client.addHeader("User-Agent", "request")
 
         client.get(url, object : AsyncHttpResponseHandler(){

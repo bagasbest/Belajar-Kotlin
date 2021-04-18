@@ -1,21 +1,27 @@
 package com.bagasbest.berepo
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.contentValuesOf
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.berepo.adapter.SectionPagerAdapter
+import com.bagasbest.berepo.database.DatabaseContract
+import com.bagasbest.berepo.database.DatabaseContract.UserColumn.Companion.CONTENT_URI
+import com.bagasbest.berepo.database.UserHelper
+import com.bagasbest.berepo.model.FavoriteModel
 import com.bagasbest.berepo.model.FollowerModel
 import com.bagasbest.berepo.model.FollowingModel
 import com.bagasbest.berepo.model.UserModel
 import com.bagasbest.berepo.viewModel.HomeViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_detail_activiy.*
 import kotlin.math.abs
@@ -33,13 +39,17 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
         )
     }
 
+    private val TAG = DetailActiviy::class.java.simpleName
+    private lateinit var userHelper: UserHelper
+    private lateinit var uriWithId: Uri
     private lateinit var detailViewModel: HomeViewModel
     private var maxScrollSize = 0
     private val PERCENTAGE_TO_ANIMATE_AVATAR = 20
     private var isAvatarShown = true
-    private var isFavorite = false
     private var username = ""
-
+    private var avatar = ""
+    private var url = ""
+    private var id = ""
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +65,33 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
             "user" -> {
                 val person = intent.getParcelableExtra<UserModel>(EXTRA_USER) as UserModel
                 username = person.username.toString()
-                val avatar = person.avatar
+                avatar = person.avatar.toString()
+                url = person.url.toString()
+                id = person.id.toString()
                 setUserDetail(username, avatar)
             }
             "following" -> {
                 val person = intent.getParcelableExtra<FollowingModel>(EXTRA_USER) as FollowingModel
                 username = person.username.toString()
-                val avatar = person.avatar
+                avatar = person.avatar.toString()
+                url = person.url.toString()
+                id = person.id.toString()
                 setUserDetail(username, avatar)
             }
             "followers" -> {
                 val person = intent.getParcelableExtra<FollowerModel>(EXTRA_USER) as FollowerModel
                 username = person.username.toString()
-                val avatar = person.avatar
+                avatar = person.avatar.toString()
+                url = person.url.toString()
+                id = person.id.toString()
+                setUserDetail(username, avatar)
+            }
+            "favorite" -> {
+                val person = intent.getParcelableExtra<FavoriteModel>(EXTRA_USER) as FavoriteModel
+                username = person.username.toString()
+                avatar = person.avatar.toString()
+                url = person.url.toString()
+                id = person.id.toString()
                 setUserDetail(username, avatar)
             }
         }
@@ -81,12 +105,47 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
         detailViewModel.getUserDetailFromAPI(username)
         showDetailViewModelObserver()
 
-        loadData()
         viewPagerConfig()
 
+        //open database
+        userHelper = UserHelper.getInstance(applicationContext)
+        userHelper.open()
+
+        //set favorite user
+        var favoriteStatus = false
+        setFavoriteStatus(favoriteStatus)
         btn_favorite.setOnClickListener {
-            saveData()
+            if(!favoriteStatus) {
+                val values = contentValuesOf(
+                    DatabaseContract.UserColumn._ID to id,
+                    DatabaseContract.UserColumn.USERNAME to username,
+                    DatabaseContract.UserColumn.AVATAR to avatar,
+                    DatabaseContract.UserColumn.URL to url
+                )
+                Log.d(TAG, values.toString())
+                contentResolver.insert(CONTENT_URI, values)
+                favoriteStatus = !favoriteStatus
+                setFavoriteStatus(favoriteStatus)
+                showSnackBar(resources.getString(R.string.user_added_to_favorite))
+            } else {
+                uriWithId = Uri.parse("$CONTENT_URI/$id")
+                contentResolver.delete(uriWithId, null, null)
+                favoriteStatus = !favoriteStatus
+                setFavoriteStatus(favoriteStatus)
+                showSnackBar(resources.getString(R.string.user_deleted_from_favorite))
+            }
         }
+
+        //database state
+        val cursor: Cursor = userHelper.queryById(id)
+        if(cursor.moveToNext()) {
+            favoriteStatus = true
+            setFavoriteStatus(favoriteStatus)
+        }
+    }
+
+    private fun showSnackBar(msg: String) {
+        Snackbar.make(btn_favorite, msg, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun viewPagerConfig() {
@@ -99,35 +158,11 @@ class DetailActiviy : AppCompatActivity() , AppBarLayout.OnOffsetChangedListener
         supportActionBar?.elevation = 0f
     }
 
-    private fun loadData() {
-        val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        val getStateFavorite = sharedPreferences.getBoolean("isFavorite", false)
-        if(getStateFavorite) {
-            isFavorite = true
+    private fun setFavoriteStatus(favoriteStatus: Boolean) {
+        if(favoriteStatus) {
             btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_24)
         } else {
-            isFavorite = false
             btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-        }
-    }
-
-    private fun saveData() {
-        loadData()
-        val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        if(isFavorite) {
-            with(sharedPreferences.edit()) {
-                putBoolean("isFavorite", false)
-                commit()
-            }
-            btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-            Toast.makeText(this, "$username ${resources.getString(R.string.added_favorite)}", Toast.LENGTH_SHORT).show()
-        }else{
-            with(sharedPreferences.edit()) {
-                putBoolean("isFavorite", true)
-                commit()
-            }
-            btn_favorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-            Toast.makeText(this, "$username ${resources.getString(R.string.delete_faforite)}", Toast.LENGTH_SHORT).show()
         }
     }
 

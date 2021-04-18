@@ -1,0 +1,160 @@
+<resources>
+    <string name="app_name">BeRepo</string>
+    <string name="image">image</string>
+    <string name="cari_repository_nberepo_aja">Cari Repository ?\nBeRepo Aja</string>
+    <string name="v1_0_0">V1.0.0</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="username">Username</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="company">Company</string>
+    <string name="halo_saya_bagas_pangestu_android_developer_saat_ini_saya_berusia_21_tahun_saya_sedang_mengikuti_event_bangkit_2021_saya_ingin_menjadi_android_developer_expert_yang_berkontribusi_membangun_negeri">Halo, saya Bagas Pangestu, Android Developer, saat ini saya berusia 21 tahun, saya sedang mengikuti event Bangkit 2021, saya ingin menjadi Android Developer Expert yang berkontribusi membangun negeri.</string>
+    <string name="tentang_developer">Tentang Developer</string>
+    <string name="search">search</string>
+    <string name="search_hint">Cari pengguna</string>
+    <string name="perusahaan_anda">Perusahaan anda</string>
+    <string name="following">Following</string>
+    <string name="follower">Follower</string>
+    <string name="maaf_data_tidak_tersedia_bro">Maaf, data tidak tersedia, Bro!</string>
+    <string name="maaf_data_yang_anda_cari_kosong_bos">Maaf, data yang anda cari kosong, Bos!</string>
+    <string name="user_id">User ID</string>
+    <string name="item_count">0 Pengguna terdaftar</string>
+    <string name="email">Email</string>
+    <string name="repositorimu">Repositorimu</string>
+    <string name="your_bio">Biodatamu</string>
+    <string name="blog">Blogmu</string>
+    <string name="button">button</string>
+
+    <string-array name="username">
+        <item>JakeWharton</item>
+        <item>amitshekhariitbhu</item>
+        <item>romainguy</item>
+        <item>chrisbanes</item>
+        <item>tipsy</item>
+        <item>ravi8x</item>
+        <item>jasoet</item>
+        <item>budioktaviyan</item>
+        <item>hendisantika</item>
+        <item>sidiqpermana</item>
+    </string-array>
+
+    <string-array name="name">
+        <item>Jake Wharton</item>
+        <item>Amit Shekhar</item>
+        <item>Romain Guy</item>
+        <item>Chris Banes</item>
+        <item>David</item>
+        <item>Ravi Tamada</item>
+        <item>Deny Prasetyo</item>
+        <item>Budi Oktaviyan</item>
+        <item>Hendi Santika</item>
+        <item>Sidiq Permana</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Pittsburgh, PA, USA</item>
+        <item>New Delhi, India</item>
+        <item>California</item>
+        <item>Sydney, Australia</item>
+        <item>Trondheim, Norway</item>
+        <item>India</item>
+        <item>Kotagede, Yogyakarta, Indonesia</item>
+        <item>Jakarta, Indonesia</item>
+        <item>Bojongsoang - Bandung Jawa Barat</item>
+        <item>Jakarta Indonesia</item>
+    </string-array>
+
+    <string-array name="repository">
+        <item>102</item>
+        <item>37</item>
+        <item>9</item>
+        <item>30</item>
+        <item>56</item>
+        <item>28</item>
+        <item>44</item>
+        <item>110</item>
+        <item>1064</item>
+        <item>65</item>
+    </string-array>
+
+    <string-array name="company">
+        <item>Google, Inc.</item>
+        <item>MindOrksOpenSource</item>
+        <item>Google</item>
+        <item>Google working on @android</item>
+        <item>Working Group Two</item>
+        <item>AndroidHive | Droid5</item>
+        <item>gojek-engineering</item>
+        <item>KotlinID</item>
+        <item>JVMDeveloperID @KotlinID @IDDevOps</item>
+        <item>Nusantara Beta Studio</item>
+    </string-array>
+
+    <string-array name="followers">
+        <item>56995</item>
+        <item>5153</item>
+        <item>7972</item>
+        <item>14725</item>
+        <item>788</item>
+        <item>18628</item>
+        <item>277</item>
+        <item>178</item>
+        <item>428</item>
+        <item>465</item>
+    </string-array>
+
+    <string-array name="following">
+        <item>12</item>
+        <item>2</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>3</item>
+        <item>39</item>
+        <item>23</item>
+        <item>61</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="avatar">
+        <item>@drawable/user1</item>
+        <item>@drawable/user2</item>
+        <item>@drawable/user3</item>
+        <item>@drawable/user4</item>
+        <item>@drawable/user5</item>
+        <item>@drawable/user6</item>
+        <item>@drawable/user7</item>
+        <item>@drawable/user8</item>
+        <item>@drawable/user9</item>
+        <item>@drawable/user10</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mengikuti">Mengikuti</string>
+    <string name="diikuti_oleh">Diikuti oleh</string>
+    <string name="added_favorite">dihapus dari daftar favoritmu</string>
+    <string name="delete_faforite">ditambahkan ke daftar favorit anda</string>
+    <string name="not_fill_name">Pengguna belum mengisi nama lengkap</string>
+    <string name="not_fill_location">Pengguna belum mengisi lokasi</string>
+    <string name="not_fill_company">Pengguna belum mengisi perusahaan</string>
+    <string name="not_fill_email">Pengguna belum mengisi email</string>
+    <string name="not_fill_bio">Pengguna belum mengisi biodata</string>
+    <string name="not_fill_blog">Pengguna belum mengisi blog</string>
+    <string name="url">url</string>
+    <string name="detail_user">Detail Pengguna</string>
+    <string name="daftar_pengguna">Daftar Pengguna Github</string>
+    <string name="user_available">Pengguna terdaftar</string>
+    <string name="about_dev">Tentang Developer</string>
+    <string name="ganti_bahasa">Ganti Bahasa</string>
+    <string name="pengguna_favorit">Pengguna Favorit</string>
+    <string name="favorite_title">Consumer App Favorite User</string>
+    <string name="nyalakan_pemberitahuan_harian">Nyalakan pemberitahuan harian ?</string>
+    <string name="reminder_title">Pemberitahuan Harian</string>
+    <string name="pengingat_harian">Pengingat Harian</string>
+    <string name="daily_reminder_on">Pengingat Harian Menyala</string>
+    <string name="daily_reminder_off">Pengingat Harian Tidak Menyala</string>
+    <string name="notification_title">Pengingat Harian BeRepo</string>
+    <string name="notification_description">Yuk, cek BeRepo,  ada yang follow kamu lho</string>
+    <string name="user_added_to_favorite">Pengguna ditambahkan ke daftar favorit</string>
+    <string name="user_deleted_from_favorite">Pengguna ini dihapus dari daftar favorit</string>
+
+</resources>

@@ -113,6 +113,12 @@ class HomeActivity : AppCompatActivity() {
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(mIntent)
         }
+        else if (item.itemId == R.id.favorite) {
+            startActivity(Intent(this, FavoriteActivity::class.java))
+        }
+        else if(item.itemId == R.id.reminder) {
+            startActivity(Intent(this, ReminderActivity::class.java))
+        }
         return super.onOptionsItemSelected(item)
     }
 
