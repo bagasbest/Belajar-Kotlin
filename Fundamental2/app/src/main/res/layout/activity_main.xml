@@ -137,7 +137,17 @@
             android:layout_height="wrap_content"
             android:text="MyPreLoadData" />
 
+        <Button
+            android:id="@+id/myWidget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyWidget" />
 
+        <Button
+            android:id="@+id/myWebView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MyWebView" />
     </LinearLayout>
 
 

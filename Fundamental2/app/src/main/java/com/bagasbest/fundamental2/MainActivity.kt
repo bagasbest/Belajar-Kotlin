@@ -22,6 +22,8 @@ import com.bagasbest.fundamental2.myTabLayout.MyTabLayoutMainActivity
 import com.bagasbest.fundamental2.myUnitTest.MyUnitTestMainActivity
 import com.bagasbest.fundamental2.myViewModel.MyViewModelMainActivity
 import com.bagasbest.fundamental2.myViewModel2.MyViewModel2MainActivity
+import com.bagasbest.fundamental2.myWebView.MyWebViewMainActivity
+import com.bagasbest.fundamental2.myWidget.MyWidgetMainActivity
 import com.bagasbest.fundamental2.myWorkManager.MyWorkManagerMainActivity
 
 class MainActivity : AppCompatActivity() {
@@ -111,6 +113,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MyPreloadDataMainActivity::class.java))
         }
 
+        binding.myWidget.setOnClickListener{
+            startActivity(Intent(this, MyWidgetMainActivity::class.java))
+        }
+        binding.myWebView.setOnClickListener {
+            startActivity(Intent(this, MyWebViewMainActivity::class.java))
+        }
     }
 
 
