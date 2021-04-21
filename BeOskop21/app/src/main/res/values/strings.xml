@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BeOskop21</string>
+    <string name="image">image</string>
+    <string name="bingung_mau_nonton_apa_nbeoskop21_aja">Bingung mau nonton apa ?BeOskop21 Aja</string>
+    <string name="versi_1_0_0">Versi 1.0.0</string>
 </resources>

@@ -6,13 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:src="@drawable/beoskop_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bingung_mau_nonton_apa_nbeoskop21_aja"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/versi_1_0_0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.138" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
