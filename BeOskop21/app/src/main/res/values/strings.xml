@@ -3,4 +3,9 @@
     <string name="image">image</string>
     <string name="bingung_mau_nonton_apa_nbeoskop21_aja">Bingung mau nonton apa ?BeOskop21 Aja</string>
     <string name="versi_1_0_0">Versi 1.0.0</string>
+    <string name="home_title">Lounge</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
 </resources>
