@@ -68,7 +68,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tv_movie_description"
+            android:id="@+id/tv_series_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -92,11 +92,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.089"
             app:layout_constraintStart_toEndOf="@+id/img_series_poster"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_series_description"
             app:layout_constraintVertical_bias="0.753" />
 
         <TextView
-            android:id="@+id/tv_movies_rating"
+            android:id="@+id/tv_series_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100"
@@ -104,7 +104,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.039"
             app:layout_constraintStart_toEndOf="@+id/star_icon"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_series_description"
             app:layout_constraintVertical_bias="0.705" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
