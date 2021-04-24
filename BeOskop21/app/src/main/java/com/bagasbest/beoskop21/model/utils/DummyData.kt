@@ -47,18 +47,6 @@ object DummyData {
         )
         movie.add(
             MovieModel(
-                "Aquaman",
-                R.drawable.m_poster_aquaman,
-                "21 DECEMBER 2019",
-                "2 Hours 23 Minute",
-                "PG-13",
-                69,
-                "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne.",
-                "James Wan",
-            )
-        )
-        movie.add(
-            MovieModel(
                 "Bohemian Rhapsody",
                 R.drawable.m_poster_bohemian,
                 "2 NOVEMBER 2018",
@@ -72,7 +60,7 @@ object DummyData {
         movie.add(
             MovieModel(
                 "Cold Pursuit",
-                R.drawable.m_poster_bohemian,
+                R.drawable.m_poster_cold_persuit,
                 "8 FEBRUARY 2019",
                 "2 Hours 15 Minute",
                 "R",

@@ -28,6 +28,7 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null) {
+            binding.progressBar.visibility = View.VISIBLE
             val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MoviesViewModel::class.java]
             val movies = viewModel.getMovies()
 
@@ -39,6 +40,7 @@ class MoviesFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = moviesAdapter
             }
+            binding.progressBar.visibility = View.INVISIBLE
         }
     }
 

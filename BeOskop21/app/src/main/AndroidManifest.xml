@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeOskop21">
+        <activity android:name=".view.activity.DetailActivity"></activity>
         <activity android:name=".view.activity.HomeActivity" />
-        <activity android:name=".view.activity.MainActivity" android:theme="@style/Theme.BeOskop21_no_action_bar" >
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:theme="@style/Theme.BeOskop21_no_action_bar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

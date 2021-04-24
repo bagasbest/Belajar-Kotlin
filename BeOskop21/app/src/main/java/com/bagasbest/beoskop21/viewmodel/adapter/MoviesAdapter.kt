@@ -1,5 +1,6 @@
 package com.bagasbest.beoskop21.viewmodel.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.beoskop21.R
 import com.bagasbest.beoskop21.databinding.ItemMoviesBinding
 import com.bagasbest.beoskop21.model.model.MovieModel
+import com.bagasbest.beoskop21.view.activity.DetailActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -46,7 +48,10 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
                     .into(imgMoviePoster)
 
                 itemView.setOnClickListener {
-                    Toast.makeText(itemView.context, tvMovieTitle.text, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(it.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_ITEMS, movie.title)
+                    intent.putExtra(DetailActivity.TITLE, "Movies")
+                    it.context.startActivity(intent)
                 }
 
             }

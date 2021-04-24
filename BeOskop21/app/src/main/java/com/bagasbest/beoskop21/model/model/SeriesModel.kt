@@ -1,5 +1,9 @@
 package com.bagasbest.beoskop21.model.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class SeriesModel(
     var title: String? = null,
     var poster: Int? = 0,
@@ -11,4 +15,4 @@ data class SeriesModel(
     var description: String? = null,
     var creator: String? = null,
     var streamingOn: String? = null,
-)
+) : Parcelable

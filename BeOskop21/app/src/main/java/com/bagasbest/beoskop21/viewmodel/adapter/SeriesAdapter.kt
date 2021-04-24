@@ -1,5 +1,6 @@
 package com.bagasbest.beoskop21.viewmodel.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.beoskop21.R
 import com.bagasbest.beoskop21.databinding.ItemSeriesBinding
 import com.bagasbest.beoskop21.model.model.SeriesModel
+import com.bagasbest.beoskop21.view.activity.DetailActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -47,7 +49,10 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
                     .into(imgSeriesPoster)
 
                 itemView.setOnClickListener {
-                    Toast.makeText(itemView.context, tvSeriesTitle.text, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(it.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_ITEMS, series.title)
+                    intent.putExtra(DetailActivity.TITLE, "Series")
+                    it.context.startActivity(intent)
                 }
 
             }

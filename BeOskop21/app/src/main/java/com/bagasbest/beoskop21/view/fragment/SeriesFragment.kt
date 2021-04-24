@@ -29,6 +29,7 @@ class SeriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null) {
+            binding.progressBar.visibility = View.VISIBLE
             val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[SeriesViewModel::class.java]
             val series = viewModel.getSeries()
 
@@ -40,6 +41,8 @@ class SeriesFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = seriesAdapter
             }
+            binding.progressBar.visibility = View.INVISIBLE
+
         }
     }
 

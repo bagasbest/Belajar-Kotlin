@@ -1,5 +1,9 @@
 package com.bagasbest.beoskop21.model.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class MovieModel(
     var title: String? = null,
     var poster: Int = 0,
@@ -9,4 +13,4 @@ data class MovieModel(
     var userScore: Int? = 0,
     var description: String? = null,
     var director: String? = null,
-)
+) : Parcelable
