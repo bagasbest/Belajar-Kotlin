@@ -9,4 +9,11 @@
     <string name="movies">Movies</string>
     <string name="series">Series</string>
     <string name="detail_title">"Detail "</string>
+    <string name="launch_date">Launch Date: </string>
+    <string name="duration">Duration: </string>
+    <string name="pg_rating">"PG Rating: "</string>
+    <string name="user_score">"User Score: "</string>
+    <string name="search">Search</string>
+    <string name="about_developer">About Developer</string>
+    <string name="search_hint">The Flash</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.bagasbest.beoskop21.view.activity
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -48,14 +49,17 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun populateMovie(movie: MovieModel) {
         binding.detailTitle.text = movie.title
-        binding.detailLaunchDate.text = movie.launchDate
-        binding.detailDuration.text = movie.duration
-        binding.detailPgRating.text = movie.pgRating
-        binding.detailUserScore.text = movie.userScore.toString()
-        binding.creator.text = movie.director
+        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) + movie.launchDate
+        binding.detailDuration.text = resources.getString(R.string.duration) + movie.duration
+        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + movie.pgRating
+        binding.detailUserScore.text = resources.getString(R.string.user_score) + movie.userScore.toString()
+        binding.detailCreator.text = movie.director
+        binding.detailDescription.text = movie.description
         binding.streaming.visibility = View.INVISIBLE
+        binding.detailStreaming.visibility = View.GONE
         binding.detailGenre.visibility = View.GONE
 
         Glide.with(this)
@@ -65,14 +69,16 @@ class DetailActivity : AppCompatActivity() {
             .into(binding.detailPoster)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun populateSeries(series: SeriesModel) {
         binding.detailTitle.text = series.title
-        binding.detailLaunchDate.text = series.year.toString()
-        binding.detailDuration.text = series.durationEpisode
-        binding.detailPgRating.text = series.pgRating
-        binding.detailUserScore.text = series.userScore.toString()
-        binding.creator.text = series.creator
-        binding.streaming.text = series.streamingOn
+        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) +series.year.toString()
+        binding.detailDuration.text = resources.getString(R.string.duration) + series.durationEpisode
+        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + series.pgRating
+        binding.detailUserScore.text =  resources.getString(R.string.user_score) + series.userScore.toString()
+        binding.detailDescription.text = series.description
+        binding.detailCreator.text = series.creator
+        binding.detailStreaming.text = series.streamingOn
         binding.detailGenre.text = series.genre
 
         Glide.with(this)

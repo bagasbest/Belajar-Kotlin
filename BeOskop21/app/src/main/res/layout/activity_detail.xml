@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_detail"
     android:padding="10dp"
     tools:context=".view.activity.DetailActivity">
 
@@ -20,7 +21,7 @@
             android:layout_marginEnd="10dp"
             android:text="MOVIE / SERIES TITLE PLACED HERE"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -40,8 +41,7 @@
             android:layout_below="@+id/detail_poster"
             android:layout_marginTop="10dp"
             android:text="Information:"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textColor="@color/white"            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/info"
+            android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:text="Launch Date: " />
 
@@ -56,6 +57,7 @@
             android:id="@+id/detail_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_below="@+id/detail_launch_date"
             android:text="Duration : " />
 
@@ -64,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Genre: "
+            android:textColor="@color/white"
             android:layout_below="@id/detail_duration" />
 
         <View
@@ -72,20 +75,23 @@
             android:layout_height="1dp"
             android:layout_below="@+id/detail_genre"
             android:layout_marginTop="10dp"
+            android:textColor="@color/white"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/white" />
 
         <TextView
             android:id="@+id/detail_pg_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/line1"
+            android:textColor="@color/white"
             android:text="PG Rating: " />
 
         <TextView
             android:id="@+id/detail_user_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_below="@+id/detail_pg_rating"
             android:text="User Score: " />
 
@@ -96,7 +102,7 @@
             android:layout_below="@+id/detail_user_score"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/white" />
 
         <TextView
             android:id="@+id/description"
@@ -104,13 +110,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/line2"
             android:text="Description"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/description"
+            android:textColor="@color/white"
             android:text="After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only 'meta-human' who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash." />
 
 
@@ -120,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/detail_description"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Director / Creator" />
 
         <TextView
@@ -128,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/creator"
+            android:textColor="@color/white"
             android:text="Detail creator" />
 
         <TextView
@@ -136,13 +144,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/detail_creator"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Online Streaming At" />
 
         <TextView
             android:id="@+id/detail_streaming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_below="@+id/streaming"
             android:text="Not available now"/>
 
