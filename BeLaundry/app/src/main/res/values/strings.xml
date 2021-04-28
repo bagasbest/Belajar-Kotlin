@@ -2,4 +2,9 @@
     <string name="app_name">BeLaundry</string>
     <string name="button">button</string>
     <string name="main_title">Daftar Laundry Dekat Sini</string>
+    <string name="add_data_title">Tambah Data</string>
+    <string name="fill_name">Nama harus diisi</string>
+    <string name="fill_address">Alamat harus diisi</string>
+    <string name="fill_phone">No handphone harus diisi</string>
+    <string name="fill_price">Harga harus diisi</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.bagasbest.belaundry.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
             binding.srlData.isRefreshing = true
             initViewModel()
             binding.srlData.isRefreshing = false
+        }
+
+        binding.addData.setOnClickListener {
+            startActivity(Intent(this, AddDataActivity::class.java))
         }
     }
 
