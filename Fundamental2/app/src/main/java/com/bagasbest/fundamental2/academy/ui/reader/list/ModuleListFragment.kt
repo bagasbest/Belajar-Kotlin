@@ -16,6 +16,7 @@ import com.bagasbest.fundamental2.academy.ui.reader.CourseReaderActivity
 import com.bagasbest.fundamental2.academy.ui.reader.CourseReaderCallback
 import com.bagasbest.fundamental2.academy.ui.reader.CourseReaderViewModel
 import com.bagasbest.fundamental2.academy.utils.DataDummy
+import com.bagasbest.fundamental2.academy.viewmodel.ViewModelFactory
 import com.bagasbest.fundamental2.databinding.FragmentModuleListBinding
 
 
@@ -43,7 +44,8 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Jika Anda ganti requireActivity() dengan this, maka Fragment tidak akan mengambil ViewModel dari Activity tetapi akan membuat ViewModel baru.
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
         adapter = ModuleListAdapter(this)
         populateRecyclerView(viewModel.getModules())
     }

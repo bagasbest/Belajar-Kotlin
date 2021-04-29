@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.academy.ui.reader.content.ModuleContentFragment
 import com.bagasbest.fundamental2.academy.ui.reader.list.ModuleListFragment
+import com.bagasbest.fundamental2.academy.viewmodel.ViewModelFactory
 import com.bagasbest.fundamental2.databinding.ActivityCourseReaderBinding
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
@@ -20,9 +21,8 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
         binding = ActivityCourseReaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
-
-
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
         if(bundle != null) {

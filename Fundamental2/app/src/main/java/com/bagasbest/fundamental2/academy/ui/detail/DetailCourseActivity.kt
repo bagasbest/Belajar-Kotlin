@@ -10,6 +10,7 @@ import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.academy.data.CourseEntity
 import com.bagasbest.fundamental2.academy.ui.reader.CourseReaderActivity
 import com.bagasbest.fundamental2.academy.utils.DataDummy
+import com.bagasbest.fundamental2.academy.viewmodel.ViewModelFactory
 import com.bagasbest.fundamental2.databinding.ActivityDetailCourseBinding
 import com.bagasbest.fundamental2.databinding.ContentDetailCourseBinding
 import com.bumptech.glide.Glide
@@ -34,7 +35,8 @@ class DetailCourseActivity : AppCompatActivity() {
         setSupportActionBar(activityDetailCourseBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val adapter = DetailCourseAdapter()
 
