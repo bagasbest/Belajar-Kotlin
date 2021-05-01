@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fundamental2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myWebView.MyWebViewMainActivity"></activity>
+        <activity
+            android:name=".liveDataWithAPI.LiveDataWithAPIMainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".myWebView.MyWebViewMainActivity" />
         <activity android:name=".myWidget.MyWidgetMainActivity" />
 
         <receiver android:name=".myWidget.RandomNumberWidget">

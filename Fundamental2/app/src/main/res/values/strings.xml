@@ -165,6 +165,9 @@
     <string name="random">Random: 100</string>
     <string name="generate">Generate</string>
 
+    <string name="review">Review</string>
+    <string name="write_your_review_here">Write your review here..</string>
+    <string name="send">Kirim</string>
 
 </resources>
 

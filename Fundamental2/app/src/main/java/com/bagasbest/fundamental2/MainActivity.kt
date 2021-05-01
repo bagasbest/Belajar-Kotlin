@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bagasbest.fundamental2.academy.ui.home.HomeActivity
 import com.bagasbest.fundamental2.databinding.ActivityMainBinding
+import com.bagasbest.fundamental2.liveDataWithAPI.LiveDataWithAPIMainActivity
 import com.bagasbest.fundamental2.myAlarmManager.MyAlarmManagerMainActivity
 import com.bagasbest.fundamental2.myBackgroundThread.MyBackgroundThreadMainActivity
 import com.bagasbest.fundamental2.myBroadcastReceiver.MyBroadcastReceiverMainActivity
@@ -118,6 +119,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.myWebView.setOnClickListener {
             startActivity(Intent(this, MyWebViewMainActivity::class.java))
+        }
+        binding.livedata.setOnClickListener {
+            startActivity(Intent(this, LiveDataWithAPIMainActivity::class.java))
         }
     }
 

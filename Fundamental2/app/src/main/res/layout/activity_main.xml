@@ -148,6 +148,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MyWebView" />
+
+        <Button
+            android:id="@+id/livedata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Live Data With API" />
     </LinearLayout>
 
 
