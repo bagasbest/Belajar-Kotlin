@@ -24,6 +24,9 @@ class LiveDataWithApiMainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _snackbarText = MutableLiveData<Event<String>>()
+    val snackbarText: LiveData<Event<String>> = _snackbarText
+
     companion object {
         private const val TAG = "MainViewModel"
         private const val RESTAURANT_ID = "uewq1zg2zlskfw1e867"
@@ -67,11 +70,11 @@ class LiveDataWithApiMainViewModel : ViewModel() {
                 call: Call<PostReviewResponse>,
                 response: Response<PostReviewResponse>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
-                    _isLoading.value = false
                     _listReview.value = response.body()?.customerReviews
+                    _snackbarText.value = Event(response.body()?.message.toString())
                 } else {
-                    _isLoading.value = false
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }

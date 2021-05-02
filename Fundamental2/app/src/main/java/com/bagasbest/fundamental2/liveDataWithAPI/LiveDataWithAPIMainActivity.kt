@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.databinding.ActivityLiveDataWithAPIMainBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 
 class LiveDataWithAPIMainActivity : AppCompatActivity() {
 
@@ -42,7 +43,7 @@ class LiveDataWithAPIMainActivity : AppCompatActivity() {
                 .into(binding.ivPicture)
         })
 
-        mainViewModel.listReview.observe(this, {it ->
+        mainViewModel.listReview.observe(this, { it ->
             val listReview = it.map {
                 "${it.review}\n- ${it.name}"
             }
@@ -52,8 +53,21 @@ class LiveDataWithAPIMainActivity : AppCompatActivity() {
         })
 
         mainViewModel.isLoading.observe(this, {
-            binding.progressBar.visibility = if (it) android.view.View.VISIBLE else android.view.View.GONE
+            binding.progressBar.visibility =
+                if (it) android.view.View.VISIBLE else android.view.View.GONE
         })
+
+        mainViewModel.snackbarText.observe(this, {
+            it.getContentIfNotHandled()?.let { snackbarText ->
+                Snackbar.make(
+                    window.decorView.rootView,
+                    snackbarText,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        })
+
+
     }
 
 }
