@@ -47,7 +47,13 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
         val factory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
         adapter = ModuleListAdapter(this)
-        populateRecyclerView(viewModel.getModules())
+
+        binding.moduleListProgressBar.visibility = View.VISIBLE
+        viewModel.getModules().observe(viewLifecycleOwner, {
+            binding.moduleListProgressBar.visibility = View.GONE
+            populateRecyclerView(it)
+        })
+
     }
 
     override fun onAttach(context: Context) {

@@ -45,9 +45,13 @@ class DetailCourseActivity : AppCompatActivity() {
             val courseId = extras.getString(EXTRA_COURSE)
             if(courseId != null) {
                 viewModel.setSelectedCourse(courseId)
-                val modules = viewModel.getModules()
-                adapter.setModules(modules)
-                populateCourse(viewModel.getCourse())
+                viewModel.getModules().observe(this, {
+                    adapter.setModules(it)
+                    adapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, {
+                    populateCourse(it)
+                })
             }
         }
 
