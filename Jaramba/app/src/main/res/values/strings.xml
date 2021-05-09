@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name" translatable="false">Jaramba</string>
+    <string name="image" translatable="false">image</string>
+    <string name="petualangan_seru_segera_dimulai">Petualangan seru segera dimulai</string>
+    <string name="nikmati_kemudahan_perjalananmu_hingga_lokasi_tujuanmu_lewat_satu_aplikasi">Nikmati kemudahan perjalananmu hingga lokasi tujuanmu lewat satu aplikasi</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="masuk">masuk</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="simpan_email_dan_password">Simpan email dan password</string>
+    <string name="lupa_password">Lupa password</string>
+    <string name="daftar">daftar</string>
+    <string name="jangan_khawatir_akun_anda_aman">Jangan khawatir, akun anda aman</string>
+    <string name="kembali_ke_halaman_login">Kembali ke halaman Login</string>
+    <string name="lengkapi_data_dirimu_di_bawah_ini_ya">Lengkapi data dirimu di bawah ini, ya</string>
+    <string name="username">Username</string>
+    <string name="nomor_hp">Nomor HP</string>
+    <string name="masukkan_ulang_kata_sandi">Masukkan ulang kata sandi</string>
+    <string name="saya_telah_memiliki_akun">Saya telah memiliki akun</string>
+    <string name="saya_belum_memiliki_akun">Saya belum memiliki akun</string>
+    <string name="konformasi">konformasi</string>
+    <string name="title_activity_beranda">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="beranda">Beranda</string>
+    <string name="trip">Trip</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="profil">Profile</string>
+    <string name="riwayat_perjalanan">History</string>
+    <string name="perjalanan">Trip</string>
+    <string name="pilih_transportasimu">Pilih Transportasimu</string>
+    <string name="button">button</string>
+    <string name="lokasi_anda">Lokasi Anda</string>
+    <string name="lokasi_tujuan">Lokasi Tujuan</string>
+    <string name="lanjutkan">Lanjutkan</string>
+    <string name="error_email">Masukkan email dengan benar</string>
+    <string name="error_password">Kata sandi minimal 6 karakter</string>
+
+</resources>
