@@ -4,19 +4,59 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityLoginBinding
+import com.bagasbest.jaramba.viewmodel.LoginViewModel
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
+    private var counter: Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // click register btn
         binding.loginBtn.setOnClickListener {
-            startActivity(Intent(this, BerandaActivity::class.java))
+            // form validation
+            loginFormValidation()
         }
+
+    }
+
+    private fun loginFormValidation() {
+        val email = binding.emailEt.text.toString().trim()
+        val password = binding.passwordEt.text.toString().trim()
+
+        if(!email.isValidEmail()) {
+            binding.emailEt.error = resources.getString(R.string.error_email)
+            return
+        }
+
+        else if(!password.isValidatePassword()) {
+            binding.passwordEt.error = resources.getString(R.string.error_password)
+            return
+        }
+
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        binding.progressBar.visibility = View.VISIBLE
+        loginViewModel.login(email, password, this)
+        loginViewModel.getUserMutableLiveData().observe(this, { observer ->
+            if(observer != null) {
+                binding.progressBar.visibility = View.GONE
+                loginViewModel.getUserMutableLiveData().postValue(null)
+                if(counter > 0) {
+                    startActivity(Intent(this, BerandaActivity::class.java))
+                    counter--
+                }
+            }
+        })
+
 
     }
 
@@ -29,4 +69,9 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(view.context, ForgotPasswordActivity::class.java))
     }
 
+    private fun String.isValidEmail() =
+        isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+    private fun String.isValidatePassword() =
+        length >= 6
 }
