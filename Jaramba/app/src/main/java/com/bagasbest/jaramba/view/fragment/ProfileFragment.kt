@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.FragmentProfileBinding
 import com.bagasbest.jaramba.view.activity.LoginActivity
+import com.bagasbest.jaramba.view.activity.SettingActivity
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -31,6 +32,10 @@ class ProfileFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             logoutFromApplication()
+        }
+
+        binding.settingIv.setOnClickListener {
+            startActivity(Intent(activity, SettingActivity::class.java))
         }
 
     }
