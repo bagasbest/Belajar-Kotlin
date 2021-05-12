@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityLoginBinding
 import com.bagasbest.jaramba.viewmodel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginActivity : AppCompatActivity() {
@@ -20,12 +21,22 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // auto login
+        autoLogin()
+
         // click register btn
         binding.loginBtn.setOnClickListener {
             // form validation
             loginFormValidation()
         }
 
+    }
+
+    private fun autoLogin() {
+        if(FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this, BerandaActivity::class.java))
+            finish()
+        }
     }
 
     private fun loginFormValidation() {
@@ -52,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.getUserMutableLiveData().postValue(null)
                 if(counter > 0) {
                     startActivity(Intent(this, BerandaActivity::class.java))
+                    finish()
                     counter--
                 }
             }
