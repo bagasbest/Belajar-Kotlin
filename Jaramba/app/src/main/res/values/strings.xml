@@ -43,5 +43,9 @@
     <string name="messageRegistered">Akun anda telah berhasil terdaftar, namun anda harus memverifikasi akun anda terlebih dahulu dengan menekan link yang telah Jaramba kirimkan pada email anda</string>
     <string name="confirmed">Email Terkonfirmasi</string>
     <string name="messageConfirmed">Silahkan buka email anda, Jaramba telah mengirimkan email untuk mengubah password akun anda</string>
+    <string name="logout">Logout</string>
+    <string name="ganti_password">Ganti Password</string>
+    <string name="no_handphone">No Handphone</string>
+    <string name="pengaturan">Pengaturan</string>
 
 </resources>
