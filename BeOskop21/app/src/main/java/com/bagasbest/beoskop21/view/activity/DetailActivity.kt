@@ -3,14 +3,14 @@ package com.bagasbest.beoskop21.view.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.beoskop21.R
 import com.bagasbest.beoskop21.databinding.ActivityDetailBinding
-import com.bagasbest.beoskop21.model.model.MovieModel
-import com.bagasbest.beoskop21.model.model.SeriesModel
+import com.bagasbest.beoskop21.model.source.remote.response.ItemList
+import com.bagasbest.beoskop21.model.source.remote.response.TvSeriesDetail
 import com.bagasbest.beoskop21.viewmodel.viewmodel.DetailViewModel
+import com.bagasbest.beoskop21.viewmodel.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
@@ -18,8 +18,20 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     companion object {
-        const val EXTRA_ITEMS = "extra_items"
         const val TITLE = "title"
+        const val ITEM_ID = "item_id"
+        const val CATALOGUE = "catalogue"
+        const val IMAGE = "image"
+    }
+
+    private val movieDetailViewModel by lazy {
+        val factory = ViewModelFactory.getInstance()
+        factory?.let { ViewModelProvider(this, it) }?.get(DetailViewModel::class.java)
+    }
+
+    private val tvSeriesViewModel by lazy {
+        val factory = ViewModelFactory.getInstance()
+        factory?.let { ViewModelProvider(this, it) }?.get(DetailViewModel::class.java)
     }
 
 
@@ -29,60 +41,51 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val subtitle = intent.getStringExtra(TITLE)
-        supportActionBar?.title = resources.getString(R.string.detail_title) + subtitle
+        val catalogue = intent.getStringExtra(CATALOGUE)
+        supportActionBar?.title = subtitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
-
-        val extras = intent.extras
-        if(extras != null) {
-            val itemTitle = extras.getString(EXTRA_ITEMS)
-            if (itemTitle != null) {
-                viewModel.setSelectedItems(itemTitle)
-                if(subtitle == "Movies") {
-                    populateMovie(viewModel.getItemMovie())
-                } else if (subtitle == "Series") {
-                    populateSeries(viewModel.getItemSeries())
-                }
-            }
+        if(catalogue == "Movies") {
+            binding.progressBar.visibility = View.VISIBLE
+            movieDetailViewModel?.getMovieDetail(intent.getStringExtra(ITEM_ID)!!)
+                ?.observe(this, {
+                    binding.progressBar.visibility = View.GONE
+                    populateMovie(it)
+                })
+        }
+        else {
+            binding.progressBar.visibility = View.VISIBLE
+            tvSeriesViewModel?.getTvSeriesDetail(intent.getStringExtra(ITEM_ID)!!)
+                ?.observe(this, {
+                    binding.progressBar.visibility = View.GONE
+                    populateSeries(it)
+                })
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun populateMovie(movie: MovieModel) {
-        binding.detailTitle.text = movie.title
-        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) + movie.launchDate
-        binding.detailDuration.text = resources.getString(R.string.duration) + movie.duration
-        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + movie.pgRating
-        binding.detailUserScore.text = resources.getString(R.string.user_score) + movie.userScore.toString()
-        binding.detailCreator.text = movie.director
-        binding.detailDescription.text = movie.description
-        binding.streaming.visibility = View.INVISIBLE
-        binding.detailStreaming.visibility = View.GONE
-        binding.detailGenre.visibility = View.GONE
+    private fun populateMovie(movie: ItemList?) {
+        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) + movie?.launchDate
+        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + movie?.userScore.toString()
+        binding.detailUserScore.text = resources.getString(R.string.user_score) + movie?.voteCount.toString()
+        binding.detailDescription.text = movie?.overview
 
         Glide.with(this)
-            .load(movie.poster)
+            .load(intent.getStringExtra(IMAGE))
             .placeholder(R.drawable.ic_loading)
             .error(R.drawable.ic_error)
             .into(binding.detailPoster)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun populateSeries(series: SeriesModel) {
-        binding.detailTitle.text = series.title
-        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) +series.year.toString()
-        binding.detailDuration.text = resources.getString(R.string.duration) + series.durationEpisode
-        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + series.pgRating
-        binding.detailUserScore.text =  resources.getString(R.string.user_score) + series.userScore.toString()
-        binding.detailDescription.text = series.description
-        binding.detailCreator.text = series.creator
-        binding.detailStreaming.text = series.streamingOn
-        binding.detailGenre.text = series.genre
+    private fun populateSeries(series: TvSeriesDetail) {
+        binding.detailLaunchDate.text = resources.getString(R.string.launch_date) +series.firstAirDate
+        binding.detailPgRating.text = resources.getString(R.string.pg_rating) + series.voteAverage.toString()
+        binding.detailUserScore.text =  resources.getString(R.string.user_score) + series.voteCount.toString()
+        binding.detailDescription.text = series.overview
 
         Glide.with(this)
-            .load(series.poster)
+            .load(intent.getStringExtra(IMAGE))
             .placeholder(R.drawable.ic_loading)
             .error(R.drawable.ic_error)
             .into(binding.detailPoster)

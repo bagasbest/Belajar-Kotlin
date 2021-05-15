@@ -5,15 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagasbest.beoskop21.databinding.FragmentMoviesBinding
+import com.bagasbest.beoskop21.model.source.remote.response.ItemList
 import com.bagasbest.beoskop21.viewmodel.adapter.MoviesAdapter
 import com.bagasbest.beoskop21.viewmodel.viewmodel.MoviesViewModel
+import com.bagasbest.beoskop21.viewmodel.viewmodel.ViewModelFactory
 
 class MoviesFragment : Fragment() {
 
     private lateinit var binding: FragmentMoviesBinding
+    private var movie = listOf<ItemList>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,20 +31,28 @@ class MoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(activity != null) {
+        if (activity != null) {
             binding.progressBar.visibility = View.VISIBLE
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MoviesViewModel::class.java]
-            val movies = viewModel.getMovies()
+            val factory = activity?.application?.let {
+                ViewModelFactory.getInstance()
+            }
+            val viewModel =
+                factory?.let { ViewModelProvider(this, it) }?.get(MoviesViewModel::class.java)
 
             val moviesAdapter = MoviesAdapter()
-            moviesAdapter.setData(movies)
+
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel?.movie?.observe(viewLifecycleOwner, {
+                binding.progressBar.visibility = View.GONE
+                movie = it
+                moviesAdapter.setData(movie)
+            })
 
             with(binding.rvMovies) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = moviesAdapter
             }
-            binding.progressBar.visibility = View.INVISIBLE
         }
     }
 

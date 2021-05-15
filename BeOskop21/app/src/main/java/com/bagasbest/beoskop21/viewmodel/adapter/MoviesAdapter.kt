@@ -3,23 +3,22 @@ package com.bagasbest.beoskop21.viewmodel.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.beoskop21.R
 import com.bagasbest.beoskop21.databinding.ItemMoviesBinding
-import com.bagasbest.beoskop21.model.model.MovieModel
+import com.bagasbest.beoskop21.model.source.remote.response.ItemList
 import com.bagasbest.beoskop21.view.activity.DetailActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    private var listMovies = ArrayList<MovieModel>()
+    private var listMovies: List<ItemList> = emptyList()
 
-    fun setData(movies: List<MovieModel>?) {
+    fun setData(movies: List<ItemList>?) {
         if(movies == null) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
+        this.listMovies = movies
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
@@ -35,22 +34,24 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     override fun getItemCount(): Int = this.listMovies.size
 
     inner class MoviesViewHolder(private val binding: ItemMoviesBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: MovieModel) {
+        fun bind(movie: ItemList) {
             with(binding) {
                 tvMovieTitle.text = movie.title
                 tvMovieLaunchDate.text = movie.launchDate
-                tvMovieDescription.text = movie.description
+                tvMovieDescription.text = movie.overview
                 tvMoviesRating.text = movie.userScore.toString()
                 Glide.with(itemView.context)
-                    .load(movie.poster)
+                    .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)
                     .into(imgMoviePoster)
 
                 itemView.setOnClickListener {
                     val intent = Intent(it.context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_ITEMS, movie.title)
-                    intent.putExtra(DetailActivity.TITLE, "Movies")
+                    intent.putExtra(DetailActivity.TITLE, movie.title)
+                    intent.putExtra(DetailActivity.ITEM_ID, movie.id.toString())
+                    intent.putExtra(DetailActivity.CATALOGUE, "Movies")
+                    intent.putExtra(DetailActivity.IMAGE, "https://image.tmdb.org/t/p/w500${movie.posterPath}")
                     it.context.startActivity(intent)
                 }
 

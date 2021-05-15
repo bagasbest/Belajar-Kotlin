@@ -13,23 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/detail_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="MOVIE / SERIES TITLE PLACED HERE"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/detail_poster"
             android:layout_width="200dp"
+            android:contentDescription="@string/image"
             android:layout_height="300dp"
-            android:layout_below="@id/detail_title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_baseline_image_24" />
@@ -53,27 +42,12 @@
             android:layout_marginTop="10dp"
             android:text="Launch Date: " />
 
-        <TextView
-            android:id="@+id/detail_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_below="@+id/detail_launch_date"
-            android:text="Duration : " />
-
-        <TextView
-            android:id="@+id/detail_genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Genre: "
-            android:textColor="@color/white"
-            android:layout_below="@id/detail_duration" />
 
         <View
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/detail_genre"
+            android:layout_below="@+id/detail_launch_date"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"
@@ -118,46 +92,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/description"
             android:textColor="@color/white"
-            android:text="After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only 'meta-human' who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash." />
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 
 
-        <TextView
-            android:id="@+id/creator"
+        <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_height="wrap_content"
-            android:layout_below="@id/detail_description"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Director / Creator" />
-
-        <TextView
-            android:id="@+id/detail_creator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/creator"
-            android:textColor="@color/white"
-            android:text="Detail creator" />
-
-        <TextView
-            android:id="@+id/streaming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/detail_creator"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Online Streaming At" />
-
-        <TextView
-            android:id="@+id/detail_streaming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_below="@+id/streaming"
-            android:text="Not available now"/>
-
-
+            android:visibility="gone"/>
 
     </RelativeLayout>
+
+
+
 
 </ScrollView>
 
