@@ -12,16 +12,26 @@ import org.junit.Test
 
 import org.junit.Before
 import org.junit.Rule
-import org.mockito.Mockito
+import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
+
+@RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
-    @Rule
-    @JvmField
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
-    private var viewModel: MoviesViewModel? = null
-    private var dataRepository = Mockito.mock(DataRepository::class.java)
 
+    lateinit var viewModel: MoviesViewModel
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Mock
+    private lateinit var dataRepository: DataRepository
+
+    @Mock
+    private lateinit var observer: Observer<List<ItemList>>
 
     @Before
     fun setUp() {
@@ -37,9 +47,8 @@ class MoviesViewModelTest {
         movie.value = GenerateDummyData.getDummyRemoteMovie()
         `when`(dataRepository.getMovie()).thenReturn(movie)
 
-        val observer = Mockito.mock(Observer::class.java)
-        viewModel?.movie?.observeForever(observer as Observer<List<ItemList>>)
-        Mockito.verify(dataRepository).getMovie()
+        viewModel.movie().observeForever(observer)
+        verify(observer).onChanged(GenerateDummyData.getDummyRemoteMovie())
 
         assertNotNull(movie)
         assertEquals(1, movie.value?.size)

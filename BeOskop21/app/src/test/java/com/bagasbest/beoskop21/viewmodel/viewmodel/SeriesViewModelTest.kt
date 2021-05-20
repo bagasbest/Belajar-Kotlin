@@ -12,17 +12,25 @@ import org.junit.Test
 
 import org.junit.Before
 import org.junit.Rule
+import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class SeriesViewModelTest {
 
-    @Rule
-    @JvmField
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
     private var viewModel: SeriesViewModel? = null
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
     private var dataRepository = Mockito.mock(DataRepository::class.java)
 
+    @Mock
+    private lateinit var observer: Observer<List<ItemList>>
 
 
     @Before
@@ -36,9 +44,8 @@ class SeriesViewModelTest {
         tvSeries.value = GenerateDummyData.getDummyRemoteTvSeries()
         `when`(dataRepository.getTvSeries()).thenReturn(tvSeries)
 
-        val observer = Mockito.mock(Observer::class.java)
-        viewModel?.tvSeries?.observeForever(observer as Observer<List<ItemList>>)
-        Mockito.verify(dataRepository).getTvSeries()
+        viewModel?.tvSeries()?.observeForever(observer)
+        verify(observer).onChanged(GenerateDummyData.getDummyRemoteTvSeries())
 
         assertNotNull(tvSeries)
         assertEquals(1, tvSeries.value?.size)

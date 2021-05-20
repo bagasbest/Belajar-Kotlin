@@ -9,6 +9,6 @@ import com.bagasbest.beoskop21.model.utils.DummyData
 
 class SeriesViewModel(private val dataRepository: DataRepository) : ViewModel() {
 
-    val tvSeries: LiveData<List<ItemList>> = dataRepository.getTvSeries()
+    fun tvSeries(): LiveData<List<ItemList>> = dataRepository.getTvSeries()
 
 }

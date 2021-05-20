@@ -43,7 +43,7 @@ class SeriesFragment : Fragment() {
             val seriesAdapter = SeriesAdapter()
 
             binding.progressBar.visibility = View.VISIBLE
-            viewModel?.tvSeries?.observe(viewLifecycleOwner, {
+            viewModel?.tvSeries()?.observe(viewLifecycleOwner, {
                 binding.progressBar.visibility = View.GONE
                 tvSeries = it
                 seriesAdapter.setData(tvSeries)

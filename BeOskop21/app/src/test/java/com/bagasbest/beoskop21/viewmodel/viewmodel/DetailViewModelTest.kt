@@ -12,18 +12,28 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
-import org.mockito.Mockito
+import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class DetailViewModelTest {
 
-    @Rule
-    @JvmField
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
     private var viewModel: DetailViewModel? = null
-    private var dataRepository = Mockito.mock(DataRepository::class.java)
 
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Mock
+    private lateinit var dataRepository: DataRepository
+
+    @Mock
+    private lateinit var observerMovie: Observer<ItemList>
+
+    @Mock
+    private lateinit var observerTvSeries: Observer<TvSeriesDetail>
 
     @Before
     fun setUp() {
@@ -36,10 +46,9 @@ class DetailViewModelTest {
         movie.value = GenerateDummyData.getDummyRemoteMovie()[0]
         `when`(dataRepository.getMovieDetail(movie.value!!.id.toString())).thenReturn(movie)
 
-        val observer = Mockito.mock(Observer::class.java)
         viewModel?.getMovieDetail(movie.value!!.id.toString())
-            ?.observeForever(observer as Observer<ItemList>)
-        verify(dataRepository).getMovieDetail(movie.value!!.id.toString())
+            ?.observeForever(observerMovie)
+        verify(observerMovie).onChanged(GenerateDummyData.getDummyRemoteMovie()[0])
 
         assertEquals(
             movie.value!!.id,
@@ -79,10 +88,9 @@ class DetailViewModelTest {
         `when`(dataRepository.getTvSeriesDetail(tvSeries.value!!.id.toString()))
             .thenReturn(tvSeries)
 
-        val observer = Mockito.mock(Observer::class.java)
         viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())
-            ?.observeForever(observer as Observer<TvSeriesDetail>)
-        verify(dataRepository).getTvSeriesDetail(tvSeries.value!!.id.toString())
+            ?.observeForever(observerTvSeries)
+        verify(observerTvSeries).onChanged(GenerateDummyData.getDummyRemoteTvSeriesDetail())
 
         assertEquals(
             tvSeries.value!!.id,
