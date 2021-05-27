@@ -26,6 +26,7 @@ import com.bagasbest.fundamental2.myViewModel2.MyViewModel2MainActivity
 import com.bagasbest.fundamental2.myWebView.MyWebViewMainActivity
 import com.bagasbest.fundamental2.myWidget.MyWidgetMainActivity
 import com.bagasbest.fundamental2.myWorkManager.MyWorkManagerMainActivity
+import com.bagasbest.fundamental2.room.ui.main.MyRoomMainActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -122,6 +123,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.livedata.setOnClickListener {
             startActivity(Intent(this, LiveDataWithAPIMainActivity::class.java))
+        }
+        binding.room.setOnClickListener {
+            startActivity(Intent(this, MyRoomMainActivity::class.java))
         }
     }
 
