@@ -6,18 +6,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.databinding.ActivityMyRoomMainBinding
 import com.bagasbest.fundamental2.room.database.Note
 import com.bagasbest.fundamental2.room.ui.insert.adapter.NoteAdapter
+import com.bagasbest.fundamental2.room.ui.insert.adapter.NotePagedListAdapter
 import com.bagasbest.fundamental2.room.ui.insert.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class MyRoomMainActivity : AppCompatActivity() {
 
     private var binding: ActivityMyRoomMainBinding? = null
-    private lateinit var adapter: NoteAdapter
+
+
+    private lateinit var adapter: NotePagedListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,7 @@ class MyRoomMainActivity : AppCompatActivity() {
         val mainViewModel = obtainViewModel(this)
         mainViewModel.getAllNotes().observe(this, noteObserver)
 
-        adapter = NoteAdapter(this)
+        adapter = NotePagedListAdapter(this)
 
         binding?.rvNotes?.layoutManager = LinearLayoutManager(this)
         binding?.rvNotes?.setHasFixedSize(true)
@@ -50,9 +54,9 @@ class MyRoomMainActivity : AppCompatActivity() {
         return ViewModelProvider(activity, factory).get(MainViewModel::class.java)
     }
 
-    private val noteObserver = Observer<List<Note>> { noteList ->
+    private val noteObserver = Observer<PagedList<Note>> { noteList ->
         if (noteList != null) {
-            adapter.setData(noteList)
+            adapter.submitList(noteList)
         }
     }
 

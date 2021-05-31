@@ -2,6 +2,7 @@ package com.bagasbest.fundamental2.room.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.bagasbest.fundamental2.room.database.Note
 import com.bagasbest.fundamental2.room.database.NoteDao
 import com.bagasbest.fundamental2.room.database.NoteRoomDatabase
@@ -18,7 +19,9 @@ class NoteRepository(application: Application) {
 
     }
 
-    fun getAllNotes(): LiveData<List<Note>> = mNotesDao.getAllNotes()
+    fun getAllNotes(): DataSource.Factory<Int, Note> {
+        return mNotesDao.getAllNotes()
+    }
 
     fun insert(note: Note) {
         executorService.execute {mNotesDao.insert(note)}
