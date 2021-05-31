@@ -3,7 +3,7 @@ package com.bagasbest.fundamental2.academy.ui.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bagasbest.fundamental2.academy.data.ModuleEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.ModuleEntity
 import com.bagasbest.fundamental2.databinding.ItemsModuleListBinding
 
 class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewHolder>() {
@@ -12,18 +12,18 @@ class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewH
 
     fun setModules(modules: List<ModuleEntity>?) {
         if (modules == null) return
-        listModules.clear()
-        listModules.addAll(modules)
+        this.listModules.clear()
+        this.listModules.addAll(modules)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleViewHolder {
-        val binding = ItemsModuleListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ModuleViewHolder(binding)
+        val itemModuleListBinding = ItemsModuleListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ModuleViewHolder(itemModuleListBinding)
     }
 
-    override fun onBindViewHolder(holder: ModuleViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ModuleViewHolder, position: Int) {
         val module = listModules[position]
-        holder.bind(module)
+        viewHolder.bind(module)
     }
 
     override fun getItemCount(): Int = listModules.size
@@ -32,6 +32,5 @@ class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewH
         fun bind(module: ModuleEntity) {
             binding.textModuleTitle.text = module.title
         }
-
     }
 }

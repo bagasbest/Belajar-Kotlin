@@ -1,4 +1,4 @@
-package com.bagasbest.fundamental2.academy.data
+package com.bagasbest.fundamental2.academy.data.source.local.entity
 
 import androidx.annotation.NonNull
 import androidx.room.*
@@ -8,9 +8,11 @@ import androidx.room.*
     primaryKeys = ["moduleId", "courseId"],
     foreignKeys = [ForeignKey(
         entity = CourseEntity::class,
-        parentColumns = ["courseId"], childColumns = ["courseId"]
+        parentColumns = ["courseId"],
+        childColumns = ["courseId"]
     )],
-    indices = [Index(value = ["courseId"])]
+    indices = [Index(value = ["moduleId"]),
+        Index(value = ["courseId"])]
 )
 data class ModuleEntity(
     @NonNull
@@ -30,7 +32,7 @@ data class ModuleEntity(
     var position: Int,
 
     @ColumnInfo(name = "read")
-    var read: Boolean = false,
+    var read: Boolean = false
 ) {
     @Embedded
     var contentEntity: ContentEntity? = null

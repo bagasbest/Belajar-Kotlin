@@ -3,7 +3,7 @@ package com.bagasbest.fundamental2.academy.ui.bookmark
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bagasbest.fundamental2.academy.data.CourseEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
 import com.bagasbest.fundamental2.academy.data.source.AcademyRepository
 import com.bagasbest.fundamental2.academy.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
@@ -46,9 +46,9 @@ class BookmarkViewModelTest {
         val courses = MutableLiveData<List<CourseEntity>>()
         courses.value = dummyCourses
 
-        `when`(academyRepository.getBookmarkedCourse()).thenReturn(courses)
+        `when`(academyRepository.getBookmarkedCourses()).thenReturn(courses)
         val courseEntities = viewModel.getBookmarks().value
-        Mockito.verify<AcademyRepository>(academyRepository).getBookmarkedCourse()
+        Mockito.verify<AcademyRepository>(academyRepository).getBookmarkedCourses()
         assertNotNull(courseEntities)
         assertEquals(5, courseEntities?.size)
 

@@ -1,4 +1,4 @@
-package com.bagasbest.fundamental2.academy.data
+package com.bagasbest.fundamental2.academy.data.source.local.entity
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class CourseEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "courseid")
+    @ColumnInfo(name = "courseId")
     var courseId: String,
 
     @ColumnInfo(name = "title")
@@ -25,5 +25,5 @@ data class CourseEntity(
     var bookmarked: Boolean = false,
 
     @ColumnInfo(name = "imagePath")
-    var imagePath: String,
+    var imagePath: String
 )

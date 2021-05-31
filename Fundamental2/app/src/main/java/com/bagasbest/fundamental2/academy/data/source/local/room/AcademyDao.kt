@@ -1,10 +1,15 @@
 package com.bagasbest.fundamental2.academy.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
-import com.bagasbest.fundamental2.academy.data.CourseEntity
-import com.bagasbest.fundamental2.academy.data.ModuleEntity
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
 import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseWithModule
+import com.bagasbest.fundamental2.academy.data.source.local.entity.ModuleEntity
 
 @Dao
 interface AcademyDao {
@@ -12,7 +17,7 @@ interface AcademyDao {
     @Query("SELECT * FROM courseentities")
     fun getCourses(): LiveData<List<CourseEntity>>
 
-    @Query("SELECT * FROM courseentities WHERE bookmarked = 1")
+    @Query("SELECT * FROM courseentities where bookmarked = 1")
     fun getBookmarkedCourse(): LiveData<List<CourseEntity>>
 
     @Transaction
@@ -26,7 +31,7 @@ interface AcademyDao {
     fun updateCourse(course: CourseEntity)
 
     @Query("SELECT * FROM moduleentities WHERE courseId = :courseId")
-    fun getModuleByCourseId(courseId: String): LiveData<List<ModuleEntity>>
+    fun getModulesByCourseId(courseId: String): LiveData<List<ModuleEntity>>
 
     @Query("SELECT * FROM moduleentities WHERE moduleId = :moduleId")
     fun getModuleById(moduleId: String): LiveData<ModuleEntity>
@@ -39,6 +44,4 @@ interface AcademyDao {
 
     @Query("UPDATE moduleentities SET content = :content WHERE moduleId = :moduleId")
     fun updateModuleByContent(content: String, moduleId: String)
-
-
 }

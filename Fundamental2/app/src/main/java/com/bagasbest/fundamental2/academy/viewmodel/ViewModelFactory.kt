@@ -11,23 +11,20 @@ import com.bagasbest.fundamental2.academy.ui.detail.DetailCourseViewModel
 import com.bagasbest.fundamental2.academy.ui.reader.CourseReaderViewModel
 
 
-class ViewModelFactory private constructor(private val mAcademyRepository: AcademyRepository)
-    : ViewModelProvider.NewInstanceFactory() {
+@Suppress("UNCHECKED_CAST")
+class ViewModelFactory private constructor(private val mAcademyRepository: AcademyRepository) : ViewModelProvider.NewInstanceFactory() {
 
-        companion object {
-            @Volatile
-            private var instance: ViewModelFactory? = null
+    companion object {
+        @Volatile
+        private var instance: ViewModelFactory? = null
 
-            fun getInstance(context: Context): ViewModelFactory =
-                instance ?: synchronized(this) {
-                    instance ?: ViewModelFactory(Injection.provideRepository(context)).apply {
-                        instance = this
-                    }
-                }
-        }
+        fun getInstance(context: Context): ViewModelFactory =
+            instance ?: synchronized(this) {
+                ViewModelFactory(Injection.provideRepository(context)).apply { instance = this }
+            }
+    }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(AcademyViewModel::class.java) -> {
                 AcademyViewModel(mAcademyRepository) as T

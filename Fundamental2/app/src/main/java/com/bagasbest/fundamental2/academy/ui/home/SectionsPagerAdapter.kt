@@ -9,16 +9,12 @@ import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.academy.ui.academy.AcademyFragment
 import com.bagasbest.fundamental2.academy.ui.bookmark.BookmarkFragment
 
-class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager)
-    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-        companion object {
-            @StringRes
-            private val TAB_TITLES = intArrayOf(
-                R.string.home,
-                R.string.bookmark,
-            )
-        }
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(R.string.home, R.string.bookmark)
+    }
 
     override fun getItem(position: Int): Fragment =
         when (position) {
@@ -27,12 +23,8 @@ class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager)
             else -> Fragment()
         }
 
-    override fun getPageTitle(position: Int): CharSequence
-    = mContext.resources.getString(
-        TAB_TITLES[position]
-    )
+    override fun getPageTitle(position: Int): CharSequence? = mContext.resources.getString(TAB_TITLES[position])
 
     override fun getCount(): Int = 2
-
 
 }

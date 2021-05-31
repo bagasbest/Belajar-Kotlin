@@ -3,9 +3,10 @@ package com.bagasbest.fundamental2.academy.ui.academy
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bagasbest.fundamental2.academy.data.CourseEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
 import com.bagasbest.fundamental2.academy.data.source.AcademyRepository
 import com.bagasbest.fundamental2.academy.utils.DataDummy
+import com.bagasbest.fundamental2.academy.vo.Resource
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -29,7 +30,7 @@ class AcademyViewModelTest {
     private lateinit var academyRepository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<List<CourseEntity>>
+    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
 
     @Before
     fun setUp() {
@@ -40,19 +41,17 @@ class AcademyViewModelTest {
     // menguji bahwa course tidak null, dan berjumlah 5
     @Test
     fun getCourse() {
-        val dummyCourse = DataDummy.generateDummyCourse()
-        val courses = MutableLiveData<List<CourseEntity>>()
+        val dummyCourse = Resource.success(DataDummy.generateDummyCourse())
+        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
         courses.value = dummyCourse
 
-        `when`(academyRepository.getAllCourse()).thenReturn(courses)
-        val courseEntities = viewModel.getCourse().value
-        verify(academyRepository).getAllCourse()
+        `when`(academyRepository.getAllCourses()).thenReturn(courses)
+        val courseEntities = viewModel.getCourses().value?.data
+        verify(academyRepository).getAllCourses()
         assertNotNull(courseEntities)
         assertEquals(5, courseEntities?.size)
 
-        viewModel.getCourse().observeForever(observer)
+        viewModel.getCourses().observeForever(observer)
         verify(observer).onChanged(dummyCourse)
     }
-
-
 }

@@ -1,7 +1,9 @@
 package com.bagasbest.fundamental2.academy.utils
 
-import com.bagasbest.fundamental2.academy.data.CourseEntity
-import com.bagasbest.fundamental2.academy.data.ModuleEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.ContentEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
+import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseWithModule
+import com.bagasbest.fundamental2.academy.data.source.local.entity.ModuleEntity
 import com.bagasbest.fundamental2.academy.data.source.remote.response.ContentResponse
 import com.bagasbest.fundamental2.academy.data.source.remote.response.CourseResponse
 import com.bagasbest.fundamental2.academy.data.source.remote.response.ModuleResponse
@@ -201,9 +203,25 @@ object DataDummy {
     }
 
 
-    fun generateRemoteDummyContent(moduleId: String): ContentResponse {
-        return ContentResponse(moduleId, "This is a dummy content")
+    fun generateRemoteDummyContent(moduleId: String): ContentResponse =
+        ContentResponse(moduleId, "This is a dummy content")
+
+    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
+        course.bookmarked = bookmarked
+        return CourseWithModule(course, generateDummyModules(course.courseId))
     }
+
+    fun generateDummyContent(moduleId: String): ContentEntity =
+        ContentEntity("This is a dummy content")
+
+
+    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
+        val moduleEntity = generateDummyModules(courseId)[0]
+        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
+        return moduleEntity
+    }
+
+
 
 
     

@@ -7,32 +7,27 @@ import com.bagasbest.fundamental2.R
 import com.bagasbest.fundamental2.academy.ui.reader.content.ModuleContentFragment
 import com.bagasbest.fundamental2.academy.ui.reader.list.ModuleListFragment
 import com.bagasbest.fundamental2.academy.viewmodel.ViewModelFactory
-import com.bagasbest.fundamental2.databinding.ActivityCourseReaderBinding
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
     companion object {
-        val EXTRA_COURSE_ID = "extra_course_id"
+        const val EXTRA_COURSE_ID = "extra_course_id"
     }
 
-    private lateinit var binding: ActivityCourseReaderBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCourseReaderBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        setContentView(R.layout.activity_course_reader)
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
-        if(bundle != null) {
+        if (bundle != null) {
             val courseId = bundle.getString(EXTRA_COURSE_ID)
-            if(courseId != null) {
+            if (courseId != null) {
                 viewModel.setSelectedCourse(courseId)
                 populateFragment()
             }
         }
-
     }
 
     override fun moveTo(position: Int, moduleId: String) {
@@ -42,9 +37,8 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
             .commit()
     }
 
-
     override fun onBackPressed() {
-        if(supportFragmentManager.backStackEntryCount <= 1) {
+        if (supportFragmentManager.backStackEntryCount <= 1) {
             finish()
         } else {
             super.onBackPressed()
@@ -54,14 +48,13 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     private fun populateFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         var fragment = supportFragmentManager.findFragmentByTag(ModuleListFragment.TAG)
-        if(fragment == null) {
+        if (fragment == null) {
             fragment = ModuleListFragment.newInstance()
             fragmentTransaction.add(R.id.frame_container, fragment, ModuleListFragment.TAG)
             fragmentTransaction.addToBackStack(null)
         }
         fragmentTransaction.commit()
     }
-
 
 
 }
