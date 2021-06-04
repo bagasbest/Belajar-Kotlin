@@ -2,6 +2,8 @@ package com.bagasbest.fundamental2.academy.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
+import androidx.paging.PagedList
 import com.bagasbest.fundamental2.academy.data.source.local.LocalDataSource
 import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
 import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseWithModule
@@ -10,6 +12,7 @@ import com.bagasbest.fundamental2.academy.data.source.remote.RemoteDataSource
 import com.bagasbest.fundamental2.academy.utils.AppExecutors
 import com.bagasbest.fundamental2.academy.utils.DataDummy
 import com.bagasbest.fundamental2.academy.utils.LiveDataTestUtil
+import com.bagasbest.fundamental2.academy.vo.Resource
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -21,41 +24,41 @@ class AcademyRepositoryTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-
     private val remote = mock(RemoteDataSource::class.java)
     private val local = mock(LocalDataSource::class.java)
     private val appExecutors = mock(AppExecutors::class.java)
 
     private val academyRepository = FakeAcademyRepository(remote, local, appExecutors)
 
-    private val courseResponse = DataDummy.generateRemoteDummyCourses()
-    private val courseId = courseResponse[0].id
+    private val courseResponses = DataDummy.generateRemoteDummyCourses()
+    private val courseId = courseResponses[0].id
     private val moduleResponses = DataDummy.generateRemoteDummyModules(courseId)
     private val moduleId = moduleResponses[0].moduleId
     private val content = DataDummy.generateRemoteDummyContent(moduleId)
 
-    @Test
-    fun getAllCourse() {
-        val dummyCourses = MutableLiveData<List<CourseEntity>>()
-        dummyCourses.value = DataDummy.generateDummyCourse()
-        `when`(local.getAllCourses()).thenReturn(dummyCourses)
 
-        val courseEntities = LiveDataTestUtil.getValue(academyRepository.getAllCourses())
+    @Test
+    fun getAllCourses() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, CourseEntity>
+        `when`(local.getAllCourses()).thenReturn(dataSourceFactory)
+        academyRepository.getAllCourses()
+
+        val courseEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyCourse()))
         verify(local).getAllCourses()
         assertNotNull(courseEntities.data)
-        assertEquals(courseResponse.size.toLong(), courseEntities.data?.size?.toLong())
+        assertEquals(courseResponses.size.toLong(), courseEntities.data?.size?.toLong())
     }
 
     @Test
-    fun getBookmarkedCourse() {
-        val dummyCourses = MutableLiveData<List<CourseEntity>>()
-        dummyCourses.value = DataDummy.generateDummyCourse()
-        `when`(local.getBookmarkedCourses()).thenReturn(dummyCourses)
+    fun getBookmarkedCourses() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, CourseEntity>
+        `when`(local.getBookmarkedCourses()).thenReturn(dataSourceFactory)
+        academyRepository.getBookmarkedCourses()
 
-        val courseEntities = LiveDataTestUtil.getValue(academyRepository.getBookmarkedCourses())
+        val courseEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyCourse()))
         verify(local).getBookmarkedCourses()
         assertNotNull(courseEntities)
-        assertEquals(courseResponse.size.toLong(), courseEntities.size.toLong())
+        assertEquals(courseResponses.size.toLong(), courseEntities.data?.size?.toLong())
     }
 
     @Test
@@ -67,7 +70,7 @@ class AcademyRepositoryTest {
         verify(local).getCourseWithModules(courseId)
         assertNotNull(courseEntities.data)
         assertNotNull(courseEntities.data?.mCourse?.title)
-        assertEquals(courseResponse[0].title, courseEntities.data?.mCourse?.title)
+        assertEquals(courseResponses[0].title, courseEntities.data?.mCourse?.title)
     }
 
     @Test

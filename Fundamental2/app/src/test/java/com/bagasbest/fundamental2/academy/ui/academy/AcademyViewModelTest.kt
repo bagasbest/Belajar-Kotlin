@@ -3,6 +3,7 @@ package com.bagasbest.fundamental2.academy.ui.academy
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.bagasbest.fundamental2.academy.data.source.local.entity.CourseEntity
 import com.bagasbest.fundamental2.academy.data.source.AcademyRepository
 import com.bagasbest.fundamental2.academy.utils.DataDummy
@@ -30,7 +31,10 @@ class AcademyViewModelTest {
     private lateinit var academyRepository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
+    private lateinit var observer: Observer<Resource<PagedList<CourseEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<CourseEntity>
 
     @Before
     fun setUp() {
@@ -41,9 +45,11 @@ class AcademyViewModelTest {
     // menguji bahwa course tidak null, dan berjumlah 5
     @Test
     fun getCourse() {
-        val dummyCourse = Resource.success(DataDummy.generateDummyCourse())
-        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
+        val dummyCourse = Resource.success(pagedList)
+        `when`(dummyCourse.data?.size).thenReturn(5)
+        val courses = MutableLiveData<Resource<PagedList<CourseEntity>>>()
         courses.value = dummyCourse
+
 
         `when`(academyRepository.getAllCourses()).thenReturn(courses)
         val courseEntities = viewModel.getCourses().value?.data

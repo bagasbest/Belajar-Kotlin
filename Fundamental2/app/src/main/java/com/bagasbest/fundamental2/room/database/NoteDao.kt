@@ -1,6 +1,8 @@
 package com.bagasbest.fundamental2.room.database
 
+import androidx.paging.DataSource
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 
 @Dao
 interface NoteDao {
@@ -13,8 +15,8 @@ interface NoteDao {
     @Delete
     fun delete(note: Note)
 
-    @Query("SELECT * FROM note ORDER BY id ASC")
-    fun getAllNotes(): androidx.paging.DataSource.Factory<Int, Note>
+    @RawQuery(observedEntities = [Note::class])
+    fun getAllNotes(query: SupportSQLiteQuery): DataSource.Factory<Int, Note>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(list: List<Note>)
