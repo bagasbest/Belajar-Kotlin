@@ -9,11 +9,26 @@
     <string name="movies">Movies</string>
     <string name="series">Series</string>
     <string name="detail_title">"Detail "</string>
-    <string name="launch_date">Launch Date: </string>
     <string name="duration">Duration: </string>
     <string name="pg_rating">"PG Rating: "</string>
     <string name="user_score">"User Score: "</string>
     <string name="search">Search</string>
     <string name="about_developer">About Developer</string>
     <string name="search_hint">The Flash</string>
+    <string name="favoriteMovies">Favorite movies</string>
+    <string name="favoriteSeries">Favorite series</string>
+    <string name="favorite">Favorite</string>
+    <string name="bagas_pangestu">Bagas Pangestu</string>
+    <string name="desc">halo saya bagas pangestu android developer saat ini saya berusia 21 tahun saya sedang mengikuti event bangkit 2021 saya ingin menjadi android developer expert yang berkontribusi membangun negeri</string>
+    <string name="information">Information:</string>
+    <string name="launch_date">Launch Date:</string>
+    <string name="description">Description</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="_22_april_2021">22 APRIL 2021</string>
+    <string name="_100">100</string>
+    <string name="on_air">ON AIR</string>
+    <string name="deleted">Data dihapus</string>
+    <string name="msg_ok">Ok</string>
+    <string name="clear">Jangan hapus</string>
 </resources>

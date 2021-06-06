@@ -5,12 +5,14 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieModel(
+    var id: Int? = 0,
     var title: String? = null,
-    var poster: Int? = 0,
+    var poster: String? = null,
     var launchDate: String? = null,
     var duration: String? = null,
     var pgRating: String? = null,
-    var userScore: Int? = 0,
+    var userScore: String? = null,
+    var voteCount: String? = null,
     var description: String? = null,
     var director: String? = null,
 ) : Parcelable

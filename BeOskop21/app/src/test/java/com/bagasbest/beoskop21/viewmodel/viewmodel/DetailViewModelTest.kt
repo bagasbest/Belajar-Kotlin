@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.bagasbest.beoskop21.GenerateDummyData
 import com.bagasbest.beoskop21.model.source.DataRepository
-import com.bagasbest.beoskop21.model.source.remote.response.ItemList
-import com.bagasbest.beoskop21.model.source.remote.response.TvSeriesDetail
+import com.bagasbest.beoskop21.model.source.local.entity.MovieEntity
+import com.bagasbest.beoskop21.model.source.local.entity.SeriesEntity
+
+import com.bagasbest.beoskop21.model.vo.Resource
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -30,10 +30,15 @@ class DetailViewModelTest {
     private lateinit var dataRepository: DataRepository
 
     @Mock
-    private lateinit var observerMovie: Observer<ItemList>
+    private lateinit var observerMovie: Observer<Resource<MovieEntity>>
 
     @Mock
-    private lateinit var observerTvSeries: Observer<TvSeriesDetail>
+    private lateinit var observerSeries: Observer<Resource<SeriesEntity>>
+
+    private val dummyMovies = GenerateDummyData.getDummyRemoteMovieDetail()
+    private val dummyMoviesId = dummyMovies.id
+    private val dummySeries = GenerateDummyData.getDummyRemoteTvSeriesDetail()
+    private val dummySeriesId = dummySeries.id
 
     @Before
     fun setUp() {
@@ -41,84 +46,48 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun getItemMovie() {
-        val movie = MutableLiveData<ItemList>()
-        movie.value = GenerateDummyData.getDummyRemoteMovie()[0]
-        `when`(dataRepository.getMovieDetail(movie.value!!.id.toString())).thenReturn(movie)
-
-        viewModel?.getMovieDetail(movie.value!!.id.toString())
-            ?.observeForever(observerMovie)
-        verify(observerMovie).onChanged(GenerateDummyData.getDummyRemoteMovie()[0])
-
-        assertEquals(
-            movie.value!!.id,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.id
-        )
-        assertEquals(
-            movie.value!!.posterPath,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.posterPath
-        )
-        assertEquals(
-            movie.value!!.title,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.title
-        )
-        assertEquals(
-            movie.value!!.overview,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.overview
-        )
-        assertEquals(
-            movie.value!!.launchDate,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.launchDate
-        )
-        assertEquals(
-            movie.value!!.userScore,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.userScore
-        )
-        assertEquals(
-            movie.value!!.voteCount,
-            viewModel?.getMovieDetail(movie.value!!.id.toString())?.value?.voteCount
-        )
-
+    fun getDetailMovie() {
+        val dummyMovies = Resource.success(dummyMovies)
+        val movies = MutableLiveData<Resource<MovieEntity>>()
+        movies.value = dummyMovies
+        `when`(dataRepository.getMovieDetail(dummyMoviesId)).thenReturn(movies)
+        viewModel?.getMovieDetail(dummyMoviesId)
+        viewModel?.getDetailMovie()?.observeForever(observerMovie)
+        verify(observerMovie).onChanged(dummyMovies)
     }
 
     @Test
-    fun getItemSeries() {
-        val tvSeries = MutableLiveData<TvSeriesDetail>()
-        tvSeries.value = GenerateDummyData.getDummyRemoteTvSeriesDetail()
-        `when`(dataRepository.getTvSeriesDetail(tvSeries.value!!.id.toString()))
-            .thenReturn(tvSeries)
+    fun getDetailSeries() {
+        val dummySeries = Resource.success(dummySeries)
+        val series = MutableLiveData<Resource<SeriesEntity>>()
+        series.value = dummySeries
+        `when`(dataRepository.getTvSeriesDetail(dummySeriesId)).thenReturn(series)
+        viewModel?.getTvSeriesDetail(dummySeriesId)
+        viewModel?.getDetailSeries()?.observeForever(observerSeries)
+        verify(observerSeries).onChanged(dummySeries)
+    }
 
-        viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())
-            ?.observeForever(observerTvSeries)
-        verify(observerTvSeries).onChanged(GenerateDummyData.getDummyRemoteTvSeriesDetail())
+    @Test
+    fun setFavoriteMovie() {
+        val setDetailMovie = Resource.success(dummyMovies)
+        val movies = MutableLiveData<Resource<MovieEntity>>()
+        movies.value = setDetailMovie
+        `when`(dataRepository.getMovieDetail(dummyMoviesId)).thenReturn(movies)
+        viewModel?.getMovieDetail(dummyMoviesId)
+        viewModel?.setFavoriteMovie()
+        verify(dataRepository).setFavoriteMovies(movies.value!!.data as MovieEntity, true)
+        verifyNoMoreInteractions(observerMovie)
+    }
 
-        assertEquals(
-            tvSeries.value!!.id,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.id
-        )
-        assertEquals(
-            tvSeries.value!!.name,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.name
-        )
-        assertEquals(
-            tvSeries.value!!.firstAirDate,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.firstAirDate
-        )
-        assertEquals(
-            tvSeries.value!!.overview,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.overview
-        )
-        assertEquals(
-            tvSeries.value!!.voteAverage,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.voteAverage
-        )
-        assertEquals(
-            tvSeries.value!!.voteCount,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.voteCount
-        )
-        assertEquals(
-            tvSeries.value!!.posterPath,
-            viewModel?.getTvSeriesDetail(tvSeries.value!!.id.toString())?.value?.posterPath
-        )
+    @Test
+    fun setFavoriteSeries() {
+        val setDetailSeries = Resource.success(dummySeries)
+        val series = MutableLiveData<Resource<SeriesEntity>>()
+        series.value = setDetailSeries
+        `when`(dataRepository.getTvSeriesDetail(dummySeriesId)).thenReturn(series)
+        viewModel?.getTvSeriesDetail(dummySeriesId)
+        viewModel?.setFavoriteSeries()
+        verify(dataRepository).setFavoriteSeries(series.value!!.data as SeriesEntity, true)
+        verifyNoMoreInteractions(observerSeries)
     }
 }

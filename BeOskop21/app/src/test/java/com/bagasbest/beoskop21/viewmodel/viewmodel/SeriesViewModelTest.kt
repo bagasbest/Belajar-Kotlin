@@ -3,15 +3,15 @@ package com.bagasbest.beoskop21.viewmodel.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bagasbest.beoskop21.GenerateDummyData
+import androidx.paging.PagedList
 import com.bagasbest.beoskop21.model.source.DataRepository
-import com.bagasbest.beoskop21.model.source.remote.response.ItemList
+import com.bagasbest.beoskop21.model.source.local.entity.SeriesEntity
+import com.bagasbest.beoskop21.model.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Test
-
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -30,8 +30,10 @@ class SeriesViewModelTest {
     private var dataRepository = Mockito.mock(DataRepository::class.java)
 
     @Mock
-    private lateinit var observer: Observer<List<ItemList>>
+    private lateinit var observer: Observer<Resource<PagedList<SeriesEntity>>>
 
+    @Mock
+    private lateinit var pagedList: PagedList<SeriesEntity>
 
     @Before
     fun setUp(){
@@ -40,15 +42,20 @@ class SeriesViewModelTest {
 
     @Test
     fun getSeries() {
-       val tvSeries = MutableLiveData<List<ItemList>>()
-        tvSeries.value = GenerateDummyData.getDummyRemoteTvSeries()
-        `when`(dataRepository.getTvSeries()).thenReturn(tvSeries)
+        val dummySeries = Resource.success(pagedList)
+        `when`(dummySeries.data?.size).thenReturn(1)
+        val series = MutableLiveData<Resource<PagedList<SeriesEntity>>>()
+        series.value = dummySeries
 
-        viewModel?.tvSeries()?.observeForever(observer)
-        verify(observer).onChanged(GenerateDummyData.getDummyRemoteTvSeries())
+        `when`(dataRepository.getSeriesList("OLDEST")).thenReturn(series)
+        val seriesEntities = viewModel?.tvSeries("OLDEST")?.value?.data
+        verify(dataRepository).getSeriesList("OLDEST")
 
-        assertNotNull(tvSeries)
-        assertEquals(1, tvSeries.value?.size)
+        assertNotNull(seriesEntities)
+        assertEquals(1, seriesEntities?.size)
+
+        viewModel?.tvSeries("OLDEST")?.observeForever(observer)
+        verify(observer).onChanged(dummySeries)
     }
 
 

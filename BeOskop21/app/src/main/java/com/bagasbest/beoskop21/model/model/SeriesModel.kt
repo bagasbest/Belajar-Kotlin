@@ -5,13 +5,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SeriesModel(
+    var id: Int? = 0,
     var title: String? = null,
-    var poster: Int? = 0,
-    var year: Int? = 0,
+    var poster: String? = null,
+    var onAir: String? = null,
     var genre: String? = null,
     var durationEpisode: String? = null,
     var pgRating: String? = null,
-    var userScore: Int? = 0,
+    var userScore: String? = null,
+    var voteCount: String? = null,
     var description: String? = null,
     var creator: String? = null,
     var streamingOn: String? = null,

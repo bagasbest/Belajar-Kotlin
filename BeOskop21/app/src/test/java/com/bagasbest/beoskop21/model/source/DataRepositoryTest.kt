@@ -1,16 +1,21 @@
 package com.bagasbest.beoskop21.model.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.bagasbest.beoskop21.GenerateDummyData
+import com.bagasbest.beoskop21.model.source.local.LocalDataSource
+import com.bagasbest.beoskop21.model.source.local.entity.MovieEntity
+import com.bagasbest.beoskop21.model.source.local.entity.SeriesEntity
 import com.bagasbest.beoskop21.model.source.remote.RemoteDataSource
-import org.junit.Test
-
-import org.junit.Assert.*
+import com.bagasbest.beoskop21.model.utils.AppExecutors
+import com.bagasbest.beoskop21.model.utils.DummyData
+import com.bagasbest.beoskop21.model.vo.Resource
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Rule
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.eq
-import org.mockito.Mockito.doAnswer
-import org.mockito.Mockito.mock
+import org.junit.Test
+import org.mockito.Mockito.*
 
 class DataRepositoryTest {
 
@@ -19,67 +24,60 @@ class DataRepositoryTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val remoteDataSource = mock(RemoteDataSource::class.java)
-    private val fakeDataRepository = FakeDataRepository(remoteDataSource)
-    private val listOfMovie = GenerateDummyData.getDummyRemoteMovie()
-    private val movieId = GenerateDummyData.getDummyRemoteMovie()[0].id.toString()
-    private val listOfTvSeries = GenerateDummyData.getDummyRemoteTvSeries()
-    private val tvSeriesId = listOfTvSeries[0].id.toString()
-    private val tvSeriesDetail = GenerateDummyData.getDummyRemoteTvSeriesDetail()
+    private val localDataSource = mock(LocalDataSource::class.java)
+    private val appExecutor = mock(AppExecutors::class.java)
+    private val fakeDataRepository = FakeDataRepository(remoteDataSource, localDataSource, appExecutor)
+    private val listOfMovie = DummyData.generateDummyMovie()
+    private val movieId = GenerateDummyData.getDummyRemoteMovie()[0].id
+    private val listOfTvSeries = DummyData.generateDummyTvSeries()
+    private val tvSeriesId = GenerateDummyData.getDummyRemoteTvSeriesDetail().id
 
-    // sebagian kecil kode dibawah, saya pelajari dari repository: KylixEza/Submission-BAJP2-Dicoding, dan saya modifikasi sesuai dengan requirement proyek saya
-    // todo Link: https://github.com/KylixEza/Submission-BAJP2-Dicoding/blob/master/app/src/test/java/com/kylix/submissionbajp2/repository/DataRepositoryTest.kt
-    private fun <T> anyOfType(type: Class<T>): T = any(type)
-    private fun <T> equalOfType(obj: T): T = eq(obj)
 
     @Test
     fun getMovie() {
-        doAnswer {
-            val callback = it.arguments[0] as RemoteDataSource.GetMovieCallback
-            callback.onResponse(listOfMovie)
-            null
-        }.`when`(remoteDataSource)
-            .getMovie(anyOfType(RemoteDataSource.GetMovieCallback::class.java))
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(localDataSource.getMovieList("OLDEST")).thenReturn(dataSourceFactory)
+        fakeDataRepository.getMovieList("OLDEST")
 
-        val result = LiveDataTest.getValue(fakeDataRepository.getMovie())
-        assertEquals(listOfMovie.size, result.size)
+        val movieEntities = Resource.success(PagedListUtil.mockPagedList(DummyData.generateDummyMovie()))
+        verify(localDataSource).getMovieList("OLDEST")
+        assertNotNull(movieEntities.data)
+        assertEquals(listOfMovie.size.toLong(), movieEntities.data?.size?.toLong())
     }
 
     @Test
     fun getMovieDetail() {
-        doAnswer {
-            val callback = it.arguments[0] as RemoteDataSource.GetMovieDetailCallback
-            callback.onResponse(listOfMovie[0])
-            null
-        }.`when`(remoteDataSource)
-            .getMovieDetail(
-                equalOfType(movieId),
-                anyOfType(RemoteDataSource.GetMovieDetailCallback::class.java)
-            )
+       val dummyMovies = MutableLiveData<MovieEntity>()
+        dummyMovies.value = GenerateDummyData.getDummyRemoteMovieDetail()
+        `when`(localDataSource.getMovieById(movieId)).thenReturn(dummyMovies)
+
+        val movieDetailEntities = LiveDataTest.getValue(fakeDataRepository.getMovieDetail(movieId))
+        verify(localDataSource).getMovieById(movieId)
+        assertNotNull(movieDetailEntities)
+        assertEquals(GenerateDummyData.getDummyRemoteMovieDetail().id, movieDetailEntities.data?.id)
     }
 
     @Test
     fun getTvSeries() {
-        doAnswer {
-            val callback = it.arguments[0] as RemoteDataSource.GetTvSeriesCallback
-            callback.onResponse(listOfTvSeries)
-            null
-        }.`when`(remoteDataSource)
-            .getTvSeries(anyOfType(RemoteDataSource.GetTvSeriesCallback::class.java))
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, SeriesEntity>
+        `when`(localDataSource.getSeriesList("OLDEST")).thenReturn(dataSourceFactory)
+        fakeDataRepository.getSeriesList("OLDEST")
 
-        val result = LiveDataTest.getValue(fakeDataRepository.getTvSeries())
-        assertEquals(listOfTvSeries.size, result.size)
+        val seriesEntities = Resource.success(PagedListUtil.mockPagedList(DummyData.generateDummyTvSeries()))
+        verify(localDataSource).getSeriesList("OLDEST")
+        assertNotNull(seriesEntities.data)
+        assertEquals(listOfTvSeries.size.toLong(), seriesEntities.data?.size?.toLong())
     }
 
     @Test
     fun getTvSeriesDetail() {
-        doAnswer {
-            val callback = it.arguments[0] as RemoteDataSource.GetTvSeriesDetailCallback
-            callback.onResponse(tvSeriesDetail)
-            null
-        }.`when`(remoteDataSource)
-            .getTvSeriesDetail(
-                equalOfType(tvSeriesId),
-                anyOfType(RemoteDataSource.GetTvSeriesDetailCallback::class.java)
-            )
+        val dummySeries = MutableLiveData<SeriesEntity>()
+        dummySeries.value = GenerateDummyData.getDummyRemoteTvSeriesDetail()
+        `when`(localDataSource.getSeriesById(tvSeriesId)).thenReturn(dummySeries)
+
+        val seriesDetailEntities = LiveDataTest.getValue(fakeDataRepository.getTvSeriesDetail(tvSeriesId))
+        verify(localDataSource).getSeriesById(tvSeriesId)
+        assertNotNull(seriesDetailEntities)
+        assertEquals(GenerateDummyData.getDummyRemoteTvSeriesDetail().id, seriesDetailEntities.data?.id)
     }
 }

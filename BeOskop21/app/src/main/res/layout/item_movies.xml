@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,7 +32,7 @@
             android:id="@+id/tv_movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Movie Title"
+            android:text="@string/movie_title"
             android:layout_marginStart="16dp"
             android:textSize="18sp"
             android:layout_marginEnd="16dp"
@@ -49,7 +48,7 @@
             android:id="@+id/tv_movie_launch_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22 APRIL 2021"
+            android:text="@string/_22_april_2021"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.137"
@@ -66,7 +65,7 @@
             android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="The quiet family life of Nels Coxman, a snowplow driver, is upended after his son's murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking's associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution."
+            android:text="@string/lorem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.012"
@@ -78,27 +77,43 @@
             android:id="@+id/star_icon"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:contentDescription="@string/image"
             android:src="@drawable/ic_baseline_stars_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintStart_toEndOf="@+id/img_movie_poster"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.905"
-            android:contentDescription="@string/image"/>
+            app:layout_constraintVertical_bias="0.948" />
+
 
         <TextView
             android:id="@+id/tv_movies_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="100"
+            android:text="@string/_100"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/star_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.897" />
+            app:layout_constraintVertical_bias="0.954" />
+
+        <ImageView
+            android:id="@+id/favoriteBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/item_container"
+            app:layout_constraintEnd_toEndOf="@id/item_container"
+            app:layout_constraintHorizontal_bias="0.955"
+
+            app:layout_constraintStart_toStartOf="@+id/img_movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_movie_description"
+            app:layout_constraintVertical_bias="0.823" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

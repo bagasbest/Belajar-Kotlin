@@ -2,34 +2,25 @@ package com.bagasbest.beoskop21.model.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ItemList(
+data class MovieResponse(
     @SerializedName("id")
     val id: Int,
 
     @SerializedName("poster_path")
-    val posterPath: String?,
+    val posterPath: String? = null,
 
     @SerializedName("title")
-    val title: String?,
+    val title: String? = null,
 
     @SerializedName("overview")
-    val overview: String?,
+    val overview: String? = null,
 
     @SerializedName("release_date")
-    val launchDate: String?,
+    val launchDate: String? = null,
 
     @SerializedName("vote_average")
-    val userScore: Double?,
+    val userScore: Double? = 0.0,
 
     @SerializedName("vote_count")
-    val voteCount: Int,
-
-
-    //for TvSeries
-    @SerializedName("name")
-    val name: String?,
-
-    @SerializedName("first_air_date")
-    val firstAirDate: String?
-
+    val voteCount: Int? = 0,
 )

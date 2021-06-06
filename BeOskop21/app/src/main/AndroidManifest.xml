@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BeOskop21">
-        <activity android:name=".view.activity.AboutDeveloperActivity"></activity>
+        <activity android:name=".view.activity.FavoriteActivity" />
+        <activity android:name=".view.activity.AboutDeveloperActivity" />
         <activity android:name=".view.activity.DetailActivity" />
         <activity android:name=".view.activity.HomeActivity" />
         <activity

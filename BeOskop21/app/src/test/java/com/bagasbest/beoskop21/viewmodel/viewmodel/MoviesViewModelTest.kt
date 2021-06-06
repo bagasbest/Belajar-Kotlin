@@ -3,9 +3,10 @@ package com.bagasbest.beoskop21.viewmodel.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bagasbest.beoskop21.GenerateDummyData
+import androidx.paging.PagedList
 import com.bagasbest.beoskop21.model.source.DataRepository
-import com.bagasbest.beoskop21.model.source.remote.response.ItemList
+import com.bagasbest.beoskop21.model.source.local.entity.MovieEntity
+import com.bagasbest.beoskop21.model.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -22,7 +23,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
 
-    lateinit var viewModel: MoviesViewModel
+    private lateinit var viewModel: MoviesViewModel
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -31,7 +32,10 @@ class MoviesViewModelTest {
     private lateinit var dataRepository: DataRepository
 
     @Mock
-    private lateinit var observer: Observer<List<ItemList>>
+    private lateinit var observer: Observer<Resource<PagedList<MovieEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<MovieEntity>
 
     @Before
     fun setUp() {
@@ -41,17 +45,20 @@ class MoviesViewModelTest {
 
     @Test
     fun getMovies() {
-        // sebagian kecil kode dibawah, saya pelajari dari repository: KylixEza/Submission-BAJP2-Dicoding, dan saya modifikasi sesuai dengan requirement proyek saya
-        // todo Link: https://github.com/KylixEza/Submission-BAJP2-Dicoding
-        val movie = MutableLiveData<List<ItemList>>()
-        movie.value = GenerateDummyData.getDummyRemoteMovie()
-        `when`(dataRepository.getMovie()).thenReturn(movie)
+        val dummyMovies = Resource.success(pagedList)
+        `when`(dummyMovies.data?.size).thenReturn(1)
+        val movies = MutableLiveData<Resource<PagedList<MovieEntity>>>()
+        movies.value = dummyMovies
 
-        viewModel.movie().observeForever(observer)
-        verify(observer).onChanged(GenerateDummyData.getDummyRemoteMovie())
+        `when`(dataRepository.getMovieList("OLDEST")).thenReturn(movies)
+        val movieEntities = viewModel.movie("OLDEST").value?.data
+        verify(dataRepository).getMovieList("OLDEST")
 
-        assertNotNull(movie)
-        assertEquals(1, movie.value?.size)
+        assertNotNull(movieEntities)
+        assertEquals(1, movieEntities?.size)
+
+        viewModel.movie("OLDEST").observeForever(observer)
+        verify(observer).onChanged(dummyMovies)
     }
 
 

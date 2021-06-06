@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -62,5 +63,42 @@ class HomeActivityTest {
         onView(withId(R.id.detail_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.detail_launch_date)).check(matches(isDisplayed()))
         onView(withId(R.id.detail_description)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun loadFavoriteMovieList() {
+        onView(withId(R.id.favorite)).perform(click())
+        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size))
+    }
+
+    @Test
+    fun loadFavoriteSeriesList() {
+        onView(withId(R.id.favorite)).perform(click())
+        onView(withText("Favorite series")).perform(click())
+        onView(withId(R.id.rv_series)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_series)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size))
+    }
+
+    @Test
+    fun loadDetailFavMovie() {
+        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.favoriteBtn)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(withId(R.id.favorite)).perform(click())
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+    }
+
+    @Test
+    fun loadDetailFavSeries() {
+        onView(withText(R.string.series)).perform(click())
+        onView(withId(R.id.rv_series)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_series)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.favoriteBtn)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(withId(R.id.favorite)).perform(click())
+        onView(withText("Favorite series")).perform(click())
+        onView(withId(R.id.rv_series)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
     }
 }

@@ -1,138 +1,136 @@
 package com.bagasbest.beoskop21.model.source.remote
 
-import android.os.Handler
-import android.os.Looper
+
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.bagasbest.beoskop21.BuildConfig
 import com.bagasbest.beoskop21.model.network.ApiConfig
-import com.bagasbest.beoskop21.model.source.remote.response.ItemList
 import com.bagasbest.beoskop21.model.source.remote.response.ItemResponse
-import com.bagasbest.beoskop21.model.source.remote.response.TvSeriesDetail
+import com.bagasbest.beoskop21.model.source.remote.response.MovieResponse
+import com.bagasbest.beoskop21.model.source.remote.response.SeriesResponse
 import com.bagasbest.beoskop21.model.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteDataSource(apiConfig: ApiConfig) {
+class RemoteDataSource {
     private val apiKey = BuildConfig.API_KEY
-    private var handler = Handler(Looper.getMainLooper())
-    private val apiConfig = ApiConfig
+
 
     companion object {
-        private const val SERVICE_LATENCY_IN_MILLIS: Long = 2000
+        @Volatile
+        private var INSTANCE: RemoteDataSource? = null
         private val TAG = RemoteDataSource::class.java.simpleName
 
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        /// Di sini terdapat method getInstance yang berfungsi untuk membuat kelas RemoteDataSource sebagai Singleton. Fungsinya yaitu supaya tercipta satu instance saja di dalam JVM.
-
-        fun getInstance(apiConfig: ApiConfig): RemoteDataSource {
-            if (instance == null)
-                instance = RemoteDataSource(apiConfig)
-            return instance!!
-        }
-
+        fun getInstance(): RemoteDataSource =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: RemoteDataSource()
+            }
     }
 
-    fun getMovie(getMovieCallback: GetMovieCallback) {
+    fun getMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
-        handler.postDelayed({
-            apiConfig.create()
-                .getMovie(apiKey)
-                .enqueue(object : Callback<ItemResponse>{
-                    override fun onResponse(
-                        call: Call<ItemResponse>,
-                        response: Response<ItemResponse>
-                    ) {
-                        response.body()?.results?.let { getMovieCallback.onResponse(it) }
-                        EspressoIdlingResource.decrement()
-                    }
 
-                    override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
-                        Log.d(TAG, t.printStackTrace().toString())
-                    }
-                })
-        }, SERVICE_LATENCY_IN_MILLIS)
+        val responses = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+
+        ApiConfig.create()
+            .getMovie(apiKey)
+            .enqueue(object : Callback<ItemResponse<MovieResponse>> {
+                override fun onResponse(
+                    call: Call<ItemResponse<MovieResponse>>,
+                    response: Response<ItemResponse<MovieResponse>>
+                ) {
+                    responses.value = ApiResponse.success(
+                        response.body()?.results as List<MovieResponse>
+                    )
+                }
+
+                override fun onFailure(call: Call<ItemResponse<MovieResponse>>, t: Throwable) {
+                    Log.e(TAG, "${t.message}")
+                }
+            })
+        EspressoIdlingResource.decrement()
+        return responses
     }
 
-    fun getMovieDetail (movieId: String, getMovieDetailCallback: GetMovieDetailCallback) {
+
+
+    fun getSeries(): LiveData<ApiResponse<List<SeriesResponse>>> {
         EspressoIdlingResource.increment()
-        handler.postDelayed({
-            apiConfig.create()
-                .getMovieDetail(movieId, apiKey)
-                .enqueue(object : Callback<ItemList> {
-                    override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
-                        getMovieDetailCallback.onResponse(response.body()!!)
-                        EspressoIdlingResource.decrement()
-                    }
 
-                    override fun onFailure(call: Call<ItemList>, t: Throwable) {
-                        Log.d(TAG, t.printStackTrace().toString())
-                    }
-                })
-        }, SERVICE_LATENCY_IN_MILLIS)
+        val responses = MutableLiveData<ApiResponse<List<SeriesResponse>>>()
+
+        ApiConfig.create()
+            .getTvSeries(apiKey)
+            .enqueue(object : Callback<ItemResponse<SeriesResponse>> {
+                override fun onResponse(
+                    call: Call<ItemResponse<SeriesResponse>>,
+                    response: Response<ItemResponse<SeriesResponse>>
+                ) {
+                    responses.value = ApiResponse.success(
+                        response.body()?.results as List<SeriesResponse>
+                    )
+                }
+
+                override fun onFailure(call: Call<ItemResponse<SeriesResponse>>, t: Throwable) {
+                    Log.e(TAG, "${t.message}")
+                }
+            })
+        EspressoIdlingResource.decrement()
+        return responses
     }
 
-    fun getTvSeries (getTvSeriesCallback: GetTvSeriesCallback) {
+
+
+    fun getDetailMovies(id: Int): LiveData<ApiResponse<MovieResponse>> {
         EspressoIdlingResource.increment()
-        handler.postDelayed({
-            apiConfig.create()
-                .getTvSeries(apiKey)
-                .enqueue(object : Callback<ItemResponse> {
-                    override fun onResponse(
-                        call: Call<ItemResponse>,
-                        response: Response<ItemResponse>
-                    ) {
-                        response.body()?.results?.let { getTvSeriesCallback.onResponse(it) }
-                        EspressoIdlingResource.decrement()
-                    }
 
-                    override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
-                        Log.d(TAG, t.printStackTrace().toString())
-                    }
-                })
-        }, SERVICE_LATENCY_IN_MILLIS)
-    }
+        val responses = MutableLiveData<ApiResponse<MovieResponse>>()
+        ApiConfig.create()
+            .getMovieDetail(id, apiKey)
+            .enqueue(object : Callback<MovieResponse> {
+                override fun onResponse(
+                    call: Call<MovieResponse>,
+                    response: Response<MovieResponse>
+                ) {
 
-    fun getTvSeriesDetail (tvSeriesId: String, getTvSeriesDetailCallback: GetTvSeriesDetailCallback) {
-        EspressoIdlingResource.increment()
-        handler.postDelayed({
-            apiConfig.create()
-                .getTvSeriesDetail(tvSeriesId, apiKey)
-                .enqueue(object : Callback<TvSeriesDetail> {
-                    override fun onResponse(
-                        call: Call<TvSeriesDetail>,
-                        response: Response<TvSeriesDetail>
-                    ) {
-                        getTvSeriesDetailCallback.onResponse(response.body()!!)
-                        EspressoIdlingResource.decrement()
-                    }
+                    responses.value = ApiResponse.success(
+                        response.body() as MovieResponse
+                    )
+                }
 
-                    override fun onFailure(call: Call<TvSeriesDetail>, t: Throwable) {
-                        Log.d(TAG, t.printStackTrace().toString())
-                    }
-                })
-        }, SERVICE_LATENCY_IN_MILLIS)
-    }
-
-
-    interface GetMovieCallback {
-        fun onResponse(movieResponse: List<ItemList>)
-    }
-
-    interface GetMovieDetailCallback {
-        fun onResponse(movieResponse: ItemList)
-    }
-
-    interface GetTvSeriesCallback {
-        fun onResponse(tvSeriesResponse: List<ItemList>)
-    }
-
-    interface GetTvSeriesDetailCallback {
-        fun onResponse(tvSeriesDetailResponse: TvSeriesDetail)
+                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                    Log.e(TAG, "${t.message}")
+                }
+            })
+        EspressoIdlingResource.decrement()
+        return responses
     }
 
 
 
+    fun getDetailSeries(id: Int): LiveData<ApiResponse<SeriesResponse>> {
+
+        val responses = MutableLiveData<ApiResponse<SeriesResponse>>()
+
+        ApiConfig.create()
+            .getTvSeriesDetail(id, apiKey)
+            .enqueue(object : Callback<SeriesResponse> {
+                override fun onResponse(
+                    call: Call<SeriesResponse>,
+                    response: Response<SeriesResponse>
+                ) {
+                    responses.value = ApiResponse.success(
+                        response.body() as SeriesResponse
+                    )
+                }
+
+                override fun onFailure(call: Call<SeriesResponse>, t: Throwable) {
+                    Log.e(TAG, "${t.message}")
+                }
+            })
+        EspressoIdlingResource.decrement()
+        return responses
+    }
 }
