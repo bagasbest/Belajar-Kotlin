@@ -80,4 +80,40 @@ class DataRepositoryTest {
         assertNotNull(seriesDetailEntities)
         assertEquals(GenerateDummyData.getDummyRemoteTvSeriesDetail().id, seriesDetailEntities.data?.id)
     }
+
+    @Test
+    fun getFavoriteMovies() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(localDataSource.getFavoriteMovieList()).thenReturn(dataSourceFactory)
+        fakeDataRepository.getFavoriteMovies()
+        val movieEntities = Resource.success(PagedListUtil.mockPagedList(GenerateDummyData.getDummyRemoteMovie()))
+        verify(localDataSource).getFavoriteMovieList()
+        assertNotNull(movieEntities)
+        assertEquals(GenerateDummyData.getDummyRemoteMovie().size, movieEntities.data?.size)
+    }
+
+    @Test
+    fun getFavoriteSeries() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, SeriesEntity>
+        `when`(localDataSource.getFavoriteSeriesList()).thenReturn(dataSourceFactory)
+        fakeDataRepository.getFavoriteSeries()
+        val seriesEntities = Resource.success(PagedListUtil.mockPagedList(GenerateDummyData.getDummyRemoteTvSeries()))
+        verify(localDataSource).getFavoriteSeriesList()
+        assertNotNull(seriesEntities)
+        assertEquals(GenerateDummyData.getDummyRemoteTvSeries().size, seriesEntities.data?.size)
+    }
+
+    @Test
+    fun setFavoriteMovies() {
+      fakeDataRepository.setFavoriteMovies(GenerateDummyData.getDummyRemoteMovieDetail(), true)
+        verify(localDataSource).setFavoriteMovie(GenerateDummyData.getDummyRemoteMovieDetail(), true)
+        verifyNoMoreInteractions(localDataSource)
+    }
+
+    @Test
+    fun setFavoriteSeries() {
+        fakeDataRepository.setFavoriteSeries(GenerateDummyData.getDummyRemoteTvSeriesDetail(), true)
+        verify(localDataSource).setFavoriteSeries(GenerateDummyData.getDummyRemoteTvSeriesDetail(), true)
+        verifyNoMoreInteractions(localDataSource)
+    }
 }

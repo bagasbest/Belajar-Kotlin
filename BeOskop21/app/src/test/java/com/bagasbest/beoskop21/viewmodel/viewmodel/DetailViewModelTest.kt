@@ -52,6 +52,7 @@ class DetailViewModelTest {
         movies.value = dummyMovies
         `when`(dataRepository.getMovieDetail(dummyMoviesId)).thenReturn(movies)
         viewModel?.getMovieDetail(dummyMoviesId)
+        verify(dataRepository).getMovieDetail(dummyMoviesId)
         viewModel?.getDetailMovie()?.observeForever(observerMovie)
         verify(observerMovie).onChanged(dummyMovies)
     }
@@ -63,6 +64,7 @@ class DetailViewModelTest {
         series.value = dummySeries
         `when`(dataRepository.getTvSeriesDetail(dummySeriesId)).thenReturn(series)
         viewModel?.getTvSeriesDetail(dummySeriesId)
+        verify(dataRepository).getTvSeriesDetail(dummySeriesId)
         viewModel?.getDetailSeries()?.observeForever(observerSeries)
         verify(observerSeries).onChanged(dummySeries)
     }

@@ -92,9 +92,9 @@ open class FakeDataRepository(
         LivePagedListBuilder(localDataSource.getFavoriteMovieList(), config()).build()
 
     override fun setFavoriteMovies(movie: MovieEntity, status: Boolean) {
-        appExecutors.diskIO().execute {
+
             localDataSource.setFavoriteMovie(movie, status)
-        }
+
     }
 
     override fun getSeriesList(sort: String): LiveData<Resource<PagedList<SeriesEntity>>> {
@@ -169,9 +169,9 @@ open class FakeDataRepository(
         LivePagedListBuilder(localDataSource.getFavoriteSeriesList(), config()).build()
 
     override fun setFavoriteSeries(series: SeriesEntity, status: Boolean) {
-        appExecutors.diskIO().execute {
+
             localDataSource.setFavoriteSeries(series, status)
-        }
+
     }
 
     private fun config(): PagedList.Config {
