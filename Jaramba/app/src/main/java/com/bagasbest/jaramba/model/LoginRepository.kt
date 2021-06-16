@@ -18,7 +18,7 @@ object LoginRepository {
                 if(it.isSuccessful) {
 
                     // check if user has verified account or not
-                    if(firebaseAuth.currentUser.isEmailVerified) {
+                    if(firebaseAuth.currentUser?.isEmailVerified == true) {
                         Log.d(TAG, "signInWithEmail:success")
                         userMutableLiveData.postValue(firebaseAuth.currentUser)
                     } else {

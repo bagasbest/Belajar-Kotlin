@@ -43,26 +43,28 @@ object RegisterRepository {
         )
 
         // add a new document with generated ID
-        Firebase.firestore.collection("users")
-            .document(firebaseAuth.currentUser.uid)
-            .set(user)
-            .addOnSuccessListener {
-                // send user email verification before login
-                sendEmailVerification()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    context,
-                    "Terjadi masalah ketika proses pendaftaran: $it",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.w(TAG, "Terjadi masalah ketika proses pendaftaran: ", it)
-            }
+        firebaseAuth.currentUser?.uid?.let {
+            Firebase.firestore.collection("users")
+                .document(it)
+                .set(user)
+                .addOnSuccessListener {
+                    // send user email verification before login
+                    sendEmailVerification()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        context,
+                        "Terjadi masalah ketika proses pendaftaran: $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.w(TAG, "Terjadi masalah ketika proses pendaftaran: ", it)
+                }
+        }
     }
 
     private fun sendEmailVerification() {
-        firebaseAuth.currentUser.sendEmailVerification()
-            .addOnCompleteListener {
+        firebaseAuth.currentUser?.sendEmailVerification()
+            ?.addOnCompleteListener {
                 if (it.isSuccessful) {
                     Log.d(TAG, "Sukses mendaftar")
                     userMutableLiveData.postValue(firebaseAuth.currentUser)
