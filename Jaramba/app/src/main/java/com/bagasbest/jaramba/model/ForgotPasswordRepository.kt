@@ -31,6 +31,6 @@ object ForgotPasswordRepository {
     }
 
     fun getUserMutableLiveData() : MutableLiveData<FirebaseUser> {
-        return ForgotPasswordRepository.userMutableLiveData
+        return userMutableLiveData
     }
 }

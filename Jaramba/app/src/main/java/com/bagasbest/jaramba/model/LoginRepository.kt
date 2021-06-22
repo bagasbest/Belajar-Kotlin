@@ -40,7 +40,7 @@ object LoginRepository {
     }
 
     fun getUserMutableLiveData() : MutableLiveData<FirebaseUser>  {
-        return LoginRepository.userMutableLiveData
+        return userMutableLiveData
     }
 
 

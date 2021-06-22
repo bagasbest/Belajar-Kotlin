@@ -12,20 +12,20 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+    private var binding: ActivityLoginBinding? = null
     private lateinit var loginViewModel: LoginViewModel
     private var counter: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         // auto login
         autoLogin()
 
         // click register btn
-        binding.loginBtn.setOnClickListener {
+        binding?.loginBtn?.setOnClickListener {
             // form validation
             loginFormValidation()
         }
@@ -40,26 +40,26 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginFormValidation() {
-        val email = binding.emailEt.text.toString().trim()
-        val password = binding.passwordEt.text.toString().trim()
+        val email = binding?.emailEt?.text.toString().trim()
+        val password = binding?.passwordEt?.text.toString().trim()
 
         if(!email.isValidEmail()) {
-            binding.emailEt.error = resources.getString(R.string.error_email)
+            binding?.emailEt?.error = resources.getString(R.string.error_email)
             return
         }
 
         else if(!password.isValidatePassword()) {
-            binding.passwordEt.error = resources.getString(R.string.error_password)
+            binding?.passwordEt?.error = resources.getString(R.string.error_password)
             return
         }
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        binding.progressBar.visibility = View.VISIBLE
+        binding?.progressBar?.visibility = View.VISIBLE
         loginViewModel.login(email, password, this)
         loginViewModel.getUserMutableLiveData().observe(this, { observer ->
             if(observer != null) {
-                binding.progressBar.visibility = View.GONE
+                binding?.progressBar?.visibility = View.GONE
                 loginViewModel.getUserMutableLiveData().postValue(null)
                 if(counter > 0) {
                     startActivity(Intent(this, BerandaActivity::class.java))
@@ -86,4 +86,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun String.isValidatePassword() =
         length >= 6
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

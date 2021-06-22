@@ -8,17 +8,22 @@ import com.bagasbest.jaramba.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySettingBinding
+    private var binding: ActivitySettingBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        binding.backButton.setOnClickListener {
+        binding?.backButton?.setOnClickListener {
             onBackPressed()
         }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

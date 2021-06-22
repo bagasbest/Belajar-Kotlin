@@ -11,19 +11,19 @@ import com.bagasbest.jaramba.databinding.ActivityRegisterBinding
 import com.bagasbest.jaramba.viewmodel.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
+    private var binding: ActivityRegisterBinding? = null
     private lateinit var registerViewModel: RegisterViewModel
     private var counter: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
 
 
         // click register btn
-        binding.registerBtn.setOnClickListener {
+        binding?.registerBtn?.setOnClickListener {
             // form validation
             registerFormValidation()
         }
@@ -32,51 +32,51 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerFormValidation() {
-        val email = binding.emailEt.text.toString().trim()
-        val password = binding.passwordEt.text.toString().trim()
-        val username = binding.usernameEt.text.toString().trim()
-        val confPass = binding.conformPasswordEt.text.toString().trim()
-        val phone = binding.phoneEt.text.toString().trim()
+        val email = binding?.emailEt?.text.toString().trim()
+        val password = binding?.passwordEt?.text.toString().trim()
+        val username = binding?.usernameEt?.text.toString().trim()
+        val confPass = binding?.conformPasswordEt?.text.toString().trim()
+        val phone = binding?.phoneEt?.text.toString().trim()
 
         if(!email.isValidEmail()) {
-            binding.emailEt.error = resources.getString(R.string.error_email)
+            binding?.emailEt?.error = resources.getString(R.string.error_email)
             return
         }
 
         else if(!password.isValidatePassword()) {
-            binding.passwordEt.error = resources.getString(R.string.error_password)
+            binding?.passwordEt?.error = resources.getString(R.string.error_password)
             return
         }
 
         else if(!confPass.isValidatePassword()) {
-            binding.conformPasswordEt.error = resources.getString(R.string.error_password)
+            binding?.conformPasswordEt?.error = resources.getString(R.string.error_password)
             return
         }
 
         else if(password != confPass) {
-            binding.passwordEt.error = resources.getString(R.string.password_not_match)
-            binding.conformPasswordEt.error = resources.getString(R.string.password_not_match)
+            binding?.passwordEt?.error = resources.getString(R.string.password_not_match)
+            binding?.conformPasswordEt?.error = resources.getString(R.string.password_not_match)
             return
         }
 
         else if(username.isEmpty()) {
-            binding.usernameEt.error = resources.getString(R.string.username_empty)
+            binding?.usernameEt?.error = resources.getString(R.string.username_empty)
             return
         }
 
         else if(phone.isEmpty()) {
-            binding.phoneEt.error = resources.getString(R.string.empty_phone)
+            binding?.phoneEt?.error = resources.getString(R.string.empty_phone)
             return
         }
 
         // observe data when user want to registration
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
-        binding.progressBar.visibility = View.VISIBLE
+        binding?.progressBar?.visibility = View.VISIBLE
         registerViewModel.register(email, password, username, phone, this)
         registerViewModel.getUserMutableLiveData().observe(this, { observer ->
             if(observer != null) {
-                binding.progressBar.visibility = View.GONE
+                binding?.progressBar?.visibility = View.GONE
                 registerViewModel.getUserMutableLiveData().postValue(null)
                 if(counter > 0) {
                     showAlertDialog()
@@ -110,4 +110,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun String.isValidatePassword() =
          length >= 6
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

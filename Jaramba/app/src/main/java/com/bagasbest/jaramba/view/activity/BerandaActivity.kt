@@ -10,16 +10,21 @@ import com.bagasbest.jaramba.databinding.ActivityBerandaBinding
 
 class BerandaActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBerandaBinding
+    private var binding: ActivityBerandaBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBerandaBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }

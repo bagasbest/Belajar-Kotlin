@@ -9,40 +9,39 @@ import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityForgotPasswordBinding
 import com.bagasbest.jaramba.viewmodel.ForgotPasswordViewModel
-import com.bagasbest.jaramba.viewmodel.LoginViewModel
 
 class ForgotPasswordActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityForgotPasswordBinding
+    private var binding : ActivityForgotPasswordBinding? = null
     private lateinit var forgotPasswordViewModel: ForgotPasswordViewModel
     private var counter: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         // click forgot password btn
-        binding.forgotPasswordBtn.setOnClickListener {
+        binding?.forgotPasswordBtn?.setOnClickListener {
             // form validation
             forgotPasswordFormValidation()
         }
     }
 
     private fun forgotPasswordFormValidation() {
-        val email = binding.emailEt.text.toString().trim()
+        val email = binding?.emailEt?.text.toString().trim()
 
         if(!email.isValidEmail()) {
-            binding.emailEt.error = resources.getString(R.string.error_email)
+            binding?.emailEt?.error = resources.getString(R.string.error_email)
             return
         }
 
         forgotPasswordViewModel = ViewModelProvider(this).get(forgotPasswordViewModel::class.java)
 
-        binding.progressBar.visibility = View.VISIBLE
+        binding?.progressBar?.visibility = View.VISIBLE
         forgotPasswordViewModel.forgotPassword(email, this)
         forgotPasswordViewModel.getUserMutableLiveData().observe(this, { observer ->
             if(observer != null) {
-                binding.progressBar.visibility = View.GONE
+                binding?.progressBar?.visibility = View.GONE
                 forgotPasswordViewModel.getUserMutableLiveData().postValue(null)
                 if(counter > 0) {
                     showAlertDialog()
@@ -72,4 +71,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun String.isValidEmail() =
         isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

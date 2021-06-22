@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JarambaNoActionBar">
-        <activity android:name=".view.activity.SettingActivity"></activity>
+        <activity android:name=".view.activity.UnderConstructionActivity"></activity>
+        <activity android:name=".view.activity.InstantTransportationDetail" />
+        <activity android:name=".view.activity.SettingActivity" />
         <activity android:name=".view.activity.InstantTransportationActivity" />
         <activity
             android:name=".view.activity.BerandaActivity"

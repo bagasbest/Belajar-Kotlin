@@ -1,14 +1,20 @@
 package com.bagasbest.jaramba.model
 
 import android.content.IntentSender
+import android.util.Log
 import com.bagasbest.jaramba.view.activity.InstantTransportationActivity
+import com.bagasbest.jaramba.view.activity.InstantTransportationDetail
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.ClassCastException
 
 object InstantTransportation {
+
+    private val TAG = InstantTransportation::class.java
+    var result:Boolean? = true
 
     fun showLocationPrompt(context: InstantTransportationActivity) {
         val locationRequest = LocationRequest.create()
@@ -20,7 +26,7 @@ object InstantTransportation {
                 .getSettingsClient(context)
                 .checkLocationSettings(builder.build())
 
-        result.addOnCompleteListener {task ->
+        result.addOnCompleteListener { task ->
             try {
                 val response = task.getResult(ApiException::class.java)
                 // All location settings are satisfied. The client can initialize location
@@ -37,7 +43,7 @@ object InstantTransportation {
                                 context, LocationRequest.PRIORITY_HIGH_ACCURACY
                             )
 
-                        } catch (e: IntentSender.SendIntentException){
+                        } catch (e: IntentSender.SendIntentException) {
                             // ignore the error
                         } catch (e: ClassCastException) {
                             // ignore, should be an imposible error
@@ -55,6 +61,49 @@ object InstantTransportation {
         }
     }
 
+    fun saveUserTripToDB(
+        transportationMode: String,
+        currentLocation: String?,
+        destination: String?,
+        format: String?,
+        totalPerson: Int,
+        totalPrice: Int,
+        paymentMethod: String?,
+        customerUid: String
+    ) {
+        val timeInMillis = System.currentTimeMillis().toString()
+
+
+        val data = hashMapOf(
+            "tripId" to timeInMillis,
+            "customerUid" to customerUid,
+            "transportationMode" to transportationMode,
+            "currentLocation" to currentLocation,
+            "destination" to destination,
+            "startDate" to format,
+            "finishDate" to "",
+            "totalPerson" to totalPerson,
+            "totalPrice" to totalPrice,
+            "paymentMethod" to paymentMethod,
+            "status" to "On Going",
+            "rating" to 0,
+            "comment" to "",
+        )
+
+        FirebaseFirestore
+            .getInstance()
+            .collection("history")
+            .document(timeInMillis)
+            .set(data)
+            .addOnSuccessListener {
+                result = true
+            }
+            .addOnFailureListener {
+                result = false
+                Log.e(TAG.toString(), it.toString())
+            }
+
+    }
 
 
 }

@@ -13,7 +13,7 @@ import com.bagasbest.jaramba.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
 
-  private lateinit var binding : FragmentHistoryBinding
+  private var binding : FragmentHistoryBinding? = null
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -22,6 +22,11 @@ class HistoryFragment : Fragment() {
   ): View {
 
     binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
-    return binding.root
+    return binding!!.root
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    binding = null
   }
 }

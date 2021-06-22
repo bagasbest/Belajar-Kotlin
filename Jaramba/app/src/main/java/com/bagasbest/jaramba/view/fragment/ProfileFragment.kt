@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private var binding: FragmentProfileBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,17 +24,17 @@ class ProfileFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener {
+        binding?.btnLogout?.setOnClickListener {
             logoutFromApplication()
         }
 
-        binding.settingIv.setOnClickListener {
+        binding?.settingIv?.setOnClickListener {
             startActivity(Intent(activity, SettingActivity::class.java))
         }
 
@@ -59,6 +59,11 @@ class ProfileFragment : Fragment() {
         builder?.setNegativeButton("NO") { dialog, _ ->
             dialog.dismiss()
         }?.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
 

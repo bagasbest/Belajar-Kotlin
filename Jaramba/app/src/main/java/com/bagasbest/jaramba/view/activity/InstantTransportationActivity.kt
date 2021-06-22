@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
 
-    private lateinit var binding: ActivityInstantTransportationBinding
+    private var binding: ActivityInstantTransportationBinding? = null
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
@@ -32,7 +32,7 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInstantTransportationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this)
@@ -42,6 +42,31 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
         InstantTransportation.showLocationPrompt(this)
         backToBerandaPage()
 
+        //click continue button
+        continueButtonClick()
+    }
+
+    private fun continueButtonClick() {
+        binding?.saveInstantLocationBtn?.setOnClickListener {
+            val currentLocation = binding?.currentLocationEt?.text.toString().trim()
+            val destination = binding?.destionationLocationEt?.text.toString().trim()
+
+            if(currentLocation.isEmpty()) {
+                binding?.currentLocationEt?.error = resources.getString(R.string.error_current_location)
+                return@setOnClickListener
+            }
+            else if(destination.isEmpty()) {
+                binding?.destionationLocationEt?.error = resources.getString(R.string.error_destination)
+                return@setOnClickListener
+            }
+
+            //bring et value to InstantTransportationDetail
+            val intent = Intent(this, InstantTransportationDetail::class.java)
+            intent.putExtra(InstantTransportationDetail.EXTRA_CURRENT_LOCATION, currentLocation)
+            intent.putExtra(InstantTransportationDetail.EXTRA_DESTINATION, destination)
+            intent.putExtra(InstantTransportationDetail.EXTRA_OPTIONS, "one time")
+            startActivity(intent)
+        }
     }
 
     private fun fetchLocation() {
@@ -73,7 +98,7 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
     }
 
     private fun backToBerandaPage() {
-        binding.backButton.setOnClickListener {
+        binding?.backButton?.setOnClickListener {
             val intent = Intent(this, BerandaActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
@@ -100,6 +125,7 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
         requestCode: Int, permissions: Array<String?>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             permissionCode -> if (grantResults.isNotEmpty() && grantResults[0] ==
                 PackageManager.PERMISSION_GRANTED
@@ -120,5 +146,10 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
