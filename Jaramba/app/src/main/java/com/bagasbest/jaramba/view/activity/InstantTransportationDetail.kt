@@ -1,8 +1,9 @@
 package com.bagasbest.jaramba.view.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,8 +14,6 @@ import com.bagasbest.jaramba.databinding.ActivityInstantTransportationDetailBind
 import com.bagasbest.jaramba.model.InstantTransportation
 import com.bagasbest.jaramba.view.fragment.DatePickerFragment
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +26,7 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
     private var currentLocation: String? = null
     private var destination: String? = null
     private var priceTotal: Int? = 0
+    private var personTotal: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,12 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
         // set calendar based option choice
         setCalendar()
 
+        // set total person
+        setTotalPerson()
+
+        // accumulate price
+        accumulatePrice()
+
         // set payment method
         setPaymentMethod()
 
@@ -48,6 +54,28 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
         // back to previous page
         goBackToPreviousPage()
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun accumulatePrice() {
+        binding?.accumulate?.setOnClickListener {
+            binding?.priceTotal?.text = "Rp. ${priceTotal?.toString()}"
+        }
+    }
+
+    private fun setTotalPerson() {
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.person_total,
+            android.R.layout.simple_spinner_item
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding?.totalPerson?.setAdapter(adapter)
+        binding?.totalPerson?.setOnItemClickListener { adapterView, view, i, l ->
+            personTotal = binding?.totalPerson?.text.toString().toInt()
+            priceTotal = personTotal!! * 20000
+        }
     }
 
     private fun goBackToPreviousPage() {
@@ -63,8 +91,12 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
                     Toast.makeText(this, "Masukkan jadwal keberangkatan", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                binding?.totalPerson?.text.toString().toInt() > 4 -> {
-                    binding?.totalPerson?.error = resources.getString(R.string.error_max_person)
+                personTotal!! < 1 || personTotal!! > 4 -> {
+                    Toast.makeText(
+                        this,
+                        "Silahkan masukkan jumlah penumpang dengan benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
                 paymentMethod.isNullOrEmpty() -> {
@@ -73,30 +105,26 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
                 }
             }
 
-            suspend fun saveToDB() =
-                coroutineScope {
-                    val process = async {
-                        binding?.progressBar?.visibility = View.VISIBLE
-                        InstantTransportation.saveUserTripToDB(
-                            "Travel dan Bus",
-                            currentLocation,
-                            destination,
-                            format,
-                            binding?.totalPerson?.text.toString().toInt(),
-                            binding?.totalPerson?.text.toString().toInt() * 20000,
-                            paymentMethod,
-                            FirebaseAuth.getInstance().currentUser?.uid.toString()
-                        )
-                    }
-                    process.await()
-                }
+            binding?.progressBar?.visibility = View.VISIBLE
+            InstantTransportation.saveUserTripToDB(
+                "Travel dan Bus",
+                currentLocation,
+                destination,
+                format,
+                binding?.totalPerson?.text.toString().toInt(),
+                binding?.totalPerson?.text.toString().toInt() * 20000,
+                paymentMethod,
+                FirebaseAuth.getInstance().currentUser?.uid.toString()
+            )
 
-            binding?.progressBar?.visibility = View.GONE
-            if (InstantTransportation.result == true) {
-                Log.e("TAG", "YES")
-            }else{
-                Log.e("TAG", "NO")
-            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding?.progressBar?.visibility = View.GONE
+                if (InstantTransportation.result == true) {
+                    Log.e("TAG", "YES")
+                } else {
+                    Log.e("TAG", "NO")
+                }
+            }, 3000)
         }
     }
 

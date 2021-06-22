@@ -97,6 +97,7 @@ object InstantTransportation {
             .set(data)
             .addOnSuccessListener {
                 result = true
+                Log.e(TAG.toString(), "TRUE")
             }
             .addOnFailureListener {
                 result = false

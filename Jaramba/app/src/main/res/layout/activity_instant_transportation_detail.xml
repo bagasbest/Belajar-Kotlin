@@ -35,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -172,6 +173,8 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/teal_700"
                 android:fontFamily="@font/nunitosans_regular"
@@ -194,25 +197,28 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:startIconTint="@android:color/holo_red_light">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/total_person"
+                <AutoCompleteTextView
+                    android:id="@+id/totalPerson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/nunitosans_regular"
                     android:hint="@string/total_penumpang"
-                    android:inputType="number" />
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
@@ -242,6 +248,17 @@
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/accumulate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_700"
+            android:text="Akumulasi"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+            app:layout_constraintEnd_toEndOf="@+id/cardView4"
+            app:layout_constraintTop_toTopOf="@+id/cardView4" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"

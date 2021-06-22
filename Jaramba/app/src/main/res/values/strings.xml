@@ -58,6 +58,8 @@
     <string name="let_start_your_trip">Let Start Your Trip</string>
     <string name="total_harga_rp">Total Harga: Rp.</string>
     <string name="error_max_person">Maksimal 4 penumpang</string>
+    <string name="kembali_ke_dashboard">Kembali ke Dashboard</string>
+    <string name="tambah">Tambah</string>
 
     <string-array name="metode_pembayaran">
         <item>Cash</item>
@@ -65,6 +67,13 @@
         <item>OVO</item>
         <item>Go-Pay</item>
         <item>Link-aja</item>
+    </string-array>
+
+    <string-array name="person_total">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
 </resources>
