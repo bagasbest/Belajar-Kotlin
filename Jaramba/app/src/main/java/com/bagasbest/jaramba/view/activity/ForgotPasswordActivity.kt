@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityForgotPasswordBinding
-import com.bagasbest.jaramba.viewmodel.ForgotPasswordViewModel
+import com.bagasbest.jaramba.viewmodel.viewmodel.ForgotPasswordViewModel
 
 class ForgotPasswordActivity : AppCompatActivity() {
     private var binding : ActivityForgotPasswordBinding? = null

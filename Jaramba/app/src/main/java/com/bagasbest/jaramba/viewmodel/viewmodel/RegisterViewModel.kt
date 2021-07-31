@@ -1,8 +1,8 @@
-package com.bagasbest.jaramba.viewmodel
+package com.bagasbest.jaramba.viewmodel.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bagasbest.jaramba.model.RegisterRepository
+import com.bagasbest.jaramba.model.repository.RegisterRepository
 import com.bagasbest.jaramba.view.activity.RegisterActivity
 import com.google.firebase.auth.FirebaseUser
 

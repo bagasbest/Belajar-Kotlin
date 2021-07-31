@@ -1,8 +1,8 @@
-package com.bagasbest.jaramba.viewmodel
+package com.bagasbest.jaramba.viewmodel.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bagasbest.jaramba.model.ForgotPasswordRepository
+import com.bagasbest.jaramba.model.repository.ForgotPasswordRepository
 import com.bagasbest.jaramba.view.activity.ForgotPasswordActivity
 import com.google.firebase.auth.FirebaseUser
 

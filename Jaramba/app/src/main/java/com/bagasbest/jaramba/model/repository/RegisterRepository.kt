@@ -1,4 +1,4 @@
-package com.bagasbest.jaramba.model
+package com.bagasbest.jaramba.model.repository
 
 import android.util.Log
 import android.widget.Toast

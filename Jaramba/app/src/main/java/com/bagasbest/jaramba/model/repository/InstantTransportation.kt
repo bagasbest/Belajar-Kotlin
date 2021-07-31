@@ -1,9 +1,8 @@
-package com.bagasbest.jaramba.model
+package com.bagasbest.jaramba.model.repository
 
 import android.content.IntentSender
 import android.util.Log
 import com.bagasbest.jaramba.view.activity.InstantTransportationActivity
-import com.bagasbest.jaramba.view.activity.InstantTransportationDetail
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -85,8 +84,8 @@ object InstantTransportation {
             "totalPerson" to totalPerson,
             "totalPrice" to totalPrice,
             "paymentMethod" to paymentMethod,
-            "status" to "On Going",
-            "rating" to 0,
+            "status" to "Dalam Perjalanan",
+            "rating" to "",
             "comment" to "",
         )
 

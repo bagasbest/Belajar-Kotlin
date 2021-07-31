@@ -16,7 +16,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bagas_pangestu"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         android:textColor="@android:color/black"
@@ -27,8 +26,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:text="@string/desc" />
+        android:textColor="@android:color/black" />
 
 
 

@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityInstantTransportationBinding
-import com.bagasbest.jaramba.model.InstantTransportation
+import com.bagasbest.jaramba.model.repository.InstantTransportation
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

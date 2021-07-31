@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityRegisterBinding
-import com.bagasbest.jaramba.viewmodel.RegisterViewModel
+import com.bagasbest.jaramba.viewmodel.viewmodel.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private var binding: ActivityRegisterBinding? = null

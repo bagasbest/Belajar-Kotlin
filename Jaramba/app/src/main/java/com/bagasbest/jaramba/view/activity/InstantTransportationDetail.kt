@@ -1,6 +1,7 @@
 package com.bagasbest.jaramba.view.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,10 +9,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityInstantTransportationDetailBinding
-import com.bagasbest.jaramba.model.InstantTransportation
+import com.bagasbest.jaramba.model.repository.InstantTransportation
 import com.bagasbest.jaramba.view.fragment.DatePickerFragment
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
@@ -120,12 +122,26 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
             Handler(Looper.getMainLooper()).postDelayed({
                 binding?.progressBar?.visibility = View.GONE
                 if (InstantTransportation.result == true) {
-                    Log.e("TAG", "YES")
+                    showSuccessDialog()
                 } else {
                     Log.e("TAG", "NO")
                 }
             }, 3000)
         }
+    }
+
+    private fun showSuccessDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Berhasil Melakukan One Trip")
+        builder.setIcon(R.drawable.ic_baseline_check_circle_24)
+        builder.setMessage("One Trip anda berhasil diproses, silahkan tunggu driver menghampiri anda")
+        builder.setPositiveButton("Oke") { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, BerandaActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
+        builder.create().show()
     }
 
     private fun setPaymentMethod() {
@@ -146,7 +162,7 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
     private fun setCalendar() {
         val options = intent.getStringExtra(EXTRA_OPTIONS)
         if (options == "one time") {
-            val simpleDateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm:ss")
+            val simpleDateFormat = SimpleDateFormat("dd MMMM yyyy")
             format = simpleDateFormat.format(Date())
 
             binding?.goingDate?.text = format
@@ -185,7 +201,7 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
 
-        val simpleDateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm:ss", Locale.getDefault())
+        val simpleDateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
         format = simpleDateFormat.format(calendar.time)
 
         //set untuk TextView

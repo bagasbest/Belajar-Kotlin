@@ -7,7 +7,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityLoginBinding
-import com.bagasbest.jaramba.viewmodel.LoginViewModel
+import com.bagasbest.jaramba.viewmodel.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
