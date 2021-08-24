@@ -3,12 +3,14 @@ package com.bagasbest.jaramba.viewmodel.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ItemHistoryBinding
 import com.bagasbest.jaramba.model.model.HistoryModel
+import com.bagasbest.jaramba.view.activity.ChatActivity
 import com.bagasbest.jaramba.view.activity.HistoryDetailActivity
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
@@ -43,6 +45,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() 
 
 
                 if(historyModel.status == "Selesai") {
+                    chatDriver.visibility = View.INVISIBLE
                     view2.background = ContextCompat.getDrawable(itemView.context, R.drawable.ic_rounded_2)
                     transportMode.setTextColor(R.color.black)
                     destination.setTextColor(R.color.black)
@@ -53,6 +56,12 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() 
                 itemView.setOnClickListener {
                     val intent = Intent(it.context, HistoryDetailActivity::class.java)
                     intent.putExtra(HistoryDetailActivity.EXTRA_HISTORY, historyModel)
+                    itemView.context.startActivity(intent)
+                }
+
+                chatDriver.setOnClickListener {
+                    val intent = Intent(it.context, ChatActivity::class.java)
+                    intent.putExtra(ChatActivity.EXTRA_TRIP_ID, historyModel.tripId)
                     itemView.context.startActivity(intent)
                 }
             }

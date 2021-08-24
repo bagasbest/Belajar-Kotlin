@@ -2,17 +2,23 @@ package com.bagasbest.jaramba.view.activity
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityInstantTransportationBinding
-import com.bagasbest.jaramba.model.repository.InstantTransportation
+import com.bagasbest.jaramba.model.data.InstantTransportation
+import com.bagasbest.jaramba.model.model.TrayekModel
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,7 +33,9 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
-
+    private val trayekList = ArrayList<TrayekModel>()
+    private var trayekRoute: String? = null
+    private var index: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +52,37 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
 
         //click continue button
         continueButtonClick()
+
+        //get all trayek & price
+        InstantTransportation.getTrayekAndPrice(trayekList)
+
+
+        //show trayek dropdown
+        Handler(Looper.getMainLooper()).postDelayed({
+            showDropdown()
+        }, 3000)
+    }
+
+    private fun showDropdown() {
+        val trayek = ArrayList<String>()
+        for (i in 0 until trayekList.size) {
+            trayek.add(trayekList[i].trayek!!)
+        }
+
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            trayek
+        )
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+        binding?.trayekEt?.setAdapter(adapter)
+        binding?.trayekEt?.setOnItemClickListener { adapterView, view, i, l ->
+            trayekRoute = binding?.trayekEt?.text.toString()
+            index = i
+        }
     }
 
     private fun continueButtonClick() {
@@ -59,12 +98,18 @@ class InstantTransportationActivity : FragmentActivity(), OnMapReadyCallback {
                 binding?.destionationLocationEt?.error = resources.getString(R.string.error_destination)
                 return@setOnClickListener
             }
+            else if(trayekRoute == null) {
+                Toast.makeText(this, "Silahkan pilih trayek", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             //bring et value to InstantTransportationDetail
             val intent = Intent(this, InstantTransportationDetail::class.java)
             intent.putExtra(InstantTransportationDetail.EXTRA_CURRENT_LOCATION, currentLocation)
             intent.putExtra(InstantTransportationDetail.EXTRA_DESTINATION, destination)
             intent.putExtra(InstantTransportationDetail.EXTRA_OPTIONS, "one time")
+            intent.putExtra(InstantTransportationDetail.EXTRA_TRAYEK, trayekRoute)
+            intent.putExtra(InstantTransportationDetail.EXTRA_PRICE, trayekList[index!!].price)
             startActivity(intent)
         }
     }

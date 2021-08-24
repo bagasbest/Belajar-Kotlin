@@ -17,6 +17,8 @@ object HistoryRepository {
 
         try {
             listHistory.clear()
+            Log.e(TAG, "Retrieve user history")
+
 
             FirebaseFirestore
                 .getInstance()
@@ -24,6 +26,8 @@ object HistoryRepository {
                 .whereEqualTo("customerUid", customerUid)
                 .get()
                 .addOnSuccessListener { documents ->
+                    Log.e(TAG, "get snapshot: $documents")
+                    Log.e(TAG,  "add history data to HistoryModel")
                     for(document in documents) {
                         val historyModel = HistoryModel()
                         historyModel.comment = document.data["comment"].toString()
@@ -43,6 +47,7 @@ object HistoryRepository {
                         listHistory.add(historyModel)
 
                     }
+                    Log.e(TAG,  "History Model: $listHistory")
                     historyMutableLiveData.postValue(listHistory)
                 }
                 .addOnFailureListener {
@@ -97,6 +102,7 @@ object HistoryRepository {
     }
 
     fun getHistoryUserMutableLiveData() : MutableLiveData<ArrayList<HistoryModel>> {
+        Log.e(TAG,  "The repository then provides an interface to the ViewModel that allows trip history data to be stored in the model.")
         return historyMutableLiveData
     }
 }

@@ -66,6 +66,7 @@
     <string name="silahkan_masukan_penilaian_anda_terhadap_driver">Silahkan masukan penilaian anda terhadap Driver</string>
     <string name="umpan_balik">Umpan Balik</string>
     <string name="tidak_ada_riwayat_trip">Tidak Ada Riwayat Trip</string>
+    <string name="pilih_trayek">Pilih Trayek</string>
 
     <string-array name="metode_pembayaran">
         <item>Cash</item>

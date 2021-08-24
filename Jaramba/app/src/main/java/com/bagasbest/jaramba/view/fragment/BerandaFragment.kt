@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.FragmentBerandaBinding
 import com.bagasbest.jaramba.view.activity.InstantTransportationActivity
 import com.bagasbest.jaramba.view.activity.UnderConstructionActivity
+import com.bumptech.glide.Glide
 
 class BerandaFragment : Fragment() {
 
@@ -21,6 +23,14 @@ class BerandaFragment : Fragment() {
   ): View {
 
     binding = FragmentBerandaBinding.inflate(layoutInflater, container, false)
+
+    binding?.cityTimeIv?.let {
+      Glide
+        .with(this)
+        .load(R.drawable.city_morning)
+        .into(it)
+    }
+
     return binding!!.root
   }
 

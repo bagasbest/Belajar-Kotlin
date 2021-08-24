@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityInstantTransportationDetailBinding
-import com.bagasbest.jaramba.model.repository.InstantTransportation
+import com.bagasbest.jaramba.model.data.InstantTransportation
 import com.bagasbest.jaramba.view.fragment.DatePickerFragment
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
@@ -76,7 +76,7 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
         binding?.totalPerson?.setAdapter(adapter)
         binding?.totalPerson?.setOnItemClickListener { adapterView, view, i, l ->
             personTotal = binding?.totalPerson?.text.toString().toInt()
-            priceTotal = personTotal!! * 20000
+            priceTotal = personTotal!! * intent.getIntExtra(EXTRA_PRICE, 0)
         }
     }
 
@@ -114,9 +114,11 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
                 destination,
                 format,
                 binding?.totalPerson?.text.toString().toInt(),
-                binding?.totalPerson?.text.toString().toInt() * 20000,
+                binding?.totalPerson?.text.toString().toInt()
+                        * intent.getIntExtra(EXTRA_PRICE, 0),
                 paymentMethod,
-                FirebaseAuth.getInstance().currentUser?.uid.toString()
+                FirebaseAuth.getInstance().currentUser?.uid.toString(),
+                intent.getStringExtra(EXTRA_TRAYEK)
             )
 
             Handler(Looper.getMainLooper()).postDelayed({
@@ -191,6 +193,8 @@ class InstantTransportationDetail : AppCompatActivity(), DatePickerFragment.Dial
     }
 
     companion object {
+        const val EXTRA_TRAYEK = "trayek"
+        const val EXTRA_PRICE = "price"
         const val EXTRA_CURRENT_LOCATION = "current_location"
         const val EXTRA_DESTINATION = "destination"
         const val EXTRA_OPTIONS = "options"

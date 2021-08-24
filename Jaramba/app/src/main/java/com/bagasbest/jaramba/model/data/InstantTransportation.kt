@@ -1,13 +1,16 @@
-package com.bagasbest.jaramba.model.repository
+package com.bagasbest.jaramba.model.data
 
 import android.content.IntentSender
 import android.util.Log
+import com.bagasbest.jaramba.model.model.TrayekModel
 import com.bagasbest.jaramba.view.activity.InstantTransportationActivity
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.lang.ClassCastException
 
 object InstantTransportation {
@@ -68,7 +71,8 @@ object InstantTransportation {
         totalPerson: Int,
         totalPrice: Int,
         paymentMethod: String?,
-        customerUid: String
+        customerUid: String,
+        trayek: String?
     ) {
         val timeInMillis = System.currentTimeMillis().toString()
 
@@ -84,9 +88,10 @@ object InstantTransportation {
             "totalPerson" to totalPerson,
             "totalPrice" to totalPrice,
             "paymentMethod" to paymentMethod,
-            "status" to "Dalam Perjalanan",
+            "status" to "Sedang Menunggu Driver",
             "rating" to "",
             "comment" to "",
+            "trayek" to trayek
         )
 
         FirebaseFirestore
@@ -103,6 +108,25 @@ object InstantTransportation {
                 Log.e(TAG.toString(), it.toString())
             }
 
+    }
+
+    fun getTrayekAndPrice(trayek: ArrayList<TrayekModel>) {
+
+        trayek.clear()
+
+        Firebase
+            .firestore
+            .collection("trayek")
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents) {
+                    val model = TrayekModel()
+                    model.trayek = document.data["trayek"].toString()
+                    model.price = document.data["price"].toString().toInt()
+
+                    trayek.add(model)
+                }
+            }
     }
 
 

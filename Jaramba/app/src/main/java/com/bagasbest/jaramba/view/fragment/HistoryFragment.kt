@@ -2,6 +2,7 @@ package com.bagasbest.jaramba.view.fragment
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,12 @@ import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.FragmentHistoryBinding
 import com.bagasbest.jaramba.viewmodel.adapter.HistoryAdapter
 import com.bagasbest.jaramba.viewmodel.utils.DatePickerFragment
 import com.bagasbest.jaramba.viewmodel.viewmodel.HistoryViewModel
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,9 +25,11 @@ class HistoryFragment : Fragment(), DatePickerDialog.OnDateSetListener {
   private var binding : FragmentHistoryBinding? = null
   private lateinit var viewModel: HistoryViewModel
   private lateinit var adapter: HistoryAdapter
+  private val TAG = HistoryFragment::class.java.simpleName
 
   override fun onResume() {
     super.onResume()
+    Log.e(TAG, "As a View to display history data")
     initRecyclerView()
     initViewModel("all")
   }
@@ -36,6 +41,13 @@ class HistoryFragment : Fragment(), DatePickerDialog.OnDateSetListener {
   ): View {
 
     binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
+
+    binding?.cityTimeIv?.let {
+      Glide
+        .with(this)
+        .load(R.drawable.city_morning)
+        .into(it)
+    }
 
     return binding!!.root
   }
@@ -70,11 +82,13 @@ class HistoryFragment : Fragment(), DatePickerDialog.OnDateSetListener {
   }
 
   private fun initViewModel(date: String) {
+    Log.e(TAG, "Observe data through HistoryViewModel, to check is there any update or not ?")
+
     // AMBIL SEMUA HISTORY BERDASARKAN CUSTOMER UID
     val uid = FirebaseAuth.getInstance().currentUser?.uid
-    viewModel = activity?.let { ViewModelProvider(it, ViewModelProvider.NewInstanceFactory()) }!!.get(HistoryViewModel::class.java)
-
-
+    viewModel = activity?.let {
+      ViewModelProvider(it, ViewModelProvider.NewInstanceFactory())
+    }!!.get(HistoryViewModel::class.java)
 
     binding?.progressBar?.visibility = View.VISIBLE
     if (uid != null && date == "all") {
@@ -84,9 +98,9 @@ class HistoryFragment : Fragment(), DatePickerDialog.OnDateSetListener {
       viewModel.setHistoryByDate(uid, requireActivity(), date)
     }
 
-
     viewModel.getHistoryMutableLiveData().observe(viewLifecycleOwner, {  historyList ->
       if(historyList.size > 0) {
+        Log.e(TAG, "Set history data to view")
         binding?.noData?.visibility = View.GONE
         adapter.setData(historyList)
       } else {

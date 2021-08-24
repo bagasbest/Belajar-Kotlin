@@ -2,22 +2,18 @@ package com.bagasbest.jaramba.view.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.*
 import com.bagasbest.jaramba.R
 import com.bagasbest.jaramba.databinding.ActivityHistoryDetailBinding
 import com.bagasbest.jaramba.model.data.History
 import com.bagasbest.jaramba.model.model.HistoryModel
-import com.bagasbest.jaramba.model.repository.InstantTransportation
-import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 

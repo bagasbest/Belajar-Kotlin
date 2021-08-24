@@ -13,7 +13,6 @@
         android:layout_height="300dp"
         android:contentDescription="@string/image"
         android:scaleType="fitXY"
-        android:src="@drawable/city_morning"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
